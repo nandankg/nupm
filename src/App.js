@@ -771,7 +771,7 @@ const LabFaultyItemRegisterForm = lazy(() => import("./departments/signalling/fo
 const ContractualSpareTestingRegisterForm = lazy(() => import("./departments/signalling/forms/ContractualSpareTestingRegisterForm"));
 const MeasurementVoltageMCBinPDCForm = lazy(() => import("./departments/signalling/forms/MeasurementVoltageMCBinPDCForm"));
 const BoxCleaningOutdoorForm = lazy(() => import("./departments/signalling/forms/BoxCleaningOutdoorForm"));
-const EquipmentFailureRegisterForm = lazy(() => import("./departments/signalling/forms/EquipmentFailureRegisterForm"));
+const SignallingEquipmentFailureRegisterForm = lazy(() => import("./departments/signalling/forms/EquipmentFailureRegisterForm"));
 const AssuranceSystemForm = lazy(() => import("./departments/signalling/forms/AssuranceSystemForm"));
 
 // PM Maintenance Records
@@ -1073,7 +1073,7 @@ function App() {
                 <Route path="/form/contractual-spare-testing-register" element={<ContractualSpareTestingRegisterForm />} />
                 <Route path="/form/measurement-voltage-mcb" element={<MeasurementVoltageMCBinPDCForm />} />
                 <Route path="/form/outdoor-box-cleaning" element={<BoxCleaningOutdoorForm />} />
-                <Route path="/form/efr-register" element={<EquipmentFailureRegisterForm />} />
+                <Route path="/form/efr-register" element={<SignallingEquipmentFailureRegisterForm />} />
                 <Route path="/form/assurance-register" element={<AssuranceSystemForm />} />
 
                 {/* PM Maintenance Records */}
