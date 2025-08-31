@@ -1,0 +1,707 @@
+/* General Styling */
+body {
+  overflow-x: hidden;
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f7f7;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0c6c6, #2bc0b1, #15907c);
+  color: white;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, width 0.3s ease;
+  border-radius: 0 10px 10px 0;
+  overflow: hidden;
+  width: 250px; /* Default width when sidebar is open */
+}
+
+.sidebar.collapsed {
+  width: 60px;
+  overflow: hidden;
+}
+
+.sidebar.collapsed .sidebar-content {
+  display: none;
+}
+
+/* Sidebar Hover Effect */
+.sidebar:hover {
+  transform: scale(1.02);
+  box-shadow: 6px 0 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Sidebar Header */
+.side-header {
+  text-align: center;
+  padding: 20px;
+  color: white;
+  margin-top: 50px;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 0 10px 10px 0;
+}
+
+/* Icon Container */
+.react-icon-container {
+  position: relative;
+  top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  width: auto;
+  height: auto;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 50px;
+  transition: all 0.3s ease;
+}
+
+.sidebar.collapsed .react-icon-container {
+  transform: rotate(180deg);
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+  width: 95%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed .sidebar-nav {
+  width: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav li {
+  width: 100%;
+  margin-top: 15px;
+  position: relative; /* For pseudo-element */
+}
+
+/* Sidebar Anchor Tags */
+.sidebar-nav li a {
+  text-decoration: none;
+  color: white; /* Text color */
+  display: flex; /* Flex container for icon and text alignment */
+  align-items: center; /* Center-align icon and text */
+  padding: 12px 20px; /* Padding for a comfortable click area */
+  font-size: 18px; /* Font size for readability */
+  border-radius: 8px; /* Rounded corners for a soft look */
+  background: #2aac9f; /* Base background color */
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+  position: relative; /* For pseudo-element */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Transparent and shiny effect */
+}
+
+/* 3D Brick-like Effect */
+.sidebar-nav li a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #edf8f8, #147b71); /* Gradient similar to sidebar */
+  border-radius: 8px;
+  z-index: -1; /* Behind the text */
+  transform: translateZ(-3px) scale(1.05); /* Enhanced 3D effect */
+  transition: transform 0.3s ease; /* Smooth transition */
+}
+
+.sidebar-nav li a:hover::before {
+  transform: translateZ(-3px) scale(1.1); /* Enhance 3D effect on hover */
+}
+
+/* Icon Styling */
+.sidebar-nav li a .react-icon {
+  margin-right: 15px; /* Space between icon and text */
+  font-size: 22px; /* Icon size */
+}
+
+/* Dropdown Menu */
+.dropdownn {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease; /* Smooth transitions */
+}
+
+.dheader:hover .dropdownn {
+  max-height: 500px; /* Large enough value to accommodate all items */
+  opacity: 1;
+}
+
+.dropdownn li {
+  margin: 0;
+}
+
+/* Dropdown Anchor Tags */
+.dropdownn li a {
+  text-decoration: none;
+  color: white; /* Text color */
+  display: flex; /* Flex container for icon and text alignment */
+  align-items: center; /* Center-align icon and text */
+  padding: 12px 20px; /* Padding for a comfortable click area */
+  font-size: 16px; /* Font size for readability */
+  border-radius: 8px; /* Rounded corners for a soft look */
+  background: #2aac9f; /* Base background color */
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Transparent and shiny effect */
+  margin-bottom: 10px; /* Space between items */
+}
+
+/* Hover Effects for Dropdown Items */
+.dropdownn li a:hover {
+  background: linear-gradient(135deg, #2a9a8f, #1f7f6d); /* Darker gradient for hover effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shiny effect on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+.dropdownn li a .react-icon {
+  margin-right: 15px; /* Space between icon and text */
+  font-size: 20px; /* Increased icon size */
+}
+
+/* Underline Animation */
+.sidebar-nav li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+  background: #b8e9f4;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease; /* Smooth transition for underline */
+}
+
+.sidebar-nav li:hover::after {
+  transform: scaleX(1); /* Animated underline on hover */
+}
+
+.sidebar.collapsed .sidebar-nav li a {
+  width: 60px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sidebar.collapsed .sidebar-nav li a .react-icon {
+  margin-right: 0 !important;
+}
+
+.sidebar.collapsed .sidebar-nav li a span {
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+}
+
+.sidebar.collapsed .sidebar-nav li a .react-icon {
+  margin-right: 0 !important;
+  font-size: 24px; /* Increase the icon size */
+  color: #fff; /* Change the icon color to white */
+  position: absolute; /* Position the icon absolutely */
+  left: 50%; /* Center the icon horizontally */
+  transform: translateX(-50%); /* Adjust the icon's position */
+}
+
+/* Main Content Area */
+.main-contain {
+  margin-left: 250px; /* Default margin-left when sidebar is open */
+  width: calc(100% - 250px); /* Default width when sidebar is open */
+  transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+.sidebar.collapsed ~ .main-contain {
+  margin-left: 60px; /* Margin-left when sidebar is collapsed */
+  width: calc(100% - 60px); /* Width when sidebar is collapsed */
+}
+
+/* Header */
+.header {
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(
+    135deg,
+    #e0c6c6,
+    #2bc0b1,
+    #15907c
+  ); /* Gradient from white to teal to dark green */
+  color: #333; /* Darker text color for contrast */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Subtle bottom border */
+  box-sizing: border-box;
+}
+
+/* Navigation */
+.header-nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.header-nav .nav-item {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  color: #333; /* Darker text color for contrast */
+  position: relative; /* For pseudo-element */
+}
+
+.header-nav .nav-item a {
+  text-decoration: none;
+  color: #333;
+  position: relative; /* For pseudo-element */
+  padding-bottom: 2px; /* Space for the underline effect */
+}
+
+/* Date */
+.header-nav .nav-item .bi-calendar-date {
+  font-size: 20px;
+  color: whitesmoke;
+  margin-top: 15px;
+}
+
+.header-nav .nav-item #date {
+  margin-left: 8px;
+  font-size: 18px;
+  color: whitesmoke;
+  margin-top: 15px;
+}
+
+#setting {
+  font-size: 18px;
+  color: whitesmoke;
+  margin-top: 15px;
+}
+
+/* Settings Dropdown */
+.header-nav .nav-item.dropdown {
+  position: relative;
+}
+
+.header-nav .nav-item.dropdown:hover .dropdown-menu {
+  display: block; /* Show dropdown on hover */
+}
+
+.header-nav .dropdown-menu {
+  display: none; /* Hidden by default */
+  background: #ffffff; /* White background for dropdown */
+  border: 1px solid #e0e0e0; /* Light border for dropdown */
+  border-radius: 8px; /* Rounded corners for dropdown */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+  right: 0;
+  top: 100%;
+  z-index: 1001; /* Ensure dropdown is above other content */
+  min-width: 220px; /* Ensure dropdown has enough width */
+  padding: 10px; /* Padding inside dropdown */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Consistent font family */
+}
+
+/* Dropdown Header */
+.header-nav .dropdown-menu .dropdown-header {
+  padding: 12px 16px; /* Padding for header */
+  background: #f5f5f5; /* Light background for header */
+  border-bottom: 1px solid #e0e0e0; /* Light border for header */
+  font-weight: bold; /* Bold text for header */
+  color: #00796b; /* Teal color for header text */
+  font-size: 16px; /* Slightly larger font size for header */
+  text-align: center; /* Center-align header text */
+}
+
+/* Dropdown Items */
+.header-nav .dropdown-menu .dropdown-item {
+  color: #333; /* Darker text color for dropdown items */
+  padding: 10px 16px; /* Added padding for better spacing */
+  font-size: 18px; /* Slightly larger font size */
+  display: flex;
+  align-items: center;
+  text-decoration: none; /* Remove underline */
+  border-radius: 4px; /* Rounded corners for items */
+  transition: background 0.3s, color 0.3s; /* Smooth transition for hover effects */
+  margin: 4px 0; /* Margin between items */
+}
+
+/* Hover Effect for Dropdown Items */
+.header-nav .dropdown-menu .dropdown-item:hover {
+  background: #e0f2f1; /* Light teal hover effect for dropdown items */
+  color: #00796b; /* Teal color for text on hover */
+}
+
+/* Divider */
+.header-nav .dropdown-menu .dropdown-divider {
+  border-top: 1px solid #e0e0e0; /* Light border for divider */
+  margin: 8px 0; /* Margin to separate divider from items */
+}
+
+/* Login Section */
+.login-background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    rgba(138, 197, 197, 0.5),
+    rgba(247, 218, 218, 0.5)
+  ); /* Example gradient */
+  padding: 50px;
+  box-sizing: border-box;
+  border-radius: 30px;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .header {
+    padding: 0 15px;
+  }
+
+  .header-nav .nav-item {
+    margin-left: 15px;
+  }
+
+  .header-nav .nav-item .bi-calendar-date {
+    font-size: 18px;
+  }
+
+  .header-nav .nav-item #date {
+    font-size: 16px;
+  }
+
+  #setting {
+    font-size: 16px;
+  }
+
+  .header-nav .dropdown-menu {
+    min-width: 180px; /* Reduced width for smaller screens */
+  }
+
+  .header-nav .dropdown-menu .dropdown-item {
+    font-size: 16px; /* Adjusted font size */
+  }
+}
+
+@media (max-width: 992px) {
+  .header {
+    height: 50px;
+    padding: 0 10px;
+  }
+
+  .header-nav .nav-item {
+    margin-left: 10px;
+  }
+
+  .header-nav .nav-item .bi-calendar-date {
+    font-size: 16px;
+  }
+
+  .header-nav .nav-item #date {
+    font-size: 14px;
+  }
+
+  #setting {
+    font-size: 14px;
+  }
+
+  .header-nav .dropdown-menu {
+    min-width: 150px; /* Further reduced width for smaller screens */
+  }
+
+  .header-nav .dropdown-menu .dropdown-item {
+    font-size: 14px; /* Adjusted font size */
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 45px;
+    padding: 0 5px;
+    box-shadow: none; /* Remove shadow for smaller screens */
+  }
+
+  .header-nav .nav-item {
+    margin-left: 5px;
+  }
+
+  .header-nav .nav-item .bi-calendar-date {
+    font-size: 14px;
+  }
+
+  .header-nav .nav-item #date {
+    font-size: 12px;
+  }
+
+  #setting {
+    font-size: 12px;
+  }
+
+  .header-nav .dropdown-menu {
+    min-width: 120px; /* Minimum width for mobile */
+  }
+
+  .header-nav .dropdown-menu .dropdown-item {
+    font-size: 12px; /* Adjusted font size */
+    padding: 8px 12px; /* Reduced padding for smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    height: 40px;
+    padding: 0 5px;
+  }
+
+  .header-nav .nav-item {
+    margin-left: 0;
+  }
+
+  .header-nav .nav-item .bi-calendar-date {
+    font-size: 12px;
+  }
+
+  .header-nav .nav-item #date {
+    font-size: 10px;
+  }
+
+  #setting {
+    font-size: 10px;
+  }
+
+  .header-nav .dropdown-menu {
+    min-width: 100px; /* Minimum width for mobile */
+  }
+
+  .header-nav .dropdown-menu .dropdown-item {
+    font-size: 10px; /* Adjusted font size */
+    padding: 6px 10px; /* Reduced padding for mobile */
+  }
+}
+
+/* Popup container styling */
+.login-popup {
+  background: #ffffff; /* White background */
+  border-radius: 25px; /* Increased border radius for a more elegant look */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow */
+  width: 100%;
+  max-width: 900px; /* Increased maximum width */
+  display: flex; /* Horizontal layout for form and image/video */
+  align-items: stretch; /* Ensure children stretch to same height */
+  padding: 0; /* Remove padding for a cleaner look */
+  position: relative; /* Positioned relative to the background */
+  overflow: hidden; /* Prevent content from overflowing */
+  border-right: 10px solid #218380; /* Add right border with the same color as the toggle bar */
+}
+
+/* Form section styling */
+.login-form-section {
+  flex: 1;
+  padding: 40px; /* Increased padding for better space */
+  background-color: #ffffff; /* Background color */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow */
+  border-radius: 25px; /* Increased border radius for a more elegant look */
+  display: flex;
+  flex-direction: column;
+  height: auto; /* Adjust to fit content */
+  width: 70%; /* Increased width */
+}
+
+/* Title styling */
+h1 {
+  margin-bottom: 20px;
+  font-size: 36px; /* Larger font size for prominence */
+  color: #218380; /* Updated color to match border */
+  text-align: center;
+  font-family: "Arial", sans-serif; /* Updated font family */
+  font-weight: 600; /* Bold title */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+/* Form styling */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Increased gap for better spacing */
+}
+
+.form-group {
+  display: flex; /* Align fields in a column */
+  flex-direction: column; /* Labels and inputs stacked vertically */
+  margin-bottom: 20px; /* Increased margin */
+}
+
+.form-group label {
+  margin-bottom: 8px; /* Space between label and input */
+  color: #333; /* Darker gray for labels */
+  font-weight: 600; /* Bold labels */
+  font-size: 18px; /* Larger font size for better readability */
+}
+
+/* Common input styling */
+.form-control {
+  padding: 14px; /* Increased padding for better input experience */
+  border-radius: 10px; /* More rounded corners */
+  border: 1px solid #ddd; /* Light border */
+  font-size: 18px; /* Larger font size */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Added transition for box-shadow */
+  width: 100%; /* Full width */
+}
+
+.password-group {
+  position: relative; /* Positioning context for the eye button */
+}
+
+.password-input {
+  padding-right: 50px; /* Increased space for the eye button */
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px; /* Distance from the right edge of the input field */
+  top: 62%;
+  right: 6%;
+  transform: translateY(-50%); /* Center the icon vertically */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #218380; /* Icon color */
+  font-size: 24px; /* Increase icon size */
+  z-index: 2; /* Ensure it's above the input box */
+}
+
+/* Button styling */
+.login-btn {
+  background: #218380; /* Updated color */
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px; /* Increased padding for better size */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Larger font size */
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  width: auto; /* Adjust width to fit content */
+  max-width: 300px; /* Increase maximum width for better appearance */
+  align-self: center; /* Center align the button */
+}
+
+.login-btn:hover {
+  background: #186c60; /* Darker shade for hover effect */
+  transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+/* Video section styling */
+.login-video-section {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center video horizontally */
+  overflow: hidden;
+}
+
+.login-video {
+  width: 100%;
+  height: auto; /* Adjust to fit within container */
+  max-height: 500px; /* Limit height to match the image */
+  object-fit: cover; /* Cover the entire container */
+  border-top-left-radius: 25px; /* Rounded top-left corner */
+  border-bottom-left-radius: 25px; /* Rounded bottom-left corner */
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .login-popup {
+    flex-direction: column; /* Stack form and image/video vertically */
+    width: 90%; /* Smaller width for smaller screens */
+    border-right: none; /* Remove right border for small screens if necessary */
+  }
+
+  .login-form-section {
+    margin-right: 0; /* Remove right margin */
+    padding: 20px; /* Adjust padding */
+    width: 100%; /* Full width on small screens */
+  }
+
+  .login-video {
+    max-height: 300px; /* Reduce height on small screens */
+  }
+}
+
+
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  border-bottom: 2px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+.container1 {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container1 {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container1 {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container1 {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container1 {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container1 {
+    max-width: 1320px;
+  }
+}
+
+
+

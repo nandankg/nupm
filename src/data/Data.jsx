@@ -1,0 +1,9 @@
+export const IncidentRegisterSignalsData = [];
+export const TeaCofeeData = [];
+export const ParameterData = [];
+export const CardRefundData = [];
+export const EscaalatorDrillData = [];
+export const RequisitionData = [];
+export const TrainIdRecordRegData = [];
+export const AssetRegisterData = [];
+export const PMSheetDepotQuartForm2Data = [];

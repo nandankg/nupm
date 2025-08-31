@@ -1,0 +1,83 @@
+S. No.,Form ,Issue
+1,Finance forms,"1. Unable to make payments through ""Budget Register Payments"". Further functionality of more than one voucher and more than one LOA of same firm can not be tested due to this."
+2,,2. Balance Budget amount is not updating even after issue of LOA.
+,,
+3,AFC-SDC Shift Log Book,1.Unable to edit the downloaded excel.  Excel format need to be modified. 
+4,,"2. No details in footer for Form ID, EmpID, Name, Timestamp by which form is submitted."
+5,,3. No option of edit is available for Admin.
+,,
+6,AFC-SDC PM Log Book - SDC SERVERS - Half Yearly,1. Downloaded excel report do not have correct data.
+7,,2. Downloded PDF do not have correct data.
+8,,3. Downloaded PDF do not have all columns.
+9,,"4. Downloaded PDF  do nnot have footer info empID, Name, Form ID, Timestamp."
+,,
+10,"AFC-SDC PM Log Book - TVM, RCTM & AVM - Half Yearly","1. Downloaded PDF  do not have footer info empID, Name, Form ID, Timestamp."
+11,,2. Rows are not merged or there is no heading in all rows as finalized in last meeting.
+12,,3. Check all button not working properly.
+13,,4. Name automatically getting filled in row-2. 
+14,,5. No edit option in the saved form- Normal User.
+15,,6. No edit button after final submit- Admin user.
+16,,"7. No Header, footer in the downloaded PDF."
+17,,8. Corrupted Excel is being downloaded.
+,,
+18,AFC-SDC PM Log Book - Yearly1 -SDC,1. Downloaded Excel have missing empID.
+19,,2. Rows are not merged in downloaded PDF or there is no heading in all rows as finalized in last meeting.
+20,,"3. Downloaded PDF  do not have footer info empID, Name, Form ID, Timestamp."
+,,
+21,"AFC-Mainline, FMTS Book Mainline",1. Excel report is not available for downloading.
+22,,2. Complete data (Rows) are not there in Downloaded PDF report.
+23,,"3. Downloaded PDF  do not have footer info empID, Name, Form ID, Timestamp."
+24,,4. Receiving date automatically getting filled.
+25,,5. Date filters not working
+26,,"6. ""Is it new item"" Auomatically changes from YES to NO when using edit option. Date vanishes when edit option is used."
+,,
+27,"AFC-Mainline, Imprest Register Mainline",1. Filters are not working in view form.
+,,
+28,"AFC-Mainline, PM followup Mainline","1. Downloaded PDF  do not have header and footer info empID, Name, Form ID, Timestamp."
+29,,2. PDF report do not have station info.
+30,,3. Filter options are not working 
+31,,4. Downloaded excel have incorrect data.
+,,
+32,"AFC-Mainline, PM logbook -Monthly -Gate Mainline","1. Downloaded PDF  do not have footer info empID, Name, Form ID, Timestamp."
+33,,2. Rows are not merged in downloaded PDF or there is no heading in all rows as finalized in last meeting.
+34,,3. Downloaded PDF do not have all columns.
+35,,"4. Station name, date, month vanishesh from filled form after clicking edit."
+36,,5. Excel report: data with respective columns is not aligned.
+37,,6. PDF report: some fileds missing while editing. 
+,,
+38,"Telecom, officer-colony",1. Date filters in view form are not working
+39,,"2. Downloaded PDF  do not have header and footer info empID, Name, Form ID, Timestamp."
+40,,"3. On clicking edit, ""Varified by"" field disapper"
+,,
+41,"Telecom, Inspection Register",1. SQLSTATE42S22 error while saving
+,,
+41,"Telecom, ups_sys_mntc_register",1. Unable to open saved form.
+,,
+42,"Telecom, checklist-and-pm-depot",1. PDF report is not complete. 
+43,,2. Downloaded Excel report is Corrupted.
+44,,3. Station column have value 1 in view form
+45,,"4. Downloaded PDF  do not have footer info empID, Name, Form ID, Timestamp."
+46,,5. Station missing in PDF report.
+,,
+47,"Telecom, pm-occ-bcc-half-yearly",1. Rows are not merged in downloaded PDF or there is no heading in all rows as finalized in last meeting.
+48,,"2. Downloaded PDF  do not have footer info empID, Name, Form ID, Timestamp."
+,,
+49,"Signalling, Station Diary",1. Station info is not there in view form.
+50,,2. PDF format completely different from the form.
+51,,"3. on clicking edit, filled information disappered."
+52,,"4. Downloaded PDF  do not have footer info empID, Name, Form ID, Timestamp."
+,,
+53,"Signalling, Hardware Failure",1. SQLSTATE[22007] error while saving form.
+54,,2. Date filter not working.
+55,,3. Unable to edit station and system fields.
+56,,4. Date of replacement field disaapear on clicking edit.
+,,
+57,"Signalling, Incident Register",Okay
+,,
+58,"Signalling, QUARTERLY TRAIN INSPECTION (UNDERFRAME & OTHER ON-BOARD EQUIPMENTS)","1. Downloaded PDF  do not have footer info empID, Name, Form ID, Timestamp."
+,,
+59,"Signalling, PM - Point Machine maintenance record TDP",1. Completely different pdf report than the form.
+60,,2. PDF report is not complete. 
+61,,"3. Downloaded PDF  do not have header footer info empID, Name, Form ID, Timestamp."
+62,,4.Date is different in form after clicking edit. 
+63,,5. No date or station infor in pdf report.

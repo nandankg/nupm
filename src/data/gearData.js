@@ -1,0 +1,1617 @@
+
+ const stationsData= [
+    {
+      "StationName": "CCAP",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Point",
+              "GearNames": ["3101P", "3102P", "3103P", "3104P"]
+            },
+            {
+              "Type": "Signal",
+              "GearNames": ["3101RS", "3102RS", "3103RS", "3104RS", "3105BS", "3107BS"]
+            },
+            {
+              "Type": "Axle Counter",
+              "GearNames": [
+                "3104T_3102T", "3106T_3104T", "3105T_3106T", "3106T_3105T", "3108T_3106T",
+                "3110T_3108T", "3202T_3110T", "3204T_3202T", "3206T_3204T", "3206T_3302T",
+                "3205T_3301T", "3205T_3203T", "3203T_3201T", "3201T_3109T", "3109T_3107T",
+                "3107T_3105T", "3105T_3103T", "3103T_3101T"
+              ]
+            },
+            {
+              "Type": "EKT",
+              "GearNames": ["EKT_8_SCR_CCAP_3101P_3102P_3103P_3104P"]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP", "ATS_TECH", "ATS_VDU", "ATS_CRM"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "CABLE FRAME", "EARTH CONNECTIVITY", "AXLE COUNTER", "RELAY CUBICLE",
+                "BTN TYPE 3", "PDU", "LOOP BOX", "SMIO", "PDC", "SMPS", "UNDER FALSE FLOOR"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_CCAP", "NSMB_UP_CCAP", "SRMB_DN", "SRMB_UP"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "AMSM",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Signal",
+              "GearNames": ["3201RS", "3202RS"]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "DCS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "ATS",
+              "GearNames": ["ATS_SUP"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "BTN TYPE 3", "PDU", "LOOP BOX", "EARTH CONNECTIVITY",
+                "UNDER FALSE FLOOR", "SMPS", "CABLE FRAME"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_AMSM", "NSMB_UP_AMSM"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "TPNR",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Point",
+              "GearNames": [
+                "3301P", "3302P", "3303P", "3304P", "3305P", "3306P", "3307P", "3308P",
+                "3310P", "3312P", "3313P"
+              ]
+            },
+            {
+              "Type": "Signal",
+              "GearNames": [
+                "3302RS", "3303RS", "3304RS", "3305RS", "3306RS", "3308RS", "3309RS",
+                "3311RS", "3313BS", "3315RS", "3317RS", "3319RS", "3321RS"
+              ]
+            },
+            {
+              "Type": "Axle Counter",
+              "GearNames": [
+                "3304T_3302T", "3306T_3304T", "3304T_3303T", "3305T_3306T", "3308T_3306T",
+                "3310T_3308T", "3309T_3310T", "3312T_3310T", "3314T_3312T", "3314T_3402T",
+                "3315T_3310T", "3317T_3315T", "3316T_3304T", "3317T_9898T", "3318T_3316T",
+                "3320T_3318T", "3320T_9899T", "3303T_3301T", "3305T_3303T", "3307T_3305T",
+                "3309T_3307T", "3311T_3309T", "3310T_3309T", "3313T_3311T", "3313T_3401T",
+                "3302T_3206T", "3301T_3205T"
+              ]
+            },
+            {
+              "Type": "EKT",
+              "GearNames": [
+                "EKT_1_SCR_TPNR_3301P_3302P", "EKT_2_SCR_TPNR_3304P_3313P",
+                "EKT_3_SCR_TPNR_3303P_3306P", "EKT_4_SCR_TPNR_3305P_3307P_3308P_3312P",
+                "EKT_5_SCR_TPNR_3310P"
+              ]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            },
+            {
+              "Type": "CLC",
+              "GearNames": []
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": [
+                "ATS_SUP", "ATS_TECH", "ATS_VDU", "FEP_A server", "FEP_B server",
+                "VDU server", "SWITCH_A", "SWITCH_B", "ROUTER_A", "ROUTER_B", "OTHERS"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "TRACKSIDE ATC",
+              "GearNames": ["ZC"]
+            },
+            {
+              "Type": "Marker Board",
+              "GearNames": [
+                "NSMB_DN_TPNR", "NSMB_UP_TPNR", "SRMB_DN", "SRMB_UP",
+                "STOP_DEPOT ENTRY", "ATC END_DEPOT ENTRY", "STOP_DEPOT EXIT",
+                "ATC BEGIN_DEPOT EXIT"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "SMIO 1", "SMIO 2", "AXLE COUNTER 1", "AXLE COUNTER 2",
+                "RELAY CUBICLE 1", "RELAY CUBICLE 2", "RELAY CUBICLE 3",
+                "RELAY CUBICLE 4", "BTN TYPE 3", "FEP CABINET", "ZC",
+                "PDU TRANSFORMER CABINET", "PDU DISTRIBUTION BOX", "CLC",
+                "LOOP BOX", "EARTH CONNECTIVITY", "UNDER FALSE FLOOR", "SMPS",
+                "CABLE FRAME"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "KRNM",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Signal",
+              "GearNames": ["3401RS", "3402RS"]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "BTN TYPE 3", "PDU", "RC_KRNM", "LOOP BOX",
+                "EARTH CONNECTIVITY", "UNDER FALSE FLOOR", "SMPS"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_KRNM", "NSMB_UP_KRNM"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "SGNG",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Signal",
+              "GearNames": ["3501RS", "3502RS"]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "DCS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "ATS",
+              "GearNames": ["ATS_SUP"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "BTN TYPE 3", "PDU", "LOOP BOX", "RELAY CUBICLE",
+                "EARTH CONNECTIVITY", "UNDER FALSE FLOOR", "SMPS", "CABLE FRAME"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_SGNG", "NSMB_UP_SGNG"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "ALMB",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Point",
+              "GearNames": ["3601P", "3602P"]
+            },
+            {
+              "Type": "Signal",
+              "GearNames": ["3601RS", "3602RS", "3603RS", "3604RS"]
+            },
+            {
+              "Type": "Axle Counter",
+              "GearNames": [
+                "3402T_3314T", "3404T_3402T", "3406T_3404T", "3502T_3406T",
+                "3504T_3502T", "3506T_3504T", "3602T_3506T", "3604T_3602T",
+                "3606T_3604T", "3604T_3605T", "3606T_3702T", "3401T_3313T",
+                "3403T_3401T", "3405T_3403T", "3501T_3405T", "3503T_3501T",
+                "3505T_3503T", "3601T_3505T", "3603T_3601T", "3605T_3603T",
+                "3605T_3701T"
+              ]
+            },
+            {
+              "Type": "EKT",
+              "GearNames": ["EKT_6_SCR_ALMB_3601P_3602P"]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP", "ATS_TECH", "ATS_VDU"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "SMIO", "AXLE COUNTER", "RELAY CUBICLE 1", "RELAY CUBICLE 2",
+                "BTN TYPE 3", "PDU TRANSFORMER CABINET", "LOOP BOX",
+                "EARTH CONNECTIVITY", "PDU DISTRIBUTION BOX", "SMPS",
+                "UNDER FALSE FLOOR", "CABLE FRAME"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_ALMB", "NSMB_UP_ALMB", "SRMB_DN"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "ABST",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Signal",
+              "GearNames": ["3701RS", "3702RS"]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "BTN TYPE 3", "PDU", "LOOP BOX", "EARTH CONNECTIVITY",
+                "UNDER FALSE FLOOR", "RC_ABST"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_ABST", "NSMB_UP_ABST"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "MWYA",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Signal",
+              "GearNames": ["3801RS", "3802RS"]
+            },
+            {
+              "Type": "Axle Counter",
+              "GearNames": [
+                "3702T_3606T", "3704T_3702T", "3706T_3704T", "3708T_3706T",
+                "3802T_3708T", "3804T_3802T", "3806T_3804T", "3806T_3902T",
+                "3701T_3605T", "3703T_3701T", "3705T_3703T", "3707T_3705T",
+                "3801T_3707T", "3803T_3801T", "3805T_3803T", "3805T_3901T"
+              ]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "SMIO", "AXLE COUNTER", "RELAY CUBICLE 1", "RELAY CUBICLE 2",
+                "BTN TYPE 3", "PDU TRANSFORMER CABINET", "LOOP BOX",
+                "EARTH CONNECTIVITY", "PDU DISTRIBUTION BOX", "SMPS",
+                "UNDER FALSE FLOOR", "CABLE FRAME"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_MWYA", "NSMB_UP_MWYA"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "DGPI",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Signal",
+              "GearNames": ["3901RS", "3902RS"]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "BTN TYPE 3", "PDU", "RC_03_DGPI", "LOOP BOX",
+                "EARTH CONNECTIVITY", "UNDER FALSE FLOOR"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_DGPI", "NSMB_UP_DGPI"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "CHBG",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Point",
+              "GearNames": ["4001P", "4002P"]
+            },
+            {
+              "Type": "Signal",
+              "GearNames": ["4001RS", "4002RS", "4003RS", "4004RS", "4006RS", "4008RS"]
+            },
+            {
+              "Type": "Axle Counter",
+              "GearNames": [
+                "3902T_3806T", "3904T_3902T", "3906T_3904T", "3908T_3906T",
+                "4002T_3908T", "4004T_4002T", "4003T_4002T", "4006T_4004T",
+                "4008T_4006T", "4010T_4008T", "3901T_3805T", "3903T_3901T",
+                "3905T_3903T", "4001T_3905T", "4003T_4001T", "4005T_4003T",
+                "4007T_4005T", "4009T_4007T", "4011T_4009T", "4010T_4102T",
+                "4011T_4101T"
+              ]
+            },
+            {
+              "Type": "EKT",
+              "GearNames": ["EKT_7_SCR_CHBG_4001P_4002P"]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP", "ATS_TECH", "ATS_VDU"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+            
+          ]
+        
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "SMIO", "AXLE COUNTER", "RELAY CUBICLE 1", "RELAY CUBICLE 2",
+                "BTN TYPE 3", "PDU TRANSFORMER CABINET", "LOOP BOX",
+                "EARTH CONNECTIVITY", "PDU DISTRIBUTION BOX", "SMPS",
+                "UNDER FALSE FLOOR", "CABLE FRAME"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_CHBG", "NSMB_UP_CHBG", "SRMB_DN"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "HSGJ",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Signal",
+              "GearNames": ["4101RS", "4102RS", "4103RS"]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            },
+            {
+              "Type": "CLC",
+              "GearNames": []
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": [
+                "ATS_SUP", "ATS_VDU", "FEP_A server", "FEP_B server",
+                "VDU server", "SWITCH_A", "SWITCH_B", "ROUTER_A",
+                "ROUTER_B", "OTHERS"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "TRACKSIDE ATC",
+              "GearNames": ["ZC"]
+            },
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_HSGJ", "NSMB_UP_HSGJ"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "ZC", "CLC", "FEP CABINET", "BTN TYPE 3", "PDU",
+                "LOOP BOX", "EARTH CONNECTIVITY", "SMPS", "UNDER FALSE FLOOR",
+                "Qz"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "SHVA",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Signal",
+              "GearNames": ["4201RS", "4202RS"]
+            },
+            {
+              "Type": "Axle Counter",
+              "GearNames": [
+                "4102T_4010T", "4104T_4102T", "4106T_4104T", "4202T_4106T",
+                "4204T_4202T", "4206T_4204T", "4302T_4206T", "4304T_4302T",
+                "4306T_4304T", "4402T_4306T", "4402T_4502T", "4403T_4501T",
+                "4403T_4401T", "4401T_4305T", "4305T_4303T", "4303T_4301T",
+                "4301T_4205T", "4205T_4203T", "4203T_4201T", "4201T_4103T",
+                "4103T_4101T", "4101T_4011T"
+              ]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "SMIO", "AXLE COUNTER", "RELAY CUBICLE 1", "RELAY CUBICLE 2",
+                "BTN TYPE 3", "PDU", "LOOP BOX", "EART CONNECTIVITY",
+                "SMPS", "UNDER FALSE FLOOR", "CABLE FRAME"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_SHVA", "NSMB_UP_SHVA"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "HZNJ",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Signal",
+              "GearNames": ["4301RS", "4302RS"]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "BTN TYPE 3", "PDU", "LOOP BOX", "RELAY CUBICLE",
+                "SMPS", "UNDER FALSE FLOOR", "EARTH CONNECTIVITY", "CABLE FRAME"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_HZNJ", "NSMB_UP_HZNJ"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "KDSS",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Signal",
+              "GearNames": ["4401RS", "4402RS"]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "BTN TYPE 3", "PDU", "LOOP BOX", "SMPS",
+                "UNDER FALSE FLOOR", "EARTH CONNECTIVITY", "CABLE FRAME"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_KDSS", "NSMB_UP_KDSS"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "VSVM",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Signal",
+              "GearNames": ["4501RS", "4502RS", "4503RS"]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "BTN TYPE 3", "PDU", "LOOP BOX", "SMPS",
+                "UNDER FALSE FLOOR", "EARTH CONNECTIVITY", "CABLE FRAME"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_VSVM", "NSMB_UP_VSVM"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "ITC",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Point",
+              "GearNames": ["4601P", "4602P", "4603P", "4604P"]
+            },
+            {
+              "Type": "Signal",
+              "GearNames": [
+                "4601RS", "4602RS", "4603RS", "4604RS", "4605RS",
+                "4606RS", "4607RS", "4608RS"
+              ]
+            },
+            {
+              "Type": "Axle Counter",
+              "GearNames": [
+                "4502T_4402T", "4504T_4502T", "4506T_4504T", "4508T_4506T",
+                "4510T_4508T", "4512T_4510T", "4602T_4512T", "4604T_4602T",
+                "4606T_4604T", "4603T_4604T", "4608T_4606T", "4610T_4608T",
+                "4610 T_4702T", "4609T_4701T", "4609T_4607T", "4608T_4607T",
+                "4607T_4605T", "4605T_4603T", "4603T_4601T", "4601T_4507T",
+                "4507T-4505T", "4505T_4503T", "4503T_4501T", "4501T_4403T"
+              ]
+            },
+            {
+              "Type": "EKT",
+              "GearNames": [
+                "EKT_7_SCR_ITC_4601P_4602P", "EKT_8_SCR_ITC_4603P_4604P"
+              ]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP", "ATS_TECH", "ATS_VDU"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "SMIO", "AXLE COUNTER", "RELAY CUBICLE 1", "RELAY CUBICLE 2",
+                "RELAY CUBICLE 3", "BTN TYPE 3", "PDU", "LOOP BOX",
+                "EARTH CONNECTIVITY", "SMPS", "UNDER FALSE FLOOR", "CABLE FRAME"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_ITC", "NSMB_UP_ITC", "SRMB_DN", "SRMB_UP"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "BSNM",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Signal",
+              "GearNames": ["4701RS", "4702RS", "4704RS"]
+            },
+            {
+              "Type": "Axle Counter",
+              "GearNames": [
+                "4702T_4610T", "4704T_4702T", "4706T_4704T", "4708T_4706T",
+                "4802T_4708T", "4804T_4802T", "4806T_4804T", "4806T_4902T",
+                "4805T_4901T", "4805T_4803T", "4803T_4801T", "4801T_4709T",
+                "4709T_4707T", "4707T_4705T", "4705T_4703T", "4703T_4701T",
+                "4701T_4609T"
+              ]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "SMIO", "AXLE COUNTER", "RELAY CUBICLE 1", "RELAY CUBICLE 2",
+                "BTN TYPE 3", "LOOP BOX", "EARTH CONNECTIVITY", "PDU", "SMPS",
+                "UNDER FALSE FLOOR", "CABLE FRAME"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_BSNM", "NSMB_UP_BSNM"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "LHMT",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Signal",
+              "GearNames": ["4801RS", "4802RS"]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "BTN TYPE 3", "PDU", "LOOP BOX", "SMPS",
+                "UNDER FALSE FLOOR", "EARTH CONNECTIVITY", "CABLE FRAME"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_LHMT", "NSMB_UP_LHMT"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "BTNT",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Signal",
+              "GearNames": ["4901RS", "4902RS"]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "BTN TYPE 3", "PDU", "LOOP BOX", "SMPS",
+                "UNDER FALSE FLOOR", "EARTH CONNECTIVITY", "CABLE FRAME"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_BTNT", "NSMB_UP_BTNT"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "IDNM",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Point",
+              "GearNames": ["5003P", "5004P", "5005P", "5007P", "5008P"]
+            },
+            {
+              "Type": "Signal",
+              "GearNames": [
+                "5001RS", "5002RS", "5003RS", "5004RS", "5005RS",
+                "5007RS", "5009RS", "5011RS", "5013BS", "5015BS", "5017BS"
+              ]
+            },
+            {
+              "Type": "Axle Counter",
+              "GearNames": [
+                "4902T_4806T", "4904T_4902T", "4906T_4904T", "5002T_4906T",
+                "5004T_5002T", "5006T_5004T", "5006T_5102T", "5007T_5006T",
+                "5007T_5101T", "5007T_5005T", "5011T_5007T", "5015T_5013T",
+                "5013T_5005T", "5005T_5003T", "5003T_5001T", "5001T_4905T",
+                "4905T_4903T", "4903T_4901T", "4901T_4805T"
+              ]
+            },
+            {
+              "Type": "EKT",
+              "GearNames": [
+                "EKT_11_SCR_IDNM_5008P_5003P", "EKT_12_SCR_IDNM_5005P_5004P_5007P"
+              ]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            },
+            {
+              "Type": "CLC",
+              "GearNames": []
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": [
+                "ATS_SUP", "ATS_TECH", "ATS_VDU", "FEP_A server",
+                "FEP_B server", "VDU server", "SWITCH_A", "SWITCH_B",
+                "ROUTER_A", "ROUTER_B", "OTHERS"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "TRACKSIDE ATC",
+              "GearNames": ["ZC"]
+            },
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_IDNM", "NSMB_UP_IDNM", "SRMB_UP_IDNM"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "SMIO", "AXLE COUNTER", "RELAY CUBICLE 1", "RELAY CUBICLE 2",
+                "RELAY CUBICLE 3", "BTN TYPE 3", "PDU", "LOOP BOX",
+                "EARTH CONNECTIVITY", "SMPS", "UNDER FALSE FLOOR", "CLC",
+                "ZC", "FEP CABINET", "CABLE FRAME"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "MSPA",
+      "Equipment": [
+        {
+          "System": "IXL",
+          "GearTypes": [
+            {
+              "Type": "Point",
+              "GearNames": ["5101P", "5102P", "5103P", "5104P", "5105P", "5106P"]
+            },
+            {
+              "Type": "Signal",
+              "GearNames": [
+                "5101RS", "5102RS", "5103RS", "5104RS", "5105RS",
+                "5106RS", "5107RS", "5108RS", "5110BS", "5112BS"
+              ]
+            },
+            {
+              "Type": "Axle Counter",
+              "GearNames": [
+                "5102T_5006T", "5104T_5102T", "5106T_5104T", "5108T_5106T",
+                "5110T_5108T", "5112T_5110T", "5112T_5111T", "5114T_5112T",
+                "5113T_5111T", "5111T_5112T", "5111T_5109T", "5109T_5107T",
+                "5107T_5108T", "5107T_5105T", "5105T_5103T", "5103T_5101T",
+                "5101T_5007T"
+              ]
+            },
+            {
+              "Type": "EKT",
+              "GearNames": [
+                "EKT_13_SCR_MSPA_5101P_5102P", "EKT_14_SCR_MSPA_5106P_5103P_5005P_5004P"
+              ]
+            },
+            {
+              "Type": "ESP",
+              "GearNames": ["PF_DN_ESP_01", "PF_UP_ESP_02", "SCR_ESP_03"]
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["ATS_SUP", "ATS_TECH", "ATS_VDU"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": ["BTN TYPE 3", "CCTV WORKSTATION"]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "SMIO", "AXLE COUNTER", "RELAY CUBICLE 1", "RELAY CUBICLE 2",
+                "BTN TYPE 3", "PDU", "LOOP BOX", "EARTH CONNECTIVITY", "SMPS",
+                "UNDER FALSE FLOOR", "CABLE FRAME"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "Marker Board",
+              "GearNames": ["NSMB_DN_MSPA", "NSMB_UP_MSPA", "SRMB_DN", "SRMB_UP"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "StationName": "TPD",
+      "Equipment": [
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Point",
+              "GearNames": [
+                "9901P", "9902P", "9903P", "9904P", "9905P", "9906P", "9907P",
+                "9908P", "9909P", "9910P", "9911P", "9912P", "9913P", "9914P",
+                "9915P", "9916P", "9917P", "9918P", "9919P", "9920P", "9921P",
+                "9922P", "9923P", "9924P", "9925P", "9926P", "9927P", "9928P",
+                "9929P", "9930P", "9931P", "9932P", "9933P", "9934P", "9935P",
+                "9936P", "9937P", "9938P", "9939P", "9940P", "9941P", "9942P",
+                "9943P", "9944P", "9945P", "9946P", "9947P", "9948P", "9501P"
+              ]
+            },
+            {
+              "Type": "Signal",
+              "GearNames": [
+                "9901RS", "9903RS", "9905RS", "9907RS", "9909RS", "9911RS",
+                "9913RS", "9915RS", "9917RS", "9919RS", "9921RS", "9923RS",
+                "9925RS", "9927RS", "9929RS", "9931RS", "9933RS", "9935RS",
+                "9937RS", "9939RS", "9941RS", "9944RS", "9946RS", "9948RS",
+                "9950RS", "9952RS", "9954RS", "9956RS", "9958RS", "9960RS",
+                "9962RS", "9964RS", "9966RS", "9968RS", "9970RS", "9972RS",
+                "9974RS", "9976RS", "9904BS", "9906BS", "9908BS", "9910BS",
+                "9912BS", "9914BS", "9916BS", "9918BS", "9920BS", "9922BS",
+                "9924BS", "9926BS", "9928BS", "9930BS", "9932BS", "9934BS",
+                "9936BS", "9940BS", "9942BS", "9943BS", "9961BS", "9963BS",
+                "9965BS", "9967BS", "9969BS", "9971BS", "9501BS", "9502RS",
+                "9503RS", "9504BS"
+              ]
+            },
+            {
+              "Type": "Axle Counter",
+              "GearNames": [
+                "3320T_9999T", "9802T_9803T", "9899T_3320T", "9898T_3317T",
+                "3317T_9898T", "9801T_9802T", "9804T_9802T", "9805T_9806T",
+                "9806T_9807T", "9807T_9803T", "9808T_9809T", "9809T_9810T",
+                "9810T_9811T", "9811T_9803T", "9812T_9813T", "9813T_9814T",
+                "9814T_9811T", "9815T_9816T", "9816T_9817T", "9817T_9818T",
+                "9819T_9820T", "9820T_9821T", "9821T_9818T", "9822T_9823T",
+                "9823T_9824T", "9824T_9818T", "9818T_9803T", "9803T_9999T",
+                "9999T_9895T", "9895T_9898T", "9895T_9897T", "9825T_9826T",
+                "9826T_9827T", "9827T_9828T", "9828T_9803T", "9829T_9830T",
+                "9830T_9831T", "9831T_9828T", "9832T_9833T", "9833T_9834T",
+                "9834T_9828T", "9835T_9836T", "9836T_9837T", "9837T_9838T",
+                "9838T_9828T", "9839T_9840T", "9840T_9841T", "9841T_9838T",
+                "9842T_9843T", "9843T_9844T", "9844T_9845T", "9845T_9894T",
+                "9894T_9896T", "9896T_9899T", "9895T_9896T", "9896T_9895T",
+                "9846T_9847T", "9847T_9848T", "9848T_9845T", "9849T_9850T",
+                "9850T_9851T", "9851T_9852T", "9852T_9896T", "9896T_9900T",
+                "9853T_9854 T", "9854T_9855T", "9855T_9852T", "9856T_9857T",
+                "9857T_9858T", "9858T_9852T", "9859T_9852T", "9860T_9861T",
+                "9861T_9852T", "9861T_9864T", "9864T_9865T", "9894T_9999T",
+                "9865T_9866T", "9865T_9867T", "9865T_9868T", "9865T_9869T",
+                "9865T_9870T", "9864T_9871T", "9864T_9873T", "9862T_9863T",
+                "9863T_9861T", "9861T_9863T", "9863T_9874T", "9874T_9873T",
+                "9873T_9872T", "9874T_9875T", "9875T_9876T", "9876T_9877T",
+                "9877T_9878T", "9875T_9879T", "9879T_9880T", "9880T_9881T",
+                "9875T_9882T", "9882T_9883T", "9883T_9884T", "9874T_9885T",
+                "9885T_9886T", "9886T_9887T", "9887T_9888T", "9885T_9889T",
+                "9889T_9890T", "9890T_ 9891T", "9874T_9892T", "9892T_9893T",
+                "9504T_9503T", "9503T _9502T", "9502T_9501T", "9892T_9502T",
+                "9502T_9892T"
+              ]
+            },
+            {
+              "Type": "EKT",
+              "GearNames": [
+                "Group 1 9901p",
+                "Group 2 9902p,03p,04p,05p",
+                "Group 3 9906p,07p",
+                "Group 4 9908p,09p",
+                "Group 5 9910p,11p",
+                "Group 6 9912p,13p,14p",
+                "Group 7 9915p",
+                "Group 8 9916p,19p",
+                "Group 9 9917p,18p",
+                "Group 10 9920p",
+                "Group 11 9921p,22p",
+                "Group 12 9923p,24p,25p,26p",
+                "Group 13 9927p",
+                "Group 14 9928p,29p,30p,31p",
+                "Group 15 9937p",
+                "Group 16 9932p,35p",
+                "Group 17 9936p",
+                "Group 18 9933p,34p",
+                "Group 19 9939p,40p",
+                "Group 20 9941p,42p",
+                "Group 21 9943p,44p",
+                "Group 22 9945p",
+                "Group 23 9501p",
+                "Group 24 9946p",
+                "Group 25 9947p",
+                "Group 26 9948p",
+                "Group 27 9938p"
+              ]
+            },
+            {
+              "Type": "CLC",
+              "GearNames": []
+            }
+          ]
+        },
+        {
+          "System": "ATS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": [
+                "CATS", "DATS", "DCC HMI SUP", "DCC HMI TECH",
+                "DCC HMI VDU", "BCC HMI TC", "BCC HMI CHF", "BCC HMI PBK"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "MSS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": [
+                "MSS CABINET", "MSS WORKSTATIONS SER", "MSS WORKSTATIONS OCC"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "ATC",
+          "GearTypes": [
+            {
+              "Type": "TRACKSIDE ATC",
+              "GearNames": ["LC"]
+            }
+          ]
+        },
+        {
+          "System": "DCS",
+          "GearTypes": [
+            {
+              "Type": "INDOOR EQUIPMENTS",
+              "GearNames": [
+                "BTN TYPE 1", "BTN TYPE 2", "BTN TYPE 3",
+                "NMS WORKSTATIONS MM", "NMS WORKSTATIONS DCS",
+                "CCTV WORKSTATIONS OCC", "CCTV WORKSTATIONS SECURITY ROOM"
+              ]
+            }
+          ]
+        },
+        {
+          "System": "NONE",
+          "GearTypes": [
+            {
+              "Type": "Indoor",
+              "GearNames": [
+                "SMIO 1", "SMIO 2", "SMIO 3", "SMIO 4",
+                "AXLE COUNTER 1", "AXLE COUNTER 2", "AXLE COUNTER 3",
+                "AXLE COUNTER 4", "AXLE COUNTER 5", "RELAY CUBICLE 1",
+                "RELAY CUBICLE 2", "RELAY CUBICLE 3", "RELAY CUBICLE 4",
+                "RELAY CUBICLE 5", "RELAY CUBICLE 6", "RELAY CUBICLE 7",
+                "RELAY CUBICLE 8", "RELAY CUBICLE 9", "BTN TYPE 1",
+                "BTN TYPE 2", "BTN TYPE 3", "MSS", "CATS", "DATS",
+                "LC", "PDU TRANSFORMER CABINET", "PDU  DISTRIBUTION BOX",
+                "LOOP BOX", "CLC", "EARTH CONNECTIVITY", "UNDER FALSE FLOOR",
+                "SMPS", "CABLE FRAME"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]

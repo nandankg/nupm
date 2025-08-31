@@ -1,0 +1,53 @@
+{
+  "AG": [
+    "AG 1",
+    "AG 2",
+    "AG 3",
+    "AG 4",
+    "AG 5",
+    "AG 11",
+    "AG 12",
+    "AG 13",
+    "AG 14",
+    "AG 15",
+    "AG 21",
+    "AG 22",
+    "AG 23",
+    "AG 24",
+    "AG 31",
+    "AG 32",
+    "AG 33",
+    "AG 34"
+  ],
+  "TOM": [
+    "TOM 1",
+    "TOM 2",
+    "TOM 3",
+    "TOM 11",
+    "TOM 41",
+    "TOM 42",
+    "TOM 43",
+    "TOM 44"
+  ],
+  "TVM": [
+    "TVM 1",
+    "TVM 2",
+    "TVM 3",
+    "TVM 4",
+    "TVM 11",
+    "TVM 12",
+    "TVM 13",
+    "TVM 14",
+    "TVM 15",
+    "TVM 16"
+  ],
+  "RCTM": ["RCTM 1", "RCTM 2", "RCTM 11"],
+  "AVM": ["AVM 1", "AVM 2", "AVM 11", "AVM 12"],
+  "Switches": [
+    "TOM L2 Switch 1",
+    "TOM L2 Switch 2",
+    "SCR L2 Switch",
+    "TER L3 Switch 1",
+    "TER L3 Switch 2"
+  ]
+}

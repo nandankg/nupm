@@ -1,0 +1,188 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Breadcrumbs } from "@mui/material";
+import { FaFilter } from "react-icons/fa";
+import { addgatepassred } from "../reducer/GatePassReducer";
+
+const GatePassList = () => {
+  const dispatch = useDispatch();
+  const gatepass = useSelector((state) => state.gatepassstore || []);
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    const itms = JSON.parse(localStorage.getItem("gatepass"));
+    if (itms) {
+      setItems(itms);
+    }
+  }, []);
+  useEffect(() => {
+    let l = gatepass.length;
+    if (l > 0) localStorage.setItem("gatepass", JSON.stringify(gatepass));
+    else dispatch(addgatepassred(items));
+  }, [gatepass, items, dispatch]);
+
+  console.log(items);
+  return (
+    <>
+      <div className="container">
+        <div role="presentation " className="bredcrumbs">
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link underline="hover" color="inherit" to="/gatepass/register">
+              Gate Pass
+            </Link>
+            <Link underline="hover" color="inherit">
+              List
+            </Link>
+          </Breadcrumbs>
+        </div>
+        <h3>Gate Pass Register</h3>
+        <span className="line-box"></span>
+        <div className="d-flex justify-content-between">
+          <input type="search" name="search" placeholder="Search Here." />
+          <div className="d-flex gap-3">
+            <Link to="">
+              <button className="btn btn-primary">
+                <FaFilter />
+              </button>
+            </Link>
+            <Link to=" ">
+              <button className="btn btn-primary">Export</button>
+            </Link>
+          </div>
+        </div>
+
+        {items.map((item, index) => (
+          <div className="w-75">
+            <table className="table " key={index}>
+              <thead>
+                <tr>
+                  <th colSpan={5}>
+                    <h3>Uttar Pradesh Metro Rail Corporation Limited</h3>
+                    <h4>उत्तर प्रदेश मेट्रो रेल कॉर्पोरेशन लिमिटेड</h4>
+                  </th>
+                  <th rowSpan={2} colSpan={2}>
+                    <img src={"/upmrc-logo.png"} alt="Logo" />
+                  </th>
+                  <th colSpan={2}>Original Copy Page No.</th>
+                </tr>
+                <tr>
+                  <th colSpan={5}>Gate Pass (गेट पास)</th>
+                  <td colSpan={2}>fix page no. </td>
+                </tr>
+                <tr>
+                  <th style={{ maxWidth: "25px" }}>Organisation</th>
+                  <td colSpan={2}>{item.org} </td>
+                  <th> Date</th>
+                  <td> {item.date}</td>
+                  <th>Book No.</th>
+                  <td colSpan={3}> fix </td>
+                </tr>
+                <tr>
+                  <th>Department</th>
+                  <td colSpan={2}> {item.dept}</td>
+                  <th colSpan={6}>Returnable/ Non-Returnable</th>
+                </tr>
+                <tr className="text-center">
+                  <th>S.No.</th>
+                  <th>Item Description</th>
+                  <th>Part No.</th>
+                  <th>Serial No.</th>
+                  <th>Location</th>
+                  <th>QTY.</th>
+                  <th style={{ widows: "150px" }}>Defective Serviceable</th>
+                  <th>Remark</th>
+                  <th style={{ width: "150px" }}>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {item?.items?.map((itm, idx) => (
+                  <tr>
+                    {/* <th>{item.logotext}</th>
+                                <th>{item.logo}</th>
+                                <th>{item.pageno}</th>
+                                <th>{item.org}</th>
+                                <th>{item.date}</th>
+                                <th>{item.bookno}</th>
+                                <th>{item.dept}</th> */}
+                    <td>{idx + 1}</td>
+                    <td>{itm.itmdespt}</td>
+                    <td>{itm.partno}</td>
+                    <td>{itm.serialno}</td>
+                    <td>{itm.location}</td>
+                    <td>{itm.qty}</td>
+                    <td>{itm.dftsrv}</td>
+                    <td>{itm.remark}</td>
+
+                    <td className=" ">
+                      <button className="btn btn-primary ">Edit</button>
+
+                      <button className="btn btn-success ">Save</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  border: "1px solid #ccc",
+                  padding: "10px",
+                  borderRadius: "5px",
+                  width: "100%",
+                }}
+              >
+                <div
+                  className="heading-sec"
+                  style={{ display: "flex", width: "100%" }}
+                  key={index}
+                >
+                  <div className="left" style={{ flex: 1 }}>
+                    <h4>Detail of issuer</h4>
+                    <p>Sign &nbsp; &nbsp;{item?.issuerdetail?.signissuer}</p>
+                    <p>Name &nbsp; &nbsp;{item?.issuerdetail?.nameissuer}</p>
+                    <p>
+                      Designation &nbsp; &nbsp;
+                      {item?.issuerdetail?.designationissuer}
+                    </p>
+                    <p>
+                      Emp id. &nbsp; &nbsp;{item?.issuerdetail?.empidissuer}
+                    </p>
+                    <p>Date: &nbsp; &nbsp;{item?.issuerdetail?.dateissuer}</p>
+                  </div>
+
+                  <div className="right">
+                    <h4>Details of Receiver</h4>
+                    <p>
+                      Sign &nbsp; &nbsp;{item?.receiverdetail?.signreceiver}
+                    </p>
+                    <p>
+                      Name &nbsp; &nbsp;{item?.receiverdetail?.namereceiver}
+                    </p>
+                    <p>
+                      Designation &nbsp; &nbsp;
+                      {item?.receiverdetail?.designationreceiver}
+                    </p>
+                    <p>
+                      Emp id. &nbsp; &nbsp;
+                      {item?.receiverdetail?.empidreceiver}
+                    </p>
+                    <p>
+                      Date: &nbsp; &nbsp;{item?.receiverdetail?.datereceiver}
+                    </p>
+                  </div>
+                </div>
+                ) : ( "" )
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};
+
+export default GatePassList;

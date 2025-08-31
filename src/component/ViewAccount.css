@@ -1,0 +1,131 @@
+/* Scopes all styles within the view-account-container */
+.view-account-container {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 40px;
+  background: #e9f2f4; /* Light gray background for a clean look */
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #26a69a; /* Teal accent border */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.view-account-container:hover {
+  transform: translateY(-4px); /* Subtle lift effect on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.view-account-container .view-account-header {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #00796b; /* Teal color for text */
+  font-weight: 700;
+}
+
+.view-account-container .view-account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.view-account-container .form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Space between form groups */
+}
+
+.view-account-container .form-group {
+  flex: 1;
+  background: #f1ffff; /* White background for form groups */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.view-account-container .form-value {
+  font-size: 20px; /* Increased font size for span */
+  color: #000; /* Black color for span text */
+  border-bottom: 1px solid #ddd; /* Subtle underline for emphasis */
+  padding-bottom: 5px; /* Space between text and underline */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+/* Style for password input containers */
+.password-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.password-inputs {
+  display: flex;
+  gap: 20px;
+}
+
+.password-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.password-input::placeholder {
+  color: #aaa; /* Light gray placeholder text */
+}
+
+/* Shiny hover effect */
+.password-input:hover,
+.password-input:focus {
+  border-color: #26a69a; /* Teal border color on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 8px rgba(38, 166, 154, 0.3); /* Shiny effect */
+  outline: none; /* Remove default focus outline */
+}
+
+/* Optional: Style focus state for better accessibility */
+.password-input:focus {
+  border-color: #00796b; /* Darker teal color for focus state */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 8px rgba(0, 121, 107, 0.3); /* Enhanced shiny effect */
+}
+
+.view-account-container .form-value b {
+  color: #004d40; /* Darker teal color for bold text */
+  font-size: 22px; /* Increased font size for bold text */
+  margin-right: 8px; /* Added spacing between bold text and content */
+}
+
+.view-account-container .fs-btn {
+  background: #00796b; /* Teal button background */
+  border: none;
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  margin: 20px auto; /* Center button */
+}
+
+.view-account-container .fs-btn:hover {
+  background: #004d40; /* Darker teal on hover */
+  transform: translateY(-2px);
+}
+
+
+@media (max-width: 600px) {
+  .view-account-container {
+    padding: 20px;
+  }
+
+  .view-account-container .form-row {
+    flex-direction: column;
+    gap: 15px; /* Stack form groups vertically on smaller screens */
+  }
+}

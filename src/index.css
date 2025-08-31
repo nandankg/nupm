@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#loader-box {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(240, 248, 255, 0.2); /* Lower opacity */
+  z-index: 9999999;
+  position: fixed; /* Covers the whole screen */
+  top: 0;
+  left: 0;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+#loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the loader */
+}
+.devalert{
+	color:orange;
+	
+}
+	
+	
+	
