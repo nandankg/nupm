@@ -895,7 +895,6 @@ const UnreadableCardRefundDetailsForm = lazy(() => import("./departments/operati
 const FirstAidRegisterForm = lazy(() => import("./departments/operation/forms/FirstAidRegisterForm"));
 const OperationLiftRescueForm = lazy(() => import("./departments/operation/forms/OperationLiftRescueForm"));
 const OperationStationDiaryForm = lazy(() => import("./departments/operation/forms/OperationStationDiaryForm"));
-const StationDiarySignallingForm = lazy(() => import("./departments/operation/forms/StationDiarySignallingForm"));
 const TerEntryRegisterForm = lazy(() => import("./departments/operation/forms/TerEntryRegisterForm"));
 const UpsRoomEntryRegisterForm = lazy(() => import("./departments/operation/forms/UpsRoomEntryRegisterForm"));
 const CrewControlCcapForm = lazy(() => import("./departments/operation/forms/CrewControlCcapForm"));
@@ -1030,7 +1029,6 @@ function App() {
                 <Route path="/form/first-aid-register" element={<FirstAidRegisterForm />} />
                 <Route path="/form/operation-lift-rescue-register" element={<OperationLiftRescueForm />} />
                 <Route path="/form/operation-station-diary" element={<OperationStationDiaryForm />} />
-                <Route path="/form/station-diary-signalling" element={<StationDiarySignallingForm />} />
                 <Route path="/form/ter-entry-register" element={<TerEntryRegisterForm />} />
                 <Route path="/form/ups-room-entry-register" element={<UpsRoomEntryRegisterForm />} />
                 <Route path="/form/crew-control-ccap" element={<CrewControlCcapForm />} />
