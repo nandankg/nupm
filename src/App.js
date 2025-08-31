@@ -747,6 +747,64 @@ const PmStationQuarterlyView = lazy(() => import("./tables/store/PmStationQuarte
 const PmDepotHalfYearlyList = lazy(() => import("./list/store/PmDepotHalfYearlyList"));
 const PmdepotHalfyearlyTable = lazy(() => import("./tables/store/PmdepotHalfyearlyTable"));
 const BioDataRegister = lazy(() => import("./forms/store/BioDataRegister"));
+
+// ================================
+// SIGNALLING DEPARTMENT FORMS (45 forms - 100% Complete)
+// ================================
+
+// Daily Operations Forms
+const StationDiarySignallingForm = lazy(() => import("./departments/signalling/forms/StationDiarySignallingForm"));
+const SEREntryForm = lazy(() => import("./departments/signalling/forms/SEREntryForm"));
+const IncidentRegisterSignallingForm = lazy(() => import("./departments/signalling/forms/IncidentRegisterSignallingForm"));
+const AtcExaminationRegisterForm = lazy(() => import("./departments/signalling/forms/AtcExaminationRegisterForm"));
+const HardwareFailureRegisterForm = lazy(() => import("./departments/signalling/forms/HardwareFailureRegisterForm"));
+const SignalFailureRegisterForm = lazy(() => import("./departments/signalling/forms/SignalFailureRegisterForm"));
+const AxleCounterMaintenanceForm = lazy(() => import("./departments/signalling/forms/AxleCounterMaintenanceForm"));
+const GatePassForm = lazy(() => import("./departments/signalling/forms/GatePassForm"));
+
+// Equipment & Hardware Forms
+const HardwareFailureForm = lazy(() => import("./departments/signalling/forms/HardwareFailureForm"));
+const ReplacementRegisterForm = lazy(() => import("./departments/signalling/forms/ReplacementRegisterForm"));
+const AssetRegisterForm = lazy(() => import("./departments/signalling/forms/AssetRegisterForm"));
+const JobCardForm = lazy(() => import("./departments/signalling/forms/JobCardForm"));
+const LabFaultyItemRegisterForm = lazy(() => import("./departments/signalling/forms/LabFaultyItemRegisterForm"));
+const ContractualSpareTestingRegisterForm = lazy(() => import("./departments/signalling/forms/ContractualSpareTestingRegisterForm"));
+const MeasurementVoltageMCBinPDCForm = lazy(() => import("./departments/signalling/forms/MeasurementVoltageMCBinPDCForm"));
+const BoxCleaningOutdoorForm = lazy(() => import("./departments/signalling/forms/BoxCleaningOutdoorForm"));
+const EquipmentFailureRegisterForm = lazy(() => import("./departments/signalling/forms/EquipmentFailureRegisterForm"));
+const AssuranceSystemForm = lazy(() => import("./departments/signalling/forms/AssuranceSystemForm"));
+
+// PM Maintenance Records
+const ColorLightMaintenanceForm = lazy(() => import("./departments/signalling/forms/ColorLightMaintenanceForm"));
+const AtsCabinetMaintenanceForm = lazy(() => import("./departments/signalling/forms/AtsCabinetMaintenanceForm"));
+const TomHalfYearlyMaintenanceForm = lazy(() => import("./departments/signalling/forms/TomHalfYearlyMaintenanceForm"));
+const AfcGateMaintenanceForm = lazy(() => import("./departments/signalling/forms/AfcGateMaintenanceForm"));
+const OccBccHalfYearlyMaintenanceForm = lazy(() => import("./departments/signalling/forms/OccBccHalfYearlyMaintenanceForm"));
+const UpsMaintenanceSignallingForm = lazy(() => import("./departments/signalling/forms/UpsMaintenanceForm"));
+const PMPointMachineMaintenanceRecordForm = lazy(() => import("./departments/signalling/forms/PMPointMachineMaintenanceRecordForm"));
+const PMPointMachineMaintenanceRecordTDPForm = lazy(() => import("./departments/signalling/forms/PMPointMachineMaintenanceRecordTDPForm"));
+const ShuntSignalMaintenanceRecordForm = lazy(() => import("./departments/signalling/forms/ShuntSignalMaintenanceRecordForm"));
+const QuarterlyTrainInspectionForm = lazy(() => import("./departments/signalling/forms/QuarterlyTrainInspectionForm"));
+const PmFollowupSheetForm = lazy(() => import("./departments/signalling/forms/PmFollowupSheetForm"));
+
+// Administrative Forms
+const LedgerSignallingForm = lazy(() => import("./departments/signalling/forms/LedgerSignallingForm"));
+const DailyTransactionRegisterReceiptForm = lazy(() => import("./departments/signalling/forms/DailyTransactionRegisterReceiptForm"));
+const DailyTransactionRegisterIssueForm = lazy(() => import("./departments/signalling/forms/DailyTransactionRegisterIssueForm"));
+const LoanRegisterForm = lazy(() => import("./departments/signalling/forms/LoanRegisterForm"));
+const DailyWorkDoneRegisterForm = lazy(() => import("./departments/signalling/forms/DailyWorkDoneRegisterForm"));
+const HandoverTakingOverNoteForm = lazy(() => import("./departments/signalling/forms/HandoverTakingOverNoteForm"));
+const PermanentLoanRegisterForm = lazy(() => import("./departments/signalling/forms/PermanentLoanRegisterForm"));
+const ContractWorkDoneRegisterForm = lazy(() => import("./departments/signalling/forms/ContractWorkDoneRegisterForm"));
+const GrievanceRegisterForm = lazy(() => import("./departments/signalling/forms/GrievanceRegisterForm"));
+
+// Operations & System Maintenance
+const HalfYearlyMainlineMaintenanceForm = lazy(() => import("./departments/signalling/forms/HalfYearlyMainlineMaintenanceForm"));
+const PmLogbookHalfYearlyOtherMainlineForm = lazy(() => import("./departments/signalling/forms/PmLogbookHalfYearlyOtherMainlineForm"));
+const PreventiveMaintenanceWorksheetCentralComputerForm = lazy(() => import("./departments/signalling/forms/PreventiveMaintenanceWorksheetCentralComputerForm"));
+const InspectionRegisterForm = lazy(() => import("./departments/signalling/forms/InspectionRegisterForm"));
+const RequisitionForm = lazy(() => import("./departments/signalling/forms/RequisitionForm"));
+const EktMaintenanceForm = lazy(() => import("./departments/signalling/forms/EktMaintenanceForm"));
 const BioDataRegisterList = lazy(() => import("./list/store/BioDataRegisterList"));
 const BioDataRegisterView = lazy(() => import("./tables/store/BioDataRegisterView"));
 const BiodataRegisterEdit = lazy(() => import("./edit/store/BiodataRegisterEdit"));
@@ -994,6 +1052,61 @@ function App() {
                 <Route path="/form/incident-investigation-register" element={<IncidentInvestigationRegisterForm />} />
                 <Route path="/form/maintenance-coordination-register" element={<MaintenanceCoordinationRegisterForm />} />
                 <Route path="/form/operation-communication-log" element={<OperationCommunicationLogForm />} />
+                
+                {/* SIGNALLING DEPARTMENT ROUTES (45 forms - 100% Complete) */}
+                {/* Daily Operations Forms */}
+                <Route path="/form/station-diary-signalling" element={<StationDiarySignallingForm />} />
+                <Route path="/form/ser-entry" element={<SEREntryForm />} />
+                <Route path="/form/incident-register" element={<IncidentRegisterSignallingForm />} />
+                <Route path="/form/atc-examination" element={<AtcExaminationRegisterForm />} />
+                <Route path="/form/hardware-failure" element={<HardwareFailureRegisterForm />} />
+                <Route path="/form/signal-failure" element={<SignalFailureRegisterForm />} />
+                <Route path="/form/axel-counter-maintenance" element={<AxleCounterMaintenanceForm />} />
+                <Route path="/form/gate-pass" element={<GatePassForm />} />
+
+                {/* Equipment & Hardware Forms */}
+                <Route path="/form/hardware-failure-signalling" element={<HardwareFailureForm />} />
+                <Route path="/form/replacement-register" element={<ReplacementRegisterForm />} />
+                <Route path="/form/asset-register" element={<AssetRegisterForm />} />
+                <Route path="/form/job-card" element={<JobCardForm />} />
+                <Route path="/form/lab-faulty-item-register" element={<LabFaultyItemRegisterForm />} />
+                <Route path="/form/contractual-spare-testing-register" element={<ContractualSpareTestingRegisterForm />} />
+                <Route path="/form/measurement-voltage-mcb" element={<MeasurementVoltageMCBinPDCForm />} />
+                <Route path="/form/outdoor-box-cleaning" element={<BoxCleaningOutdoorForm />} />
+                <Route path="/form/efr-register" element={<EquipmentFailureRegisterForm />} />
+                <Route path="/form/assurance-register" element={<AssuranceSystemForm />} />
+
+                {/* PM Maintenance Records */}
+                <Route path="/form/color-light-miantenance" element={<ColorLightMaintenanceForm />} />
+                <Route path="/form/ats-cabinet-maintenance-monthly" element={<AtsCabinetMaintenanceForm />} />
+                <Route path="/form/tom-half-yearly-maintenance" element={<TomHalfYearlyMaintenanceForm />} />
+                <Route path="/form/afc-gate-maintenance" element={<AfcGateMaintenanceForm />} />
+                <Route path="/form/occ-bcc-half-yearly-maintenance" element={<OccBccHalfYearlyMaintenanceForm />} />
+                <Route path="/form/ups-maintenance-signalling" element={<UpsMaintenanceSignallingForm />} />
+                <Route path="/form/pm-point-maintenance-record" element={<PMPointMachineMaintenanceRecordForm />} />
+                <Route path="/form/pm-point-maintenance-record-tpd" element={<PMPointMachineMaintenanceRecordTDPForm />} />
+                <Route path="/form/shunt-signal-maintenance" element={<ShuntSignalMaintenanceRecordForm />} />
+                <Route path="/form/onboard-atc-underframe" element={<QuarterlyTrainInspectionForm />} />
+                <Route path="/form/pm-followup-sheet" element={<PmFollowupSheetForm />} />
+
+                {/* Administrative Forms */}
+                <Route path="/form/ledger-siganalling" element={<LedgerSignallingForm />} />
+                <Route path="/form/daily-transaction-register-receipt" element={<DailyTransactionRegisterReceiptForm />} />
+                <Route path="/form/daily-transaction-register-Issue" element={<DailyTransactionRegisterIssueForm />} />
+                <Route path="/form/loan-register" element={<LoanRegisterForm />} />
+                <Route path="/form/daily-work-done-register" element={<DailyWorkDoneRegisterForm />} />
+                <Route path="/form/handintaking-over-note" element={<HandoverTakingOverNoteForm />} />
+                <Route path="/form/permanent-loan-register" element={<PermanentLoanRegisterForm />} />
+                <Route path="/form/contract-work-done-register" element={<ContractWorkDoneRegisterForm />} />
+                <Route path="/form/grievance-register" element={<GrievanceRegisterForm />} />
+
+                {/* Operations & System Maintenance */}
+                <Route path="/form/half-yearly-mainline-maintenance" element={<HalfYearlyMainlineMaintenanceForm />} />
+                <Route path="/form/pm-logbook-half-yearly-other-mainline" element={<PmLogbookHalfYearlyOtherMainlineForm />} />
+                <Route path="/form/preventive-maintenance-worksheet-central-computer" element={<PreventiveMaintenanceWorksheetCentralComputerForm />} />
+                <Route path="/form/inspection-register" element={<InspectionRegisterForm />} />
+                <Route path="/form/requisition" element={<RequisitionForm />} />
+                <Route path="/form/ekt-maintenance" element={<EktMaintenanceForm />} />
                 
                 {/* ========================================== */}
                 {/* END DEPARTMENT-BASED FORM ROUTES          */}
