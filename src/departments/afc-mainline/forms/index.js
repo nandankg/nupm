@@ -19,11 +19,11 @@ export { default as DailyChecklistMainlineForm } from './DailyChecklistMainlineF
 // - PmLogbookMonthlyOtherMainlineForm
 // ✅ RequisitionMainlineForm - COMPLETED
 // - ShiftLogBookMainlineForm
-// - PmLogbookHalfYearlyGateMainlineForm
+// ✅ PmLogbookHalfYearlyGateMainlineForm - COMPLETED
 // - PmLogbookHalfYearlyTvmMainlineForm
 // - PmLogbookHalfYearlyTomMainlineForm
 // - PmLogbookHalfYearlyOtherMainlineForm
-// - PmLogbookMonthlyGateMainlineForm
+// ✅ PmLogbookMonthlyGateMainlineForm - COMPLETED
 // - PmLogbookMonthlyTvmMainlineForm
 // - PmLogbookMonthlyTomMainlineForm
 // - DailyTransactionRegisterMainlineIssueForm
@@ -32,3 +32,7 @@ export { default as DailyChecklistMainlineForm } from './DailyChecklistMainlineF
 export { default as LedgerMainlineForm } from './LedgerMainlineForm';
 export { default as ImprestRegisterMainlineForm } from './ImprestRegisterMainlineForm';
 export { default as RequisitionMainlineForm } from './RequisitionMainlineForm';
+
+// Day 4 Migration - PM Logbook GATE Forms (2/2) - COMPLETED ✅
+export { default as PmLogbookHalfYearlyGateMainlineForm } from './PmLogbookHalfYearlyGateMainlineForm';
+export { default as PmLogbookMonthlyGateMainlineForm } from './PmLogbookMonthlyGateMainlineForm';
