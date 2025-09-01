@@ -734,10 +734,10 @@ const EditSMPSSYSTEMMAINTENANCERECORD = lazy(() => import("./edit/isha/EditSMPSS
 const StationEarning = lazy(() => import("./reducer/store/StationEarning"));
 const StationEarningList = lazy(() => import("./tables/store/StationEarningList"));
 const StationEarningEdit = lazy(() => import("./edit/store/StationEarningEdit"));
-const PmStationQuarterlyForm = lazy(() => import("./forms/store/PmStationQuarterlyForm"));
+const PmStationQuarterlyFormLegacy = lazy(() => import("./forms/store/PmStationQuarterlyForm"));
 const PmoccbccQuarterlyData = lazy(() => import("./list/store/PmoccbccQuarterlyData"));
 const PmoccbccQuarterlyList = lazy(() => import("./tables/store/PmoccbccQuarterlyList"));
-const PmStationMonthlyForm = lazy(() => import("./forms/store/PmStationMonthlyForm"));
+// const PmStationMonthlyForm = lazy(() => import("./forms/store/PmStationMonthlyForm"));
 const PmDepotQuarterlyList = lazy(() => import("./list/store/PmDepotQuarterlyList"));
 const PmDepotQuarterlyView = lazy(() => import("./tables/store/PmDepotQuarterlyView"));
 const PmStationMonthlyList = lazy(() => import("./list/store/PmStationMonthlyList"));
@@ -831,7 +831,7 @@ const DailyTransactionRegisterTelecomReceiptForm = lazy(() => import("./departme
 const FmtsForm = lazy(() => import("./departments/telecom/forms/FmtsForm"));
 const GatePassBookForm = lazy(() => import("./departments/telecom/forms/GatePassBookForm"));
 const InspectionRegisterTelecomForm = lazy(() => import("./departments/telecom/forms/InspectionRegisterTelecomForm"));
-const LedgerForm = lazy(() => import("./departments/telecom/forms/LedgerForm"));
+const LedgerForms = lazy(() => import("./departments/telecom/forms/LedgerForm"));
 const LoanRegisterTelecomForm = lazy(() => import("./departments/telecom/forms/LoanRegisterTelecomForm"));
 
 // Priority 3 Forms (12 forms)
@@ -935,7 +935,7 @@ const UnreadableCardRefundDetailsForm = lazy(() => import("./departments/operati
 const FirstAidRegisterForm = lazy(() => import("./departments/operation/forms/FirstAidRegisterForm"));
 const OperationLiftRescueForm = lazy(() => import("./departments/operation/forms/OperationLiftRescueForm"));
 const OperationStationDiaryForm = lazy(() => import("./departments/operation/forms/OperationStationDiaryForm"));
-const TerEntryRegisterForm = lazy(() => import("./departments/operation/forms/TerEntryRegisterForm"));
+const TerEntryRegisterOperationForm = lazy(() => import("./departments/operation/forms/TerEntryRegisterForm"));
 const UpsRoomEntryRegisterForm = lazy(() => import("./departments/operation/forms/UpsRoomEntryRegisterForm"));
 const CrewControlCcapForm = lazy(() => import("./departments/operation/forms/CrewControlCcapForm"));
 
@@ -1069,7 +1069,7 @@ function App() {
                 <Route path="/form/first-aid-register" element={<FirstAidRegisterForm />} />
                 <Route path="/form/operation-lift-rescue-register" element={<OperationLiftRescueForm />} />
                 <Route path="/form/operation-station-diary" element={<OperationStationDiaryForm />} />
-                <Route path="/form/ter-entry-register" element={<TerEntryRegisterForm />} />
+                <Route path="/form/ter-entry-register-operation" element={<TerEntryRegisterOperationForm />} />
                 <Route path="/form/ups-room-entry-register" element={<UpsRoomEntryRegisterForm />} />
                 <Route path="/form/crew-control-ccap" element={<CrewControlCcapForm />} />
                 
@@ -1213,10 +1213,6 @@ function App() {
                 <Route
                   path="/edit/incident-register"
                   Component={EditIncident}
-                />
-                 <Route
-                  path="/form/pm-station-quarterly"
-                  Component={PmStationQuarterlyForm}
                 />
                  <Route
                   path="/edit/pm-station-quarterly"
