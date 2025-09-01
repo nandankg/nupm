@@ -808,6 +808,52 @@ const PreventiveMaintenanceWorksheetCentralComputerForm = lazy(() => import("./d
 const InspectionRegisterForm = lazy(() => import("./departments/signalling/forms/InspectionRegisterForm"));
 const RequisitionForm = lazy(() => import("./departments/signalling/forms/RequisitionForm"));
 const EktMaintenanceForm = lazy(() => import("./departments/signalling/forms/EktMaintenanceForm"));
+
+// ================================
+// TELECOM DEPARTMENT FORMS (33 forms - 100% Complete) 
+// Using Modern Architecture with TelecomFormLayout and UniversalTelecomFormField
+// ================================
+
+// Priority 1 Forms (6 forms)
+const ChecklistAndPmDepotForm = lazy(() => import("./departments/telecom/forms/ChecklistAndPmDepotForm"));
+const ChecklistAndPmStationForm = lazy(() => import("./departments/telecom/forms/ChecklistAndPmStationForm"));
+const ChecklistAndPmOccbccForm = lazy(() => import("./departments/telecom/forms/ChecklistAndPmOccbccForm"));
+const CssShiftLogBookForm = lazy(() => import("./departments/telecom/forms/CssShiftLogBookForm"));
+const InstructionShiftLogBookForm = lazy(() => import("./departments/telecom/forms/InstructionShiftLogBookForm"));
+const RequisitionRegisterForm = lazy(() => import("./departments/telecom/forms/RequisitionRegisterForm"));
+
+// Priority 2 Forms (10 forms)
+const AssetRegisterTelecomForm = lazy(() => import("./departments/telecom/forms/AssetRegisterTelecomForm"));
+const AssuranceRegisterTelecomForm = lazy(() => import("./departments/telecom/forms/AssuranceRegisterTelecomForm"));
+const ContractorWorkDoneRegisterTelecomForm = lazy(() => import("./departments/telecom/forms/ContractorWorkDoneRegisterTelecomForm"));
+const DailyTransactionRegisterTelecomIssuesForm = lazy(() => import("./departments/telecom/forms/DailyTransactionRegisterTelecomIssuesForm"));
+const DailyTransactionRegisterTelecomReceiptForm = lazy(() => import("./departments/telecom/forms/DailyTransactionRegisterTelecomReceiptForm"));
+const FmtsForm = lazy(() => import("./departments/telecom/forms/FmtsForm"));
+const GatePassBookForm = lazy(() => import("./departments/telecom/forms/GatePassBookForm"));
+const InspectionRegisterTelecomForm = lazy(() => import("./departments/telecom/forms/InspectionRegisterTelecomForm"));
+const LedgerForm = lazy(() => import("./departments/telecom/forms/LedgerForm"));
+const LoanRegisterTelecomForm = lazy(() => import("./departments/telecom/forms/LoanRegisterTelecomForm"));
+
+// Priority 3 Forms (12 forms)
+const PmDepotMonthlyForm = lazy(() => import("./departments/telecom/forms/PmDepotMonthlyForm"));
+const PmDepotQuarterlyForm = lazy(() => import("./departments/telecom/forms/PmDepotQuarterlyForm"));
+const PmDepotHalfYearlyForm = lazy(() => import("./departments/telecom/forms/PmDepotHalfYearlyForm"));
+const PmDepotYearlyForm = lazy(() => import("./departments/telecom/forms/PmDepotYearlyForm"));
+const PmOccBccMonthlyForm = lazy(() => import("./departments/telecom/forms/PmOccBccMonthlyForm"));
+const PmOccBccQuarterlyForm = lazy(() => import("./departments/telecom/forms/PmOccBccQuarterlyForm"));
+const PmOccBccHalfYearlyForm = lazy(() => import("./departments/telecom/forms/PmOccBccHalfYearlyForm"));
+const PmOccBccYearlyForm = lazy(() => import("./departments/telecom/forms/PmOccBccYearlyForm"));
+const PmStationMonthlyForm = lazy(() => import("./departments/telecom/forms/PmStationMonthlyForm"));
+const PmStationQuarterlyForm = lazy(() => import("./departments/telecom/forms/PmStationQuarterlyForm"));
+const PmStationHalfYearlyForm = lazy(() => import("./departments/telecom/forms/PmStationHalfYearlyForm"));
+const PmStationYearlyForm = lazy(() => import("./departments/telecom/forms/PmStationYearlyForm"));
+
+// Priority 4 Forms (5 forms)
+const OfficerColonyForm = lazy(() => import("./departments/telecom/forms/OfficerColonyForm"));
+const TerEntryRegisterForm = lazy(() => import("./departments/telecom/forms/TerEntryRegisterForm"));
+const UpsRoomEntryForm = lazy(() => import("./departments/telecom/forms/UpsRoomEntryForm"));
+const SmpsSystemMaintenanceRecordForm = lazy(() => import("./departments/telecom/forms/SmpsSystemMaintenanceRecordForm"));
+const UpsSystemMaintenanceRecordForm = lazy(() => import("./departments/telecom/forms/UpsSystemMaintenanceRecordForm"));
 const BioDataRegisterList = lazy(() => import("./list/store/BioDataRegisterList"));
 const BioDataRegisterView = lazy(() => import("./tables/store/BioDataRegisterView"));
 const BiodataRegisterEdit = lazy(() => import("./edit/store/BiodataRegisterEdit"));
@@ -1099,6 +1145,50 @@ function App() {
                 <Route path="/form/inspection-register" element={<InspectionRegisterForm />} />
                 <Route path="/form/requisition" element={<RequisitionForm />} />
                 <Route path="/form/ekt-maintenance" element={<EktMaintenanceForm />} />
+                
+                {/* TELECOM DEPARTMENT ROUTES (33 forms - 100% Complete) */}
+                {/* Using Modern Architecture with TelecomFormLayout and UniversalTelecomFormField */}
+                
+                {/* Priority 1 Forms (6 forms) */}
+                <Route path="/form/checklist-and-pm-depot" element={<ChecklistAndPmDepotForm />} />
+                <Route path="/form/checklist-and-pm-station" element={<ChecklistAndPmStationForm />} />
+                <Route path="/form/checklist-and-pm-occbcc" element={<ChecklistAndPmOccbccForm />} />
+                <Route path="/form/css-shift-logbook" element={<CssShiftLogBookForm />} />
+                <Route path="/form/instruction-shift-logbook" element={<InstructionShiftLogBookForm />} />
+                <Route path="/form/requisition-register" element={<RequisitionRegisterForm />} />
+                
+                {/* Priority 2 Forms (10 forms) */}
+                <Route path="/form/asset-register-telecom" element={<AssetRegisterTelecomForm />} />
+                <Route path="/form/assurance-register-telecom" element={<AssuranceRegisterTelecomForm />} />
+                <Route path="/form/contractor-work-done-register-telecom" element={<ContractorWorkDoneRegisterTelecomForm />} />
+                <Route path="/form/daily-transaction-register-telecom-issues" element={<DailyTransactionRegisterTelecomIssuesForm />} />
+                <Route path="/form/daily-transaction-register-telecom-receipt" element={<DailyTransactionRegisterTelecomReceiptForm />} />
+                <Route path="/form/fmts" element={<FmtsForm />} />
+                <Route path="/form/gate-pass-book" element={<GatePassBookForm />} />
+                <Route path="/form/inspection-register-telecom" element={<InspectionRegisterTelecomForm />} />
+                <Route path="/form/ledger-telecom" element={<LedgerForm />} />
+                <Route path="/form/loan-register-telecom" element={<LoanRegisterTelecomForm />} />
+                
+                {/* Priority 3 Forms (12 forms) */}
+                <Route path="/form/pm-depot-monthly" element={<PmDepotMonthlyForm />} />
+                <Route path="/form/pm-depot-quarterly" element={<PmDepotQuarterlyForm />} />
+                <Route path="/form/pm-depot-half-yearly" element={<PmDepotHalfYearlyForm />} />
+                <Route path="/form/pm-depot-yearly" element={<PmDepotYearlyForm />} />
+                <Route path="/form/pm-occ-bcc-monthly" element={<PmOccBccMonthlyForm />} />
+                <Route path="/form/pm-occ-bcc-quarterly" element={<PmOccBccQuarterlyForm />} />
+                <Route path="/form/pm-occ-bcc-half-yearly" element={<PmOccBccHalfYearlyForm />} />
+                <Route path="/form/pm-occ-bcc-yearly" element={<PmOccBccYearlyForm />} />
+                <Route path="/form/pm-station-monthly" element={<PmStationMonthlyForm />} />
+                <Route path="/form/pm-station-quarterly" element={<PmStationQuarterlyForm />} />
+                <Route path="/form/pm-station-half-yearly" element={<PmStationHalfYearlyForm />} />
+                <Route path="/form/pm-station-yearly" element={<PmStationYearlyForm />} />
+                
+                {/* Priority 4 Forms (5 forms) */}
+                <Route path="/form/officer-colony" element={<OfficerColonyForm />} />
+                <Route path="/form/ter-entry-register" element={<TerEntryRegisterForm />} />
+                <Route path="/form/ups-room-entry" element={<UpsRoomEntryForm />} />
+                <Route path="/form/smps-system-maintenance-record" element={<SmpsSystemMaintenanceRecordForm />} />
+                <Route path="/form/ups-system-maintenance-record" element={<UpsSystemMaintenanceRecordForm />} />
                 
                 {/* ========================================== */}
                 {/* END DEPARTMENT-BASED FORM ROUTES          */}
@@ -2255,10 +2345,7 @@ function App() {
                   path="/list/assurance-register"
                   Component={AssuRegList}
                 />
-                <Route
-                  path="/form/assurance-register-telecom"
-                  Component={AssuRegReg}
-                />
+                {/* OLD: Assurance Register Telecom - now handled by modern architecture */}
                 <Route
                   path="/list/assurance-register-telecom"
                   Component={AssuRegList}
@@ -2929,10 +3016,7 @@ function App() {
                   path="/list/daily-transaction-register-store-receipt"
                   Component={DailyTransactionRegisterList_RECEIPTS}
                 />
-                <Route
-                  path="/form/daily-transaction-register-telecom-receipt"
-                  Component={DailyTransactionRegister_RECEIPTS}
-                />
+                {/* OLD: Daily Transaction Register Telecom Receipt - now handled by modern architecture */}
                 <Route
                   path="/list/daily-transaction-register-telecom-receipt"
                   Component={DailyTransactionRegisterList_RECEIPTS}
@@ -3065,10 +3149,7 @@ function App() {
                   path="/edit/inspection-register"
                   Component={InspactionEdit}
                 />
-                <Route
-                  path="/form/inspection-register-telecom"
-                  Component={InspactionRegister}
-                />
+                {/* OLD: Inspection Register Telecom - now handled by modern architecture */}
                 <Route
                   path="/list/inspection-register-telecom"
                   Component={InspactionRegisterList}
@@ -3303,10 +3384,7 @@ function App() {
                   path="/list/pm-logbook-half-yearly-tvm-mainline"
                   Component={ChecklistAfc}
                 />
-                <Route
-                  path="/form/loan-register-telecom"
-                  Component={LoanregTelecom}
-                />
+                {/* OLD: Loan Register Telecom - now handled by modern architecture */}
                 <Route
                   path="/list/loan-register-telecom"
                   Component={LoanregTelecomList}
@@ -3327,10 +3405,7 @@ function App() {
                   path="/edit/daily-transaction-register-Issue"
                   Component={EditDTRIssue}
                 />
-                <Route
-                  path="form/daily-transaction-register-telecom-issues"
-                  Component={DailyTransactionRegister_ISSUE}
-                />
+                {/* OLD: Daily Transaction Register Telecom Issues - now handled by modern architecture */}
                 <Route
                   path="/list/daily-transaction-register-telecom-issues"
                   Component={DtrIssueStoreList}
