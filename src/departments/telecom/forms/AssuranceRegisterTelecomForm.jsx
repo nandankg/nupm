@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { TelecomFormLayout, UniversalTelecomFormField } from "../components";
 import { validateForm } from "../validation";
-import { addData } from "../../../reducer/store/AssetRegisterReducer";
+import { addAssetRegister } from "../../../reducer/store/AssetRegisterReducer";
 
 const AssuranceRegisterTelecomForm = () => {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const AssuranceRegisterTelecomForm = () => {
     event.preventDefault();
     setLoading(true);
     try {
-      await dispatch(addData(formValues));
+      await dispatch(addAssetRegister(formValues));
       navigate("/list");
     } catch (error) {
       setErrors({ submit: 'Error saving form.' });
