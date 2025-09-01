@@ -188,4 +188,7 @@ const Pmlog6Slice = createSlice({
     });
   },
 });
+// Export additional action alias for compatibility
+export const addPmlog6 = addData;
+
 export default Pmlog6Slice.reducer;

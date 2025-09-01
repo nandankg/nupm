@@ -223,4 +223,7 @@ const pmsheetoccbccSlice = createSlice({
     });
   },
 });
+// Export additional action alias for compatibility
+export const addPmsheet = addData;
+
 export default pmsheetoccbccSlice.reducer;

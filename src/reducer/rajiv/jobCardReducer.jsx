@@ -259,4 +259,7 @@ const jobCardSlice = createSlice({
   },
 });
 
+// Export additional action alias for compatibility
+export const addJobCard = addData;
+
 export default jobCardSlice.reducer;

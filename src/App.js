@@ -748,6 +748,9 @@ const PmDepotHalfYearlyList = lazy(() => import("./list/store/PmDepotHalfYearlyL
 const PmdepotHalfyearlyTable = lazy(() => import("./tables/store/PmdepotHalfyearlyTable"));
 const BioDataRegister = lazy(() => import("./forms/store/BioDataRegister"));
 
+// ========================================
+// DEPARTMENT-BASED FORM IMPORTS (Migrated)
+// ========================================
 // ================================
 // SIGNALLING DEPARTMENT FORMS (45 forms - 100% Complete)
 // ================================
@@ -832,17 +835,8 @@ const BudgetPaymentEdit = lazy(() => import("./edit/store/BudgetPaymentEdit"));
 const AllDeptFormList = lazy(() => import("./pages/AllDeptFormList"));
 
 // Universal Form Components - Migration Implementation
-const UniversalOperationForm = lazy(() => import("./features/operation/components/UniversalOperationForm"));
-const UniversalFinanceForm = lazy(() => import("./features/finance/components/UniversalFinanceForm"));
-const UniversalSignallingForm = lazy(() => import("./features/signalling/components/UniversalSignallingForm"));
-const UniversalTelecomForm = lazy(() => import("./features/telecom/components/UniversalTelecomForm"));
-const UniversalAfcSdcForm = lazy(() => import("./features/afc-sdc/components/UniversalAfcSdcForm"));
-const UniversalAfcMainlineForm = lazy(() => import("./features/afc-mainline/components/UniversalAfcMainlineForm"));
-const UniversalAfcStoreForm = lazy(() => import("./features/afc-store/components/UniversalAfcStoreForm"));
 
-// ========================================
-// DEPARTMENT-BASED FORM IMPORTS (Migrated)
-// ========================================
+
 
 // FINANCE DEPARTMENT FORMS (4 forms - 100% Complete)
 const ExpenditureBudgetRegisterForm = lazy(() => import("./departments/finance/forms/ExpenditureBudgetRegisterForm"));
@@ -1110,17 +1104,14 @@ function App() {
                 {/* END DEPARTMENT-BASED FORM ROUTES          */}
                 {/* ========================================== */}
                 
-                <Route
-                  path="/form/dtr-receipt-store"
-                  element={<UniversalAfcStoreForm formType="daily-transaction-register-store-receipt" />}
-                />
+               
                 <Route path="/admin/activity-log" Component={ActivityLog} />
                 <Route
                   path="/view/admin/activity-log"
                   Component={ActivityLogDetail}
                 />
                 <Route path="/form/dtr-receipt" Component={DtrReceipt} />
-                <Route path="/form/dtr-issue-store" element={<UniversalAfcStoreForm formType="daily-transaction-register-store-issue" />} />
+                
                 <Route
                   path="/form/incident-register"
                   Component={IncidentRegisterSignals}
@@ -1193,10 +1184,7 @@ function App() {
                   path="/view/color-light-miantenance"
                   Component={SignalMainlineList}
                 />
-                <Route
-                  path="/form/station-earning-register"
-                  element={<UniversalFinanceForm formType="station-earning-register" />}
-                />
+                
                  <Route
                   path="/list/station-earning-register"
                   Component={StationEarningList}
@@ -1459,7 +1447,7 @@ function App() {
                   path="/list/pm-logbook-monthly-other-mainline"
                   Component={AFCPreventAnnexureAMainlineList}
                 />
-                <Route path="/form/gate-pass-book-store" element={<UniversalAfcStoreForm formType="gate-pass-book-store" />} />
+                
                 <Route
                   path="/view/gate-pass-book-store"
                   Component={GatePassList}
@@ -1492,7 +1480,7 @@ function App() {
                 <Route path="/view/gate-pass" Component={GatePassList} />
                 <Route path="/list/gate-pass" Component={GatePassStoreList} />
                 <Route path="/edit/gate-pass" Component={GatePassEdit} />
-                <Route path="/form/gate-pass-book" element={<UniversalTelecomForm formType="gate-pass-book" />} />
+                
                 <Route path="/view/gate-pass-book" Component={GatePassList} />
                 <Route
                   path="/list/gate-pass-book"
@@ -2056,10 +2044,7 @@ function App() {
                   path="/edit/lab-faulty-item-register"
                   Component={EditLabMaterial}
                 />
-                <Route
-                  path="/form/equipment_failure_register"
-                  element={<UniversalOperationForm formType="equipment_failure_register" />}
-                />
+              
                 <Route
                   path="/list/equipment_failure_register"
                   Component={EquipmentFailureRegisterList}
@@ -2265,7 +2250,7 @@ function App() {
                   Component={AssuRegList}
                 />
                 
-                <Route path="/form/assurance-register" element={<UniversalSignallingForm formType="assurance-register" />} />
+                
                 <Route
                   path="/list/assurance-register"
                   Component={AssuRegList}
@@ -2423,10 +2408,7 @@ function App() {
                   Component={StationDiary_NewList}
                 />
                 {/* Claim Registration Register */}
-                <Route
-                  path="/form/claim-registration-register"
-                  element={<UniversalOperationForm formType="claim-registration-register" />}
-                />
+               
                 <Route
                   path="/list/claim-registration-register"
                   Component={ClaimRegList}
@@ -2534,7 +2516,7 @@ function App() {
                 <Route path="/list/fmts-sdc" Component={FMTSData} />
                 <Route path="/edit/fmts-sdc" Component={EditFMTS} />
                 <Route path="/view/fmts-sdc" Component={FMTSList} />
-                <Route path="/form/fmts" element={<UniversalTelecomForm formType="fmts" />} />
+                <Route path="/form/fmts" Component={FMTSReg}/>
                 <Route path="/list/fmts" Component={FMTSData} />
                 <Route path="/view/fmts" Component={FMTSList} />
                 <Route path="/edit/fmts" Component={EditFMTS} />
@@ -2598,10 +2580,7 @@ function App() {
                   path="/edit/hardware-failure"
                   Component={EditHardwareFailure}
                 />
-                <Route
-                  path="/form/signal-failure"
-                  element={<UniversalSignallingForm formType="signal-failure" />}
-                />
+              
                 <Route
                   path="/list/signal-failure"
                   Component={SignalFailureList}
@@ -2958,10 +2937,7 @@ function App() {
                   path="/list/daily-transaction-register-telecom-receipt"
                   Component={DailyTransactionRegisterList_RECEIPTS}
                 />
-                <Route
-                  path="/form/pm-logbook-half-yearly-tvm-mainline"
-                  element={<UniversalAfcMainlineForm formType="pm-logbook-half-yearly-tvm-mainline" />}
-                />
+                
                 <Route
                   path="/list/pm-logbook-half-yearly-tvm-mainline"
                   Component={PMLOGBOOKMAINLINE9List}
@@ -3406,7 +3382,7 @@ function App() {
                   path="/list/pm-depot-monthy"
                   Component={Pmloogbook_NewList}
                 />
-                <Route path="/form/bio-data-register" element={<UniversalOperationForm formType="bio-data-register" />} />
+                
                 <Route
                   path="/list/bio-data-register"
                   Component={BioDataRegisterView}
@@ -3473,7 +3449,7 @@ function App() {
                   path="/edit/daily-transaction-register-telecom-receipt"
                   Component={EditDailyTransactionRegister_RECEIPTS}
                 />
-                <Route path="/form/requisition" element={<UniversalSignallingForm formType="requisition" />} />
+               
                 <Route path="/list/requisition" Component={RequisitionSList} />
                 <Route
                   path="/edit/requisition"
@@ -3556,7 +3532,7 @@ function App() {
                   path="/AssetRegister/list"
                   Component={AssetRegisterList}
                 />
-                <Route path="/form/css-shift-logbook" element={<UniversalTelecomForm formType="css-shift-logbook" />} />
+                <Route path="/form/css-shift-logbook" Component={CSSShiftLog} />
                 <Route
                   path="/view/css-shift-logbook"
                   Component={CSSShiftLogList}
@@ -3619,8 +3595,7 @@ function App() {
                 />
                 <Route
                   path="/form/estimate-and-loa-budget-register"
-                  element={<UniversalFinanceForm formType="estimate-and-loa-budget-register" />}
-                />
+                 Component={EstimateLOARegister}/>
                 <Route
                   path="/list/estimate-and-loa-budget-register"
                   Component={EstimateLOARegisterList}
@@ -3657,13 +3632,13 @@ function App() {
                   path="/edit/ups-room-entry"
                   Component={UPS_Room_entry_register_edit}
                 />
-                <Route path="/form/ledger-mainline" element={<UniversalAfcMainlineForm formType="ledger-mainline" />} />
+                <Route path="/form/ledger-mainline" Component={LedgerForm} />
                 <Route path="/list/ledger-mainline" Component={LedgerTable} />
                 <Route
                   path="/list/ledger-siganalling"
                   Component={LedgerTable}
                 />
-                <Route path="/form/ledger-store" element={<UniversalAfcStoreForm formType="ledger-store" />} />
+                
                 <Route path="/list/ledger-store" Component={LedgerTable} />
                 <Route path="/form/ledger" Component={LedgerForm} />
                 <Route path="/list/ledger" Component={LedgerTable} />
@@ -3673,7 +3648,7 @@ function App() {
                 />
                 <Route
                   path="/form/budget-payments-register"
-                  element={<UniversalFinanceForm formType="budget-payments-register" />}
+                  Component={NewbudgetPayment}
                 />
                  <Route
                   path="/edit/budget-payments-register"

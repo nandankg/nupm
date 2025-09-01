@@ -154,7 +154,7 @@ const OperationCommunicationLogForm = () => {
       totalExternalMessages: "",
       emergencyAlerts: "",
       responseTimeAverage: "",
-      acknowled²mentRate: "",
+      acknowledmentRate: "",
       escalationsRequired: "",
       communicationFailures: "",
       systemUptime: ""
