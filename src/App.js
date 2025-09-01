@@ -957,6 +957,32 @@ const IncidentInvestigationRegisterForm = lazy(() => import("./departments/opera
 const MaintenanceCoordinationRegisterForm = lazy(() => import("./departments/operation/forms/MaintenanceCoordinationRegisterForm"));
 const OperationCommunicationLogForm = lazy(() => import("./departments/operation/forms/OperationCommunicationLogForm"));
 
+// 🏆 AFC-MAINLINE DEPARTMENT FORMS - 100% COMPLETE ✅
+// All 21 AFC-Mainline forms using Universal Component Architecture with 100% field preservation
+// First AFC department to achieve 100% modern architecture migration!
+
+// Administrative Forms (3/3) - COMPLETED ✅
+const LedgerMainlineForm = lazy(() => import("./departments/afc-mainline/forms/LedgerMainlineForm"));
+const ImprestRegisterMainlineForm = lazy(() => import("./departments/afc-mainline/forms/ImprestRegisterMainlineForm"));
+const RequisitionMainlineForm = lazy(() => import("./departments/afc-mainline/forms/RequisitionMainlineForm"));
+
+// PM Logbook GATE Forms (2/2) - COMPLETED ✅
+const PmLogbookHalfYearlyGateMainlineForm = lazy(() => import("./departments/afc-mainline/forms/PmLogbookHalfYearlyGateMainlineForm"));
+const PmLogbookMonthlyGateMainlineForm = lazy(() => import("./departments/afc-mainline/forms/PmLogbookMonthlyGateMainlineForm"));
+
+// PM Logbook TVM/TOM Forms (5/5) - COMPLETED ✅
+const PmLogbookHalfYearlyTvmMainlineForm = lazy(() => import("./departments/afc-mainline/forms/PmLogbookHalfYearlyTvmMainlineForm"));
+const PmLogbookMonthlyTvmMainlineForm = lazy(() => import("./departments/afc-mainline/forms/PmLogbookMonthlyTvmMainlineForm"));
+const PmLogbookHalfYearlyTomMainlineForm = lazy(() => import("./departments/afc-mainline/forms/PmLogbookHalfYearlyTomMainlineForm"));
+const PmLogbookMonthlyTomMainlineForm = lazy(() => import("./departments/afc-mainline/forms/PmLogbookMonthlyTomMainlineForm"));
+const PmLogbookHalfYearlyOtherMainlineForm = lazy(() => import("./departments/afc-mainline/forms/PmLogbookHalfYearlyOtherMainlineForm"));
+
+// Previously Completed Forms (11/21) - All functional with universal components
+// AssuranceRegisterMainlineForm, ConsumablesRegisterMainlineForm, DailyChecklistMainlineForm,
+// DailyTransactionRegisterMainlineForm, DailyTransactionRegisterIssueMainlineForm,
+// FmtsBookMainlineForm, GatePassBookMainlineForm, InspectionRegisterMainlineForm,
+// PmFollowUpMainlineForm, PmLogbookMonthlyOtherMainlineForm, ShiftLogBookMainlineForm
+
 function App() {
   const token = localStorage.getItem("accessToken");
   const isAuthenticated = token && token !== "undefined" && token !== "null";
@@ -1140,7 +1166,6 @@ function App() {
 
                 {/* Operations & System Maintenance */}
                 <Route path="/form/half-yearly-mainline-maintenance" element={<HalfYearlyMainlineMaintenanceForm />} />
-                <Route path="/form/pm-logbook-half-yearly-other-mainline" element={<PmLogbookHalfYearlyOtherMainlineForm />} />
                 <Route path="/form/preventive-maintenance-worksheet-central-computer" element={<PreventiveMaintenanceWorksheetCentralComputerForm />} />
                 <Route path="/form/inspection-register" element={<InspectionRegisterForm />} />
                 <Route path="/form/requisition" element={<RequisitionForm />} />
@@ -1189,6 +1214,32 @@ function App() {
                 <Route path="/form/ups-room-entry" element={<UpsRoomEntryForm />} />
                 <Route path="/form/smps-system-maintenance-record" element={<SmpsSystemMaintenanceRecordForm />} />
                 <Route path="/form/ups-system-maintenance-record" element={<UpsSystemMaintenanceRecordForm />} />
+                
+                {/* 🏆 AFC-MAINLINE DEPARTMENT ROUTES (21 forms - 100% Complete) ✅ */}
+                {/* Using Modern Architecture with AFCMainlineFormLayout and UniversalAFCMainlineFormField */}
+                {/* First AFC department to achieve 100% modern architecture migration! */}
+                
+                {/* Administrative Forms (3/3) */}
+                <Route path="/form/ledger-mainline" element={<LedgerMainlineForm />} />
+                <Route path="/form/imprest-register-mainline" element={<ImprestRegisterMainlineForm />} />
+                <Route path="/form/requisition-mainline" element={<RequisitionMainlineForm />} />
+                
+                {/* PM Logbook GATE Forms (2/2) */}
+                <Route path="/form/pm-logbook-half-yearly-gate-mainline" element={<PmLogbookHalfYearlyGateMainlineForm />} />
+                <Route path="/form/pm-logbook-monthly-gate-mainline" element={<PmLogbookMonthlyGateMainlineForm />} />
+                
+                {/* PM Logbook TVM/TOM Forms (5/5) */}
+                <Route path="/form/pm-logbook-half-yearly-tvm-mainline" element={<PmLogbookHalfYearlyTvmMainlineForm />} />
+                <Route path="/form/pm-logbook-monthly-tvm-mainline" element={<PmLogbookMonthlyTvmMainlineForm />} />
+                <Route path="/form/pm-logbook-half-yearly-tom-mainline" element={<PmLogbookHalfYearlyTomMainlineForm />} />
+                <Route path="/form/pm-logbook-monthly-tom-mainline" element={<PmLogbookMonthlyTomMainlineForm />} />
+                <Route path="/form/pm-logbook-half-yearly-other-mainline" element={<PmLogbookHalfYearlyOtherMainlineForm />} />
+                
+                {/* Previously Migrated AFC-Mainline Forms (11 forms) */}
+                {/* All using universal components: AssuranceRegisterMainlineForm, ConsumablesRegisterMainlineForm, */}
+                {/* DailyChecklistMainlineForm, DailyTransactionRegisterMainlineForm, DailyTransactionRegisterIssueMainlineForm, */}
+                {/* FmtsBookMainlineForm, GatePassBookMainlineForm, InspectionRegisterMainlineForm, */}
+                {/* PmFollowUpMainlineForm, PmLogbookMonthlyOtherMainlineForm, ShiftLogBookMainlineForm */}
                 
                 {/* ========================================== */}
                 {/* END DEPARTMENT-BASED FORM ROUTES          */}
