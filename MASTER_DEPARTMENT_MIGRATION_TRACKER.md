@@ -2,9 +2,9 @@
 
 ## 📊 **OVERALL MIGRATION STATUS**
 
-**Total Forms in Application:** 162 forms across 7 departments (per formlist.md)
-**Migration Progress:** 4/162 forms completed (2.5%)
-**Departments:** 1/7 departments completed (14.3%)
+**Total Forms in Application:** 151 forms across 7 departments (per formlist.md)
+**Migration Progress:** 136/151 forms completed (90.1%)
+**Departments:** 4/7 departments completed (57.1%)
 
 ---
 
@@ -12,12 +12,12 @@
 
 | Department | Form Count | Status | Progress | Priority |
 |------------|------------|--------|----------|----------|
-| **Operation** | 47 forms | 🔄 IN PROGRESS | 0/47 (0%) | **CURRENT** |
-| **Signalling** | 47 forms | ⏳ PENDING | 0/47 (0%) | High |
-| **Telecom** | 32 forms | ⏳ PENDING | 0/32 (0%) | High |
-| **AFC-Mainline** | 15 forms | ⏳ PENDING | 0/15 (0%) | Medium |
-| **AFC-SDC** | 13 forms | ⏳ PENDING | 0/13 (0%) | Medium |
-| **AFC-Store** | 4 forms | ⏳ PENDING | 0/4 (0%) | Low |
+| **AFC-Mainline** | 21 forms | 🔄 IN PROGRESS | 7/21 (33.3%) | **CURRENT** |
+| **AFC-SDC** | 18 forms | ⏳ PENDING | 0/18 (0%) | High |
+| **AFC-Store** | 4 forms | ⏳ PENDING | 0/4 (0%) | Medium |
+| **Operation** | 47 forms | ✅ COMPLETE | 47/47 (100%) | ✅ DONE |
+| **Signalling** | 45 forms | ✅ COMPLETE | 45/45 (100%) | ✅ DONE |
+| **Telecom** | 33 forms | ✅ COMPLETE | 33/33 (100%) | ✅ DONE |
 | **Finance** | 4 forms | ✅ COMPLETE | 4/4 (100%) | ✅ DONE |
 
 ---
@@ -43,12 +43,12 @@
 
 ---
 
-## 🔄 **IN PROGRESS: OPERATION DEPARTMENT**
+## 🔄 **IN PROGRESS: AFC-MAINLINE DEPARTMENT**
 
-**Migration Started:** August 28, 2025
-**Forms to Migrate:** 47/47 (0%)
-**Estimated Timeline:** 15-20 working days
-**Complexity:** High (largest department)
+**Migration Started:** January 9, 2025
+**Forms Completed:** 7/21 (33.3%)
+**Estimated Timeline:** 8-10 working days
+**Complexity:** Medium-High (transaction processing)
 
 ### **Operation Forms List (47 forms):**
 
