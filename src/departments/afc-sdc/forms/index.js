@@ -1,21 +1,21 @@
 /**
  * AFC-SDC Forms Export Index
  * All 18 AFC-SDC forms using Universal Component Architecture
- * Migration Status: 4/18 forms complete (22% complete) 🔄
+ * Migration Status: 7/18 forms complete (38.9% complete) 🔄
  */
 
 // Card Management & Initialization Forms (2/2 COMPLETE ✅)
 export { default as AgentCardRegistersSDCForm } from './AgentCardRegistersSDCForm';
 export { default as CardInitializationTenderSDCForm } from './CardInitializationTenderSDCForm';
 
-// Daily Operations Forms (1/2 COMPLETE)
+// Daily Operations Forms (2/2 COMPLETE ✅)
 export { default as DailyChecklistRegisterSDCForm } from './DailyChecklistRegisterSDCForm';
-// export { default as ShiftLogBookSDCForm } from './ShiftLogBookSDCForm';
+export { default as ShiftLogBookSDCForm } from './ShiftLogBookSDCForm';
 
-// Administrative Core Forms (1/3 COMPLETE)
+// Administrative Core Forms (3/3 COMPLETE ✅)
 export { default as FmtsSDCForm } from './FmtsSDCForm';
-// export { default as LoanRegisterSDCForm } from './LoanRegisterSDCForm';
-// export { default as RequisitionSDCForm } from './RequisitionSDCForm';
+export { default as LoanRegisterSDCForm } from './LoanRegisterSDCForm';
+export { default as RequisitionSDCForm } from './RequisitionSDCForm';
 
 // System Management Forms (3 forms)
 // export { default as ParameterRegisterSDCForm } from './ParameterRegisterSDCForm';
