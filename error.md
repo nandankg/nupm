@@ -1,25 +1,13 @@
+✅ RESOLVED: Duplicate Component Name Conflict Fixed
 
+ISSUE: Duplicate identifier 'PmLogbookHalfYearlyOtherMainlineForm' in App.js
+- Line 806: Signalling department form
+- Line 978: AFC-Mainline department form
 
-✅ RESOLVED - Import error fixed in AssuranceRegisterTelecomForm.jsx
+SOLUTION APPLIED:
+✅ Renamed signalling form to 'PmLogbookHalfYearlyOtherSignallingForm' 
+✅ AFC-Mainline form keeps original name 'PmLogbookHalfYearlyOtherMainlineForm'
+✅ No route conflicts - each form has distinct routing paths
+✅ ESLint confirms no syntax errors remain
 
-Previously attempted import error: 'addData' is not exported from '../../../reducer/store/AssetRegisterReducer' (imported as 'addData').
-
-Fixed by changing import from:
-```javascript
-import { addData } from "../../../reducer/store/AssetRegisterReducer";
-```
-to:
-```javascript
-import { addAssetRegister } from "../../../reducer/store/AssetRegisterReducer";
-```
-
-And updating the dispatch call from:
-```javascript
-await dispatch(addData(formValues));
-```
-to:
-```javascript
-await dispatch(addAssetRegister(formValues));
-```
-
-Build should now compile successfully.
+STATUS: ✅ FIXED - App.js compiles successfully

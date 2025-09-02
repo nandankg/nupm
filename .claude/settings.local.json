@@ -10,7 +10,8 @@
       "Bash(node:*)",
       "Bash(timeout 30 npm start:*)",
       "Bash(grep:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npx eslint:*)"
     ],
     "deny": [],
     "ask": []
