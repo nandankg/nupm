@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./ViewAccount.css";
 
-export const ViewAccount = () => {
+const ViewAccount = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.user);

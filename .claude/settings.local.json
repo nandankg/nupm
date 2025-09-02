@@ -12,7 +12,10 @@
       "Bash(grep:*)",
       "Bash(git commit:*)",
       "Bash(npx eslint:*)",
-      "Bash(timeout 10 npm start)"
+      "Bash(timeout 10 npm start)",
+      "Bash(npm start:*)",
+      "Bash(rg:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
