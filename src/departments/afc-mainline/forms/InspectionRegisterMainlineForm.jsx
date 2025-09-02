@@ -563,7 +563,7 @@ const InspectionRegisterMainlineForm = () => {
         {/* Safety & Compliance Checks */}
         <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
           <Typography variant="h6" gutterBottom sx={{ color: 'primary.main', display: 'flex', alignItems: 'center' }}>
-            <CheckCircle sx={{ mr: 1 }} />
+            <ApprovalIcon sx={{ mr: 1 }} />
             Safety & Compliance Checks
           </Typography>
           <Divider sx={{ mb: 2 }} />

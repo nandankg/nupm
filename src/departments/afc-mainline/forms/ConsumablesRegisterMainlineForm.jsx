@@ -455,7 +455,7 @@ const ConsumablesRegisterMainlineForm = () => {
         {/* Inventory Summary Section */}
         <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
           <Typography variant="h6" gutterBottom sx={{ color: 'primary.main', display: 'flex', alignItems: 'center' }}>
-            <Inventory sx={{ mr: 1 }} />
+            <ConsumablesIcon sx={{ mr: 1 }} />
             Inventory Summary
           </Typography>
           <Divider sx={{ mb: 2 }} />

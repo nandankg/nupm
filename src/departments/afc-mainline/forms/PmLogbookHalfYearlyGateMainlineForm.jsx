@@ -34,7 +34,7 @@ import {
   UniversalAFCMainlineFormField, 
   AFCMainlineFormLayout 
 } from "../components";
-import { validateForm } from "../validation";
+import { validateForm } from "../validation/afcMainlineValidationSchemas";
 import { addData } from "../../../reducer/pinki/AfcPreventiveReducer";
 import { formatDate } from "../../../data/formatDate";
 import stations from "../../../station.json";

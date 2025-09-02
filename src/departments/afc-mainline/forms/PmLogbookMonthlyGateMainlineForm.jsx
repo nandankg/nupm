@@ -36,7 +36,7 @@ import {
   UniversalAFCMainlineFormField, 
   AFCMainlineFormLayout 
 } from "../components";
-import { validateForm } from "../validation";
+import { validateForm } from "../validation/afcMainlineValidationSchemas";
 import { addData } from "../../../reducer/rajiv/PMLogBookMainLine3Reducer";
 
 const PmLogbookMonthlyGateMainlineForm = () => {

@@ -5,7 +5,7 @@ import { AFCMainlineFormLayout, UniversalAFCMainlineFormField } from "../compone
 import { Accordion, AccordionSummary, AccordionDetails, Typography, Chip } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { afcMainlineValidationSchemas } from "../utils/afcMainlineValidationSchemas";
-import { addData } from "../../../reducer/akshra/PmlogBookReducer";
+import { addData } from "../../../reducer/akshra/PmloogbookReducer";
 
 const PmLogbookMonthlyTomMainlineForm = () => {
   const dispatch = useDispatch();
