@@ -15,7 +15,14 @@
       "Bash(timeout 10 npm start)",
       "Bash(npm start:*)",
       "Bash(rg:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm install:*)",
+      "Bash(npm cache clean:*)",
+      "Bash(timeout 60 npm start)",
+      "Bash(rm:*)",
+      "Bash(pkill:*)"
     ],
     "deny": [],
     "ask": []
