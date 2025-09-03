@@ -1,19 +1,20 @@
 /**
- * Universal Redux Slice Factory
- * Creates standardized Redux slices for UPMRC forms with common CRUD operations
+ * Universal Redux Slice Factory - API Compatible Version
+ * Creates standardized Redux slices for UPMRC forms with 100% API compatibility
  * 
- * This factory function eliminates 60-70% of reducer code duplication by providing
- * a consistent pattern for API interactions, state management, and error handling.
+ * CRITICAL: Preserves ALL existing API endpoints, field names, and data structures
+ * This factory eliminates 60-70% of reducer code duplication while maintaining
+ * complete backward compatibility with existing forms and API contracts.
  */
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { showToastOnce } from '../../../component/toastUtils';
 
-// API Configuration
+// API Configuration - EXACTLY as existing system
 const API_BASE = 'https://tprosysit.com/upmrc/public/api';
 
-// Helper function to get authentication headers
+// Helper function to get authentication headers - EXACT match
 const getAuthHeaders = () => {
   const token = localStorage.getItem('accessToken');
   return {
@@ -23,14 +24,23 @@ const getAuthHeaders = () => {
   };
 };
 
-// Helper function to get user context
+// Helper function to get user context - EXACT match to existing reducers
 const getUserContext = () => {
-  const user = JSON.parse(localStorage.getItem('userdata') || '{}');
-  return {
-    employee_id: user.profileid,
-    department: user.department,
-    unit: user.department,
-  };
+  try {
+    const user = JSON.parse(localStorage.getItem('userdata'));
+    return {
+      employee_id: user.profileid,
+      department: user.department,
+      unit: user.department,
+    };
+  } catch (error) {
+    console.error('Error parsing user data:', error);
+    return {
+      employee_id: null,
+      department: null,
+      unit: null,
+    };
+  }
 };
 
 // Helper function for API calls
@@ -49,45 +59,69 @@ const apiCall = async (endpoint, body = {}) => {
 };
 
 /**
- * Creates a universal Redux slice with standard CRUD operations
- * @param {string} sliceName - Name of the slice (e.g., 'signalling', 'finance')
- * @param {string} apiEndpoint - Base API endpoint (e.g., 'register/signalling')  
- * @param {string} formType - Form type identifier for API calls
+ * Creates API-compatible universal Redux slice preserving existing patterns
+ * @param {string} sliceName - Name of the slice (matches existing reducer names)
+ * @param {string} exactApiEndpoint - EXACT API endpoint from existing reducers
+ * @param {string} formType - EXACT formType from existing reducers  
+ * @param {Object} fieldMapping - Maps form fields to API fields (preserves existing names)
  * @param {Object} customReducers - Additional slice-specific reducers
  * @param {Object} customAsyncThunks - Additional async thunk creators
  * @returns {Object} Complete Redux slice with actions and reducer
  */
 export const createUniversalSlice = (
   sliceName, 
-  apiEndpoint, 
+  exactApiEndpoint, 
   formType,
+  fieldMapping = {},
   customReducers = {},
   customAsyncThunks = {}
 ) => {
-  // Standard async thunks for CRUD operations
+  // EXACT API pattern replication from existing reducers
   const fetchData = createAsyncThunk(
     `${sliceName}/fetchData`,
     async (filters = {}) => {
-      return await apiCall(`${apiEndpoint}/viewData`, {
-        formType,
-        ...filters
-      });
+      // Use EXACT endpoint pattern from existing reducers
+      return fetch(`${API_BASE}/${exactApiEndpoint}/viewData`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          formType,
+          ...filters
+        })
+      }).then((res) => res.json());
     }
   );
 
   const addData = createAsyncThunk(
     `${sliceName}/addData`, 
     async (values) => {
-      const result = await apiCall(`${apiEndpoint}/save`, {
+      // Preserve EXACT field names and API structure
+      const user = JSON.parse(localStorage.getItem('userdata'));
+      const apiPayload = {
         ...values,
         formType,
-        ...getUserContext()
-      });
+        employee_id: user.profileid,
+        department: user.department,
+        unit: user.department,
+        // Apply field mapping if provided (for API field name preservation)
+        ...Object.keys(fieldMapping).reduce((mapped, formField) => {
+          if (values[formField] !== undefined) {
+            mapped[fieldMapping[formField]] = values[formField];
+          }
+          return mapped;
+        }, {})
+      };
       
-      if (result.success) {
+      const result = await fetch(`${API_BASE}/${exactApiEndpoint}/save`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify(apiPayload)
+      }).then((res) => res.json());
+      
+      if (result.success || result.status === 'success') {
         showToastOnce('Data saved successfully!', 'success');
       } else {
-        showToastOnce('Failed to save data', 'error');
+        showToastOnce(result.message || 'Failed to save data', 'error');
       }
       
       return result;
@@ -97,17 +131,40 @@ export const createUniversalSlice = (
   const editData = createAsyncThunk(
     `${sliceName}/editData`,
     async (values) => {
-      const result = await apiCall(`${apiEndpoint}/edit`, {
-        ...values,
-        formType,
+      // Preserve EXACT edit API structure from existing reducers
+      const user = JSON.parse(localStorage.getItem('userdata'));
+      const apiPayload = {
         update_id: values.id,
-        ...getUserContext()
-      });
+        formType,
+        employee_id: user.profileid,
+        department: user.department,
+        unit: user.department,
+        // Apply field mapping to preserve API field names
+        ...Object.keys(fieldMapping).reduce((mapped, formField) => {
+          if (values[formField] !== undefined) {
+            mapped[fieldMapping[formField]] = values[formField];
+          }
+          return mapped;
+        }, {}),
+        // Include any additional fields not in mapping
+        ...Object.keys(values).reduce((remaining, key) => {
+          if (key !== 'id' && !fieldMapping[key]) {
+            remaining[key] = values[key];
+          }
+          return remaining;
+        }, {})
+      };
       
-      if (result.success) {
+      const result = await fetch(`${API_BASE}/${exactApiEndpoint}/edit`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify(apiPayload)
+      }).then((res) => res.json());
+      
+      if (result.success || result.status === 'success') {
         showToastOnce('Data updated successfully!', 'success');
       } else {
-        showToastOnce('Failed to update data', 'error');
+        showToastOnce(result.message || 'Failed to update data', 'error');
       }
       
       return result;
@@ -117,14 +174,19 @@ export const createUniversalSlice = (
   const deleteData = createAsyncThunk(
     `${sliceName}/deleteData`,
     async (id) => {
-      const result = await apiCall(`${apiEndpoint}/delete`, {
-        update_id: id
-      });
+      // Use EXACT delete pattern from existing reducers
+      const result = await fetch(`${API_BASE}/${exactApiEndpoint}/delete`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          update_id: id
+        })
+      }).then((res) => res.json());
       
-      if (result.success) {
+      if (result.success || result.status === 'success') {
         showToastOnce('Data deleted successfully!', 'success');
       } else {
-        showToastOnce('Failed to delete data', 'error');
+        showToastOnce(result.message || 'Failed to delete data', 'error');
       }
       
       return { ...result, deletedId: id };
@@ -134,13 +196,18 @@ export const createUniversalSlice = (
   const saveData = createAsyncThunk(
     `${sliceName}/saveData`,
     async (id) => {
-      const result = await apiCall(`${apiEndpoint}/edit`, {
-        formType,
-        status: '1',
-        update_id: id
-      });
+      // EXACT saveData pattern from existing reducers (status update)
+      const result = await fetch(`${API_BASE}/${exactApiEndpoint}/edit`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          formType,
+          status: '1',
+          update_id: id
+        })
+      }).then((res) => res.json());
       
-      if (result.success) {
+      if (result.success || result.status === 'success') {
         showToastOnce('Data saved successfully!', 'success');
       }
       

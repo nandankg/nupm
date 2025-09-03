@@ -1,47 +1,118 @@
 /**
- * Finance Budget Slice
- * Consolidates all budget-related reducers into a single, efficient slice
+ * Finance Budget Slice - API Compatible Version
+ * Consolidates all budget-related reducers with 100% API compatibility
  * 
- * Replaces reducers:
- * - BudgetAllotmentReducer.jsx (3 copies across manshi, pinki, store)
- * - BudgetRegisterPaymentReducer.jsx
- * - HonorariumRegReducer.jsx, ListHonorariumReducer.jsx, HonorariumReducer.jsx
+ * Replaces reducers while preserving EXACT API patterns:
+ * - BudgetAllotmentReducer.jsx (3 copies) - EXACT endpoints preserved
+ * - BudgetRegisterPaymentReducer.jsx - EXACT field names preserved  
+ * - HonorariumRegReducer.jsx, ListHonorariumReducer.jsx - EXACT structure preserved
+ * 
+ * CRITICAL: All existing API endpoints, field names, and data structures preserved
  */
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createUniversalSlice } from '../../shared/redux/createUniversalSlice';
-import { createDepartmentAPI } from '../../shared/redux/apiHelpers';
+import { showToastOnce } from '../../../component/toastUtils';
 
-// Department API instance
-const financeAPI = createDepartmentAPI('finance');
+// EXACT API patterns from existing reducers - no changes to endpoints or structure
 
-// Budget-specific async thunks
+// EXACT API thunks from existing BudgetAllotmentReducer.jsx
 const budgetThunks = {
-  // Budget Allotment operations
-  fetchBudgetAllotments: createAsyncThunk(
-    'financeBudget/fetchBudgetAllotments',
-    async (filters = {}) => {
-      return await financeAPI.fetch('budget', {
-        formType: 'budget-allotment',
-        ...filters
-      });
+  // EXACT: Budget head dropdown (from existing reducer)
+  budgetheadList: createAsyncThunk(
+    'financeBudget/budgetheadList',
+    async () => {
+      const token = localStorage.getItem('accessToken');
+      return fetch('https://tprosysit.com/upmrc/public/api/finance/budgethead/dropdown', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({})
+      }).then((res) => res.json());
     }
   ),
 
-  addBudgetAllotment: createAsyncThunk(
-    'financeBudget/addBudgetAllotment',
-    async (allotmentData) => {
-      // Validate budget allotment business rules
-      const { budgetType, amount, balanceAmount } = allotmentData;
-      
-      if (budgetType === 'revised' && parseFloat(amount) > parseFloat(balanceAmount)) {
-        throw new Error(`Amount cannot exceed balance amount: ${balanceAmount}`);
-      }
+  // EXACT: New subhead list (from existing reducer)
+  newsubheadList: createAsyncThunk(
+    'financeBudget/newsubheadList',
+    async (values) => {
+      const token = localStorage.getItem('accessToken');
+      return fetch('https://tprosysit.com/upmrc/public/api/finance/getsubhead/dropdown/new', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          budgetHead: values.budgetHead
+        })
+      }).then((res) => res.json());
+    }
+  ),
 
-      return await financeAPI.add('budget', {
-        ...allotmentData,
-        formType: 'budget-allotment'
-      });
+  // EXACT: Subhead list (from existing reducer)
+  subheadList: createAsyncThunk(
+    'financeBudget/subheadList',
+    async (values) => {
+      const token = localStorage.getItem('accessToken');
+      return fetch('https://tprosysit.com/upmrc/public/api/finance/getsubhead/dropdown', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          budgetHead: values.budgetHead,
+          financialYear: values.financialYear,
+          department: values.department
+        })
+      }).then((res) => res.json());
+    }
+  ),
+
+  // EXACT: Revised budget (from existing reducer) 
+  revisedBudget: createAsyncThunk(
+    'financeBudget/revisedBudget',
+    async (data) => {
+      const token = localStorage.getItem('accessToken');
+      return fetch('https://tprosysit.com/upmrc/public/api/operation/finance/budget/revised/add', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          budgetSubhead: data.budgetSubhead,
+          financialYear: data.financialYear,
+          department: data.department,
+          budgetHead_id: data.id,
+          budgetType: 'Revised Budget Allotment',
+          amount: data.amount
+        })
+      }).then((res) => res.json());
+    }
+  ),
+
+  // EXACT: Fetch budget list (from existing reducer)
+  fetchData: createAsyncThunk(
+    'financeBudget/fetchData',
+    async () => {
+      const token = localStorage.getItem('accessToken');
+      return fetch('https://tprosysit.com/upmrc/public/api/operation/finance/budget/list', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({})
+      }).then((res) => res.json());
     }
   ),
 
