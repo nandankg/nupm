@@ -8,8 +8,8 @@ import {
   Paper,
   Button,
 } from "@mui/material";
-import { fetchData, budgetheadList, subheadList } from "../../../reducer/isha/EstimateLOAReducer";
-import { addData, getData } from "../../../reducer/store/BudgetRegisterPaymentReducer";
+import { estimateLoaFetchData as fetchData, estimateLoaBudgetheadList as budgetheadList, estimateLoaSubheadList as subheadList } from "../redux/transactionSlice";
+import { addData, getData } from "../redux/budgetSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -51,8 +51,8 @@ const BudgetPaymentForm = () => {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const Esti = useSelector((state) => state.estimateloa);
-  const bpayment = useSelector((state) => state.budgetpayment);
+  const Esti = useSelector((state) => state.financeTransaction);
+  const bpayment = useSelector((state) => state.financeBudget);
 
   // NEW: Form validation function
   const validateForm = () => {
@@ -145,12 +145,12 @@ const BudgetPaymentForm = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (Esti.data.data) {
-      setItems(Esti.data.data);
-      setSlug(Esti.lslug);
-      setFilteredItems(Esti.data.data);
-      setBudgetHead(Esti?.budgethead);
-      setSubHead(Esti?.subHead);
+    if (Esti.estimateLoaData) {
+      setItems(Esti.estimateLoaData);
+      setSlug(Esti.slugs?.estimateLoa || 'budget-payments-register');
+      setFilteredItems(Esti.estimateLoaData);
+      setBudgetHead(Esti?.budgetHeadList || []);
+      setSubHead(Esti?.subHeadList || []);
     }
   }, [Esti]);
 

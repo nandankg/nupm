@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Breadcrumbs } from "@mui/material";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../../data/formatDate";
-import { addData } from "../../../reducer/manshi/BudgetAllotmentReducer";
+import { addData } from "../redux/budgetSlice";
 
 const SimpleBudgetPaymentForm = () => {
   const navigate = useNavigate();

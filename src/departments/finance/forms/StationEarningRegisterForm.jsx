@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Container, Grid, Button } from "@mui/material";
 import { UniversalFinanceFormField, FinanceFormLayout } from "../components";
 import stations from "../../../data/station.json";
-import { addData, fetchData } from "../../../reducer/store/StationEarningReducer";
+import { stationEarningAddData as addData, stationEarningFetchData as fetchData } from "../redux/transactionSlice";
 
 const StationEarningRegisterForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const stationearning = useSelector((state) => state.stationearning);
+  const stationearning = useSelector((state) => state.financeTransaction);
   const [slug, setSlug] = useState("");
 
   // PRESERVED EXACT FIELD STRUCTURE - No changes to field names
@@ -34,7 +34,7 @@ const StationEarningRegisterForm = () => {
 
   useEffect(() => {
     if (stationearning) {
-      setSlug(stationearning.slug);
+      setSlug(stationearning.slugs?.stationEarning || 'station-earning-register');
     }
   }, [stationearning]);
 
