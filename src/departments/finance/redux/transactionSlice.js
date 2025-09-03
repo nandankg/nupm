@@ -484,6 +484,23 @@ const transactionThunks = {
     }
   ),
 
+  estimateLoaNewSubheadList: createAsyncThunk(
+    'financeTransaction/estimateLoaNewSubheadList',
+    async (values) => {
+      return fetch('https://tprosysit.com/upmrc/public/api/finance/getsubhead/dropdown/new', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          budgetHead: values.budgetHead
+        }),
+      }).then((res) => res.json());
+    }
+  ),
+
   estimateLoaSaveData: createAsyncThunk(
     'financeTransaction/estimateLoaSaveData',
     async (data) => {
@@ -771,6 +788,7 @@ export const {
   listHonorariumEditData,
   estimateLoaBudgetheadList,
   estimateLoaSubheadList,
+  estimateLoaNewSubheadList,
   estimateLoaSaveData,
   estimateLoaFetchData,
   estimateLoaAddData,
@@ -784,6 +802,7 @@ export const addData = ledgerAddData; // LedgerReducer compatibility
 export const editData = ledgerEditData; // LedgerReducer compatibility
 export const budgetheadList = estimateLoaBudgetheadList; // EstimateLOAReducer compatibility
 export const subheadList = estimateLoaSubheadList; // EstimateLOAReducer compatibility
+export const newsubheadList = estimateLoaNewSubheadList; // BudgetAllotment compatibility
 
 // Selectors for easy state access (maintaining backward compatibility)
 export const selectTransactionState = (state) => state.financeTransaction || {};
