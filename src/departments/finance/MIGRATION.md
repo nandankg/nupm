@@ -22,6 +22,32 @@ The Finance Department reducer migration has been **successfully completed** wit
 
 ---
 
+## 🔧 Critical Runtime Fixes Applied
+
+### Budget Head Dropdown Integration Issue (Resolved)
+**Problem:** After migration, budget head dropdowns were not populating from API calls due to inconsistent slice usage across forms.
+
+**Root Cause:** Different forms were importing `budgetheadList` from different slices:
+- `BudgetAllotmentForm`: imported from `budgetSlice` → stored in `financeBudget.budgetHeadList`
+- `Other forms`: imported from `transactionSlice` → stored in `financeTransaction.budgetHeadList`
+
+**Solution:** Standardized all forms to use `transactionSlice` for dropdown data:
+- Updated `BudgetAllotmentForm` imports to use `transactionSlice` for dropdown functions
+- Added `estimateLoaNewSubheadList` thunk to support both subhead API variations
+- Implemented dual selector pattern: `financeTransaction` for dropdowns, `financeBudget` for form operations
+
+**Impact:** ✅ All budget head dropdowns now populate correctly with API data across all finance forms
+
+### Dependent Dropdown Chain Complete
+**Functionality Verified:**
+1. **Budget Head** → API call populates dropdown
+2. **Budget Type** → Determines which subhead API to call
+3. **Sub Head** → Filters based on budget head selection
+4. **Department** → Enables party name filtering
+5. **Party Name** → Final dependent selection
+
+---
+
 ## 🏗️ Architecture Overview
 
 ### Modern Department Structure
