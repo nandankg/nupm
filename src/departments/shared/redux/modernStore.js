@@ -15,6 +15,8 @@ import tableDataSlice from "../../../reducer/redux/tableDataSlice"; // Keep exis
 // Department slices (examples - will be implemented during migration)
 import signallingMaintenanceSlice from "../../signalling/redux/maintenanceSlice";
 import financeBudgetSlice from "../../finance/redux/budgetSlice";
+import financeTransactionSlice from "../../finance/redux/transactionSlice";
+import financeAuditSlice from "../../finance/redux/auditSlice";
 
 // Department slice imports (to be implemented)
 // import signallingSafetySlice from "../../signalling/redux/safetySlice";
@@ -31,8 +33,6 @@ import financeBudgetSlice from "../../finance/redux/budgetSlice";
 // import operationSafetySlice from "../../operation/redux/safetySlice";
 // import operationPersonnelSlice from "../../operation/redux/personnelSlice";
 
-// import financeTransactionSlice from "../../finance/redux/transactionSlice";
-// import financeAuditSlice from "../../finance/redux/auditSlice";
 // import financeReportSlice from "../../finance/redux/reportSlice";
 
 // import afcMainlineGateSlice from "../../afc-mainline/redux/gateSlice";
@@ -88,8 +88,8 @@ const modernStore = configureStore({
     // FINANCE DEPARTMENT
     // ========================================
     financeBudget: financeBudgetSlice,
-    // financeTransaction: financeTransactionSlice,    // To be implemented
-    // financeAudit: financeAuditSlice,                // To be implemented
+    financeTransaction: financeTransactionSlice,
+    financeAudit: financeAuditSlice,
     // financeReport: financeReportSlice,              // To be implemented
 
     // ========================================
