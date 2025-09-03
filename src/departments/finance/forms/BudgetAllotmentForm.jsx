@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import {
   revisedBudget,
   editData,
+  fetchData,
+} from "../redux/budgetSlice";
+import {
   budgetheadList,
   subheadList,
   newsubheadList,
-  fetchData,
-} from "../redux/budgetSlice";
+} from "../redux/transactionSlice";
 
 const user = JSON.parse(localStorage.getItem("userdata"));
 
@@ -38,6 +40,7 @@ const BudgetAllotmentForm = () => {
 
   const [loa, setLoa] = useState({});
   const eloa = useSelector((state) => state.financeBudget);
+  const transactionData = useSelector((state) => state.financeTransaction);
   const dispatch = useDispatch();
 
   // PRESERVED EXACT VALIDATION LOGIC
@@ -153,10 +156,10 @@ const BudgetAllotmentForm = () => {
 
   useEffect(() => {
     setSlug(eloa?.slugs?.budget || 'expenditure-budget-register');
-    setBudgetHead(eloa?.budgetHeadList || []);
-    setSubHead(eloa?.subHeadList || []);
+    setBudgetHead(transactionData?.budgetHeadList || []);
+    setSubHead(transactionData?.subHeadList || []);
     setBudgetData(eloa?.data || []);
-  }, [eloa]);
+  }, [eloa, transactionData]);
 
   // PRESERVED EXACT FUNCTION - No changes
   const getSubhead = (e) => {
