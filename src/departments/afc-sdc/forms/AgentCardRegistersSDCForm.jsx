@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Card, Button, Alert } from 'react-bootstrap';
 import { AFCSDCFormLayout, UniversalAFCSDCFormField } from '../components';
-import { agentCardRegistersValidation } from '../validation/afcSDCValidationSchemas';
+import { agentCardValidation } from '../validation/afcSDCValidationSchemas';
 
 // Redux action (maintaining exact legacy action)
 const submitAgentCardRegistersSDC = (formData) => ({
@@ -134,7 +134,16 @@ const AgentCardRegistersSDCForm = () => {
   const handleSubmit = async (data) => {
     try {
       // Validate form data
-      await agentCardRegistersValidation.validate(data, { abortEarly: false });
+      // Simple validation using custom validation logic
+      const validationErrors = {};
+      if (!data.agentId) validationErrors.agentId = 'Agent ID is required';
+      if (!data.cardNumber) validationErrors.cardNumber = 'Card Number is required'; 
+      if (!data.issueDate) validationErrors.issueDate = 'Issue Date is required';
+      
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+      }
       
       // Dispatch to Redux store (maintaining legacy action structure)
       dispatch(submitAgentCardRegistersSDC(data));

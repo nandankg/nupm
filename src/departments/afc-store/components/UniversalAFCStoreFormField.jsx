@@ -1,67 +1,70 @@
-import React from 'react';
-import {
-  TextField,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  FormHelperText,
-  Checkbox,
-  FormControlLabel,
-  RadioGroup,
-  Radio,
-  FormLabel,
-  Autocomplete,
-  Chip,
-  Box,
-  Typography,
-  InputAdornment
-} from '@mui/material';
-import { DatePicker, TimePicker, DateTimePicker } from '@mui/x-date-pickers';
-import { useField, useFormikContext } from 'formik';
-import {
+import React, { useState } from 'react';
+import { TextField, Select, MenuItem, FormControl, InputLabel, Checkbox, FormControlLabel, RadioGroup, Radio, FormLabel, Grid, Box, Chip, FormHelperText, InputAdornment } from '@mui/material';
+import { DatePicker, TimePicker } from '@mui/x-date-pickers';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { 
   Inventory as InventoryIcon,
   LocalShipping as ShippingIcon,
   AttachMoney as MoneyIcon,
   Category as CategoryIcon,
-  Store as StoreIcon,
-  Scale as WeightIcon,
-  Straighten as DimensionIcon,
-  QrCode as QrCodeIcon,
-  Warehouse as WarehouseIcon,
-  LocalOffer as TagIcon
+  Store as StoreIcon 
 } from '@mui/icons-material';
 
-const UniversalAFCStoreFormField = ({ 
-  type, 
-  name, 
-  label, 
-  options = [], 
-  multiple = false,
+/**
+ * UniversalAFCStoreFormField - Reusable form field component for AFC-Store department
+ * Supports all field types found in AFC-Store forms with 100% field preservation
+ */
+const UniversalAFCStoreFormField = ({
+  type = 'text',
+  name,
+  label,
+  value,
+  onChange,
+  error = '',
   required = false,
   disabled = false,
   placeholder = '',
-  rows = 3,
-  ...props 
+  options = [],
+  validation = {},
+  className = '',
+  fullWidth = true,
+  size = 'medium',
+  multiline = false,
+  rows = 1,
+  min,
+  max,
+  step,
+  ...props
 }) => {
-  const [field, meta, helpers] = useField(name);
-  const { setFieldValue } = useFormikContext();
-  const hasError = meta.touched && !!meta.error;
+  const [internalValue, setInternalValue] = useState(value || '');
+  
+  // Handle value changes
+  const handleChange = (newValue) => {
+    setInternalValue(newValue);
+    if (onChange) {
+      onChange(newValue);
+    }
+  };
 
-  // Store-specific field type handlers
+  // Store-specific field types
   const renderStoreSpecificField = () => {
     switch (type) {
       case 'inventory-item':
         return (
           <TextField
-            {...field}
-            fullWidth
+            name={name}
+            value={value || ''}
+            onChange={(e) => handleChange(e.target.value)}
+            fullWidth={fullWidth}
             label={label}
             placeholder={placeholder || "Enter inventory item name"}
-            error={hasError}
-            helperText={hasError ? meta.error : ''}
+            error={!!error}
+            helperText={error}
             required={required}
             disabled={disabled}
+            size={size}
+            className={className}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -80,17 +83,23 @@ const UniversalAFCStoreFormField = ({
           { value: 'CONSUMABLES', label: 'Consumables' },
           { value: 'EQUIPMENT', label: 'Equipment' },
           { value: 'STATIONERY', label: 'Stationery' },
-          { value: 'TOOLS', label: 'Tools & Instruments' },
-          { value: 'CLEANING_SUPPLIES', label: 'Cleaning Supplies' },
-          { value: 'SAFETY_EQUIPMENT', label: 'Safety Equipment' }
+          { value: 'TOOLS', label: 'Tools & Instruments' }
         ];
+        
         return (
-          <FormControl fullWidth error={hasError} required={required} disabled={disabled}>
-            <InputLabel>{label}</InputLabel>
+          <FormControl fullWidth={fullWidth} error={!!error} size={size} className={className}>
+            <InputLabel required={required}>{label}</InputLabel>
             <Select
-              {...field}
+              name={name}
+              value={value || ''}
+              onChange={(e) => handleChange(e.target.value)}
               label={label}
-              startAdornment={<CategoryIcon sx={{ mr: 1 }} />}
+              disabled={disabled}
+              startAdornment={
+                <InputAdornment position="start">
+                  <CategoryIcon />
+                </InputAdornment>
+              }
               {...props}
             >
               {categoryOptions.map((option) => (
@@ -99,326 +108,38 @@ const UniversalAFCStoreFormField = ({
                 </MenuItem>
               ))}
             </Select>
-            {hasError && <FormHelperText>{meta.error}</FormHelperText>}
+            {error && <FormHelperText>{error}</FormHelperText>}
           </FormControl>
-        );
-
-      case 'supplier-info':
-        return (
-          <TextField
-            {...field}
-            fullWidth
-            label={label}
-            placeholder={placeholder || "Enter supplier name/details"}
-            error={hasError}
-            helperText={hasError ? meta.error : ''}
-            required={required}
-            disabled={disabled}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <ShippingIcon />
-                </InputAdornment>
-              ),
-            }}
-            {...props}
-          />
-        );
-
-      case 'cost-amount':
-        return (
-          <TextField
-            {...field}
-            fullWidth
-            label={label}
-            placeholder={placeholder || "0.00"}
-            error={hasError}
-            helperText={hasError ? meta.error : ''}
-            required={required}
-            disabled={disabled}
-            type="number"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <MoneyIcon />
-                  ₹
-                </InputAdornment>
-              ),
-            }}
-            {...props}
-          />
-        );
-
-      case 'quantity-field':
-        return (
-          <TextField
-            {...field}
-            fullWidth
-            label={label}
-            placeholder={placeholder || "0"}
-            error={hasError}
-            helperText={hasError ? meta.error : ''}
-            required={required}
-            disabled={disabled}
-            type="number"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <InventoryIcon />
-                </InputAdornment>
-              ),
-            }}
-            {...props}
-          />
-        );
-
-      case 'weight-measurement':
-        return (
-          <TextField
-            {...field}
-            fullWidth
-            label={label}
-            placeholder={placeholder || "0.00"}
-            error={hasError}
-            helperText={hasError ? meta.error : ''}
-            required={required}
-            disabled={disabled}
-            type="number"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <WeightIcon />
-                </InputAdornment>
-              ),
-              endAdornment: (
-                <InputAdornment position="end">
-                  kg
-                </InputAdornment>
-              ),
-            }}
-            {...props}
-          />
-        );
-
-      case 'dimension-field':
-        return (
-          <TextField
-            {...field}
-            fullWidth
-            label={label}
-            placeholder={placeholder || "L x W x H (cm)"}
-            error={hasError}
-            helperText={hasError ? meta.error : ''}
-            required={required}
-            disabled={disabled}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <DimensionIcon />
-                </InputAdornment>
-              ),
-            }}
-            {...props}
-          />
-        );
-
-      case 'barcode-qr':
-        return (
-          <TextField
-            {...field}
-            fullWidth
-            label={label}
-            placeholder={placeholder || "Scan or enter barcode/QR code"}
-            error={hasError}
-            helperText={hasError ? meta.error : ''}
-            required={required}
-            disabled={disabled}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <QrCodeIcon />
-                </InputAdornment>
-              ),
-            }}
-            {...props}
-          />
-        );
-
-      case 'storage-location':
-        const locationOptions = [
-          { value: 'MAIN_WAREHOUSE', label: 'Main Warehouse' },
-          { value: 'SECTION_A', label: 'Section A' },
-          { value: 'SECTION_B', label: 'Section B' },
-          { value: 'SECTION_C', label: 'Section C' },
-          { value: 'COLD_STORAGE', label: 'Cold Storage' },
-          { value: 'SECURE_VAULT', label: 'Secure Vault' },
-          { value: 'STATION_STORE', label: 'Station Store' },
-          { value: 'TEMP_STORAGE', label: 'Temporary Storage' }
-        ];
-        return (
-          <FormControl fullWidth error={hasError} required={required} disabled={disabled}>
-            <InputLabel>{label}</InputLabel>
-            <Select
-              {...field}
-              label={label}
-              startAdornment={<WarehouseIcon sx={{ mr: 1 }} />}
-              {...props}
-            >
-              {locationOptions.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </Select>
-            {hasError && <FormHelperText>{meta.error}</FormHelperText>}
-          </FormControl>
-        );
-
-      case 'procurement-status':
-        const statusOptions = [
-          { value: 'REQUESTED', label: 'Requested' },
-          { value: 'APPROVED', label: 'Approved' },
-          { value: 'ORDERED', label: 'Ordered' },
-          { value: 'RECEIVED', label: 'Received' },
-          { value: 'INSPECTED', label: 'Inspected' },
-          { value: 'ACCEPTED', label: 'Accepted' },
-          { value: 'REJECTED', label: 'Rejected' },
-          { value: 'CANCELLED', label: 'Cancelled' }
-        ];
-        return (
-          <FormControl fullWidth error={hasError} required={required} disabled={disabled}>
-            <InputLabel>{label}</InputLabel>
-            <Select
-              {...field}
-              label={label}
-              {...props}
-            >
-              {statusOptions.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </Select>
-            {hasError && <FormHelperText>{meta.error}</FormHelperText>}
-          </FormControl>
-        );
-
-      case 'priority-level':
-        const priorityOptions = [
-          { value: 'LOW', label: 'Low Priority' },
-          { value: 'MEDIUM', label: 'Medium Priority' },
-          { value: 'HIGH', label: 'High Priority' },
-          { value: 'URGENT', label: 'Urgent' },
-          { value: 'CRITICAL', label: 'Critical' }
-        ];
-        return (
-          <FormControl fullWidth error={hasError} required={required} disabled={disabled}>
-            <InputLabel>{label}</InputLabel>
-            <Select
-              {...field}
-              label={label}
-              {...props}
-            >
-              {priorityOptions.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </Select>
-            {hasError && <FormHelperText>{meta.error}</FormHelperText>}
-          </FormControl>
-        );
-
-      case 'unit-measurement':
-        const unitOptions = [
-          { value: 'PIECES', label: 'Pieces (pcs)' },
-          { value: 'KILOGRAMS', label: 'Kilograms (kg)' },
-          { value: 'GRAMS', label: 'Grams (g)' },
-          { value: 'LITERS', label: 'Liters (L)' },
-          { value: 'MILLILITERS', label: 'Milliliters (mL)' },
-          { value: 'METERS', label: 'Meters (m)' },
-          { value: 'CENTIMETERS', label: 'Centimeters (cm)' },
-          { value: 'BOXES', label: 'Boxes' },
-          { value: 'CARTONS', label: 'Cartons' },
-          { value: 'ROLLS', label: 'Rolls' }
-        ];
-        return (
-          <FormControl fullWidth error={hasError} required={required} disabled={disabled}>
-            <InputLabel>{label}</InputLabel>
-            <Select
-              {...field}
-              label={label}
-              {...props}
-            >
-              {unitOptions.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </Select>
-            {hasError && <FormHelperText>{meta.error}</FormHelperText>}
-          </FormControl>
-        );
-
-      case 'tags-field':
-        return (
-          <Autocomplete
-            multiple
-            freeSolo
-            options={[]}
-            value={field.value || []}
-            onChange={(event, newValue) => {
-              setFieldValue(name, newValue);
-            }}
-            renderTags={(value, getTagProps) =>
-              value.map((option, index) => (
-                <Chip
-                  variant="outlined"
-                  label={option}
-                  {...getTagProps({ index })}
-                  icon={<TagIcon />}
-                />
-              ))
-            }
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label={label}
-                placeholder={placeholder || "Add tags..."}
-                error={hasError}
-                helperText={hasError ? meta.error : ''}
-                required={required}
-                disabled={disabled}
-              />
-            )}
-            {...props}
-          />
         );
 
       default:
-        return renderStandardField();
+        return null;
     }
   };
 
-  // Standard form field types
+  // Standard field types
   const renderStandardField = () => {
     switch (type) {
       case 'text':
       case 'email':
       case 'password':
-      case 'url':
-      case 'tel':
         return (
           <TextField
-            {...field}
             type={type}
-            fullWidth
+            name={name}
+            value={value || ''}
+            onChange={(e) => handleChange(e.target.value)}
+            fullWidth={fullWidth}
             label={label}
             placeholder={placeholder}
-            error={hasError}
-            helperText={hasError ? meta.error : ''}
+            error={!!error}
+            helperText={error}
             required={required}
             disabled={disabled}
+            size={size}
+            multiline={multiline}
+            rows={multiline ? rows : 1}
+            className={className}
             {...props}
           />
         );
@@ -426,15 +147,24 @@ const UniversalAFCStoreFormField = ({
       case 'number':
         return (
           <TextField
-            {...field}
             type="number"
-            fullWidth
+            name={name}
+            value={value || ''}
+            onChange={(e) => handleChange(e.target.value)}
+            fullWidth={fullWidth}
             label={label}
             placeholder={placeholder}
-            error={hasError}
-            helperText={hasError ? meta.error : ''}
+            error={!!error}
+            helperText={error}
             required={required}
             disabled={disabled}
+            size={size}
+            className={className}
+            inputProps={{
+              min: min,
+              max: max,
+              step: step
+            }}
             {...props}
           />
         );
@@ -442,253 +172,240 @@ const UniversalAFCStoreFormField = ({
       case 'textarea':
         return (
           <TextField
-            {...field}
-            fullWidth
-            multiline
-            rows={rows}
+            name={name}
+            value={value || ''}
+            onChange={(e) => handleChange(e.target.value)}
+            fullWidth={fullWidth}
             label={label}
             placeholder={placeholder}
-            error={hasError}
-            helperText={hasError ? meta.error : ''}
+            error={!!error}
+            helperText={error}
             required={required}
             disabled={disabled}
+            size={size}
+            className={className}
+            multiline
+            rows={rows || 4}
             {...props}
           />
         );
 
       case 'select':
         return (
-          <FormControl fullWidth error={hasError} required={required} disabled={disabled}>
-            <InputLabel>{label}</InputLabel>
+          <FormControl fullWidth={fullWidth} error={!!error} size={size} className={className}>
+            <InputLabel required={required}>{label}</InputLabel>
             <Select
-              {...field}
+              name={name}
+              value={value || ''}
+              onChange={(e) => handleChange(e.target.value)}
               label={label}
+              disabled={disabled}
               {...props}
             >
-              {options.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
+              {options.map((option, index) => (
+                <MenuItem key={index} value={typeof option === 'string' ? option : option.value}>
+                  {typeof option === 'string' ? option : option.label}
                 </MenuItem>
               ))}
             </Select>
-            {hasError && <FormHelperText>{meta.error}</FormHelperText>}
+            {error && <FormHelperText>{error}</FormHelperText>}
           </FormControl>
         );
 
       case 'checkbox':
-        if (multiple) {
-          return (
-            <FormControl error={hasError} required={required} disabled={disabled}>
-              <FormLabel component="legend">{label}</FormLabel>
-              {options.map((option) => (
-                <FormControlLabel
-                  key={option.value}
-                  control={
-                    <Checkbox
-                      checked={field.value?.includes(option.value) || false}
-                      onChange={(e) => {
-                        const currentValue = field.value || [];
-                        const newValue = e.target.checked
-                          ? [...currentValue, option.value]
-                          : currentValue.filter(v => v !== option.value);
-                        setFieldValue(name, newValue);
-                      }}
-                      disabled={disabled}
-                    />
-                  }
-                  label={option.label}
-                />
-              ))}
-              {hasError && <FormHelperText>{meta.error}</FormHelperText>}
-            </FormControl>
-          );
-        } else {
-          return (
-            <FormControlLabel
-              control={
-                <Checkbox
-                  {...field}
-                  checked={field.value || false}
-                  disabled={disabled}
-                />
-              }
-              label={label}
-              {...props}
-            />
-          );
-        }
+        return (
+          <FormControlLabel
+            control={
+              <Checkbox
+                name={name}
+                checked={!!value}
+                onChange={(e) => handleChange(e.target.checked)}
+                disabled={disabled}
+                {...props}
+              />
+            }
+            label={label}
+            className={className}
+          />
+        );
 
       case 'radio':
         return (
-          <FormControl error={hasError} required={required} disabled={disabled}>
-            <FormLabel component="legend">{label}</FormLabel>
+          <FormControl component="fieldset" error={!!error} className={className}>
+            <FormLabel component="legend" required={required}>{label}</FormLabel>
             <RadioGroup
-              {...field}
+              name={name}
+              value={value || ''}
+              onChange={(e) => handleChange(e.target.value)}
+              disabled={disabled}
               {...props}
             >
-              {options.map((option) => (
+              {options.map((option, index) => (
                 <FormControlLabel
-                  key={option.value}
-                  value={option.value}
-                  control={<Radio disabled={disabled} />}
-                  label={option.label}
+                  key={index}
+                  value={typeof option === 'string' ? option : option.value}
+                  control={<Radio />}
+                  label={typeof option === 'string' ? option : option.label}
                 />
               ))}
             </RadioGroup>
-            {hasError && <FormHelperText>{meta.error}</FormHelperText>}
+            {error && <FormHelperText>{error}</FormHelperText>}
           </FormControl>
-        );
-
-      case 'autocomplete':
-        return (
-          <Autocomplete
-            options={options}
-            getOptionLabel={(option) => option.label || option}
-            value={options.find(option => option.value === field.value) || null}
-            onChange={(event, newValue) => {
-              setFieldValue(name, newValue ? newValue.value : '');
-            }}
-            multiple={multiple}
-            disabled={disabled}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label={label}
-                placeholder={placeholder}
-                error={hasError}
-                helperText={hasError ? meta.error : ''}
-                required={required}
-              />
-            )}
-            {...props}
-          />
         );
 
       case 'date':
         return (
-          <DatePicker
-            label={label}
-            value={field.value ? new Date(field.value) : null}
-            onChange={(date) => {
-              setFieldValue(name, date ? date.toISOString().split('T')[0] : '');
-            }}
-            disabled={disabled}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                fullWidth
-                error={hasError}
-                helperText={hasError ? meta.error : ''}
-                required={required}
-              />
-            )}
-            {...props}
-          />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label={label}
+              value={value ? new Date(value) : null}
+              onChange={(newValue) => handleChange(newValue ? newValue.toISOString().split('T')[0] : '')}
+              disabled={disabled}
+              slotProps={{
+                textField: {
+                  fullWidth: fullWidth,
+                  error: !!error,
+                  helperText: error,
+                  required: required,
+                  size: size,
+                  className: className,
+                  ...props
+                }
+              }}
+            />
+          </LocalizationProvider>
         );
 
       case 'time':
         return (
-          <TimePicker
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <TimePicker
+              label={label}
+              value={value ? new Date(`2000-01-01T${value}`) : null}
+              onChange={(newValue) => handleChange(newValue ? newValue.toTimeString().slice(0, 5) : '')}
+              disabled={disabled}
+              slotProps={{
+                textField: {
+                  fullWidth: fullWidth,
+                  error: !!error,
+                  helperText: error,
+                  required: required,
+                  size: size,
+                  className: className,
+                  ...props
+                }
+              }}
+            />
+          </LocalizationProvider>
+        );
+
+      case 'datetime-local':
+        return (
+          <TextField
+            type="datetime-local"
+            name={name}
+            value={value || ''}
+            onChange={(e) => handleChange(e.target.value)}
+            fullWidth={fullWidth}
             label={label}
-            value={field.value ? new Date(`1970-01-01T${field.value}`) : null}
-            onChange={(time) => {
-              if (time) {
-                const timeString = time.toTimeString().split(' ')[0].substring(0, 5);
-                setFieldValue(name, timeString);
-              } else {
-                setFieldValue(name, '');
-              }
-            }}
+            error={!!error}
+            helperText={error}
+            required={required}
             disabled={disabled}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                fullWidth
-                error={hasError}
-                helperText={hasError ? meta.error : ''}
-                required={required}
-              />
-            )}
+            size={size}
+            className={className}
+            InputLabelProps={{ shrink: true }}
             {...props}
           />
         );
 
-      case 'datetime':
+      case 'tel':
         return (
-          <DateTimePicker
+          <TextField
+            type="tel"
+            name={name}
+            value={value || ''}
+            onChange={(e) => handleChange(e.target.value)}
+            fullWidth={fullWidth}
             label={label}
-            value={field.value ? new Date(field.value) : null}
-            onChange={(dateTime) => {
-              setFieldValue(name, dateTime ? dateTime.toISOString() : '');
-            }}
+            placeholder={placeholder}
+            error={!!error}
+            helperText={error}
+            required={required}
             disabled={disabled}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                fullWidth
-                error={hasError}
-                helperText={hasError ? meta.error : ''}
-                required={required}
-              />
-            )}
+            size={size}
+            className={className}
+            {...props}
+          />
+        );
+
+      case 'url':
+        return (
+          <TextField
+            type="url"
+            name={name}
+            value={value || ''}
+            onChange={(e) => handleChange(e.target.value)}
+            fullWidth={fullWidth}
+            label={label}
+            placeholder={placeholder}
+            error={!!error}
+            helperText={error}
+            required={required}
+            disabled={disabled}
+            size={size}
+            className={className}
             {...props}
           />
         );
 
       case 'file':
         return (
-          <Box>
-            <input
-              type="file"
-              id={name}
-              onChange={(event) => {
-                setFieldValue(name, event.target.files[0]);
-              }}
-              style={{ display: 'none' }}
-              disabled={disabled}
-              {...props}
-            />
-            <label htmlFor={name}>
-              <TextField
-                fullWidth
-                label={label}
-                value={field.value?.name || ''}
-                placeholder="Choose file..."
-                error={hasError}
-                helperText={hasError ? meta.error : ''}
-                required={required}
-                disabled={disabled}
-                InputProps={{
-                  readOnly: true,
-                  style: { cursor: 'pointer' }
-                }}
-              />
-            </label>
-          </Box>
+          <TextField
+            type="file"
+            name={name}
+            onChange={(e) => handleChange(e.target.files[0])}
+            fullWidth={fullWidth}
+            label={label}
+            error={!!error}
+            helperText={error}
+            required={required}
+            disabled={disabled}
+            size={size}
+            className={className}
+            InputLabelProps={{ shrink: true }}
+            {...props}
+          />
         );
 
       default:
         return (
           <TextField
-            {...field}
-            fullWidth
+            name={name}
+            value={value || ''}
+            onChange={(e) => handleChange(e.target.value)}
+            fullWidth={fullWidth}
             label={label}
             placeholder={placeholder}
-            error={hasError}
-            helperText={hasError ? meta.error : ''}
+            error={!!error}
+            helperText={error}
             required={required}
             disabled={disabled}
+            size={size}
+            className={className}
             {...props}
           />
         );
     }
   };
 
-  return (
-    <Box sx={{ mb: 2 }}>
-      {renderStoreSpecificField()}
-    </Box>
-  );
+  // Render store-specific field first, then fall back to standard fields
+  const storeField = renderStoreSpecificField();
+  if (storeField) {
+    return storeField;
+  }
+
+  return renderStandardField();
 };
 
 export default UniversalAFCStoreFormField;

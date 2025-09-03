@@ -37,8 +37,6 @@ import {
   Memory as MemoryIcon,
   AccountTree as SystemIcon
 } from '@mui/icons-material';
-import { Formik, Form, FieldArray } from 'formik';
-import * as Yup from 'yup';
 import { AFCSDCFormLayout, UniversalAFCSDCFormField } from '../components';
 
 const UrcOsEntryRegisterSDCForm = () => {

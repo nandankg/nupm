@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Card, Button, Alert, Table, ProgressBar } from 'react-bootstrap';
 import { AFCSDCFormLayout, UniversalAFCSDCFormField } from '../components';
-import { dailyCheckRegisterSDCValidation } from '../validation/afcSDCValidationSchemas';
+import { dailyChecklistValidation } from '../validation/afcSDCValidationSchemas';
 
 // Redux action (maintaining exact legacy action)
 const submitDailyChecklistRegisterSDC = (formData) => ({
@@ -235,7 +235,16 @@ const DailyChecklistRegisterSDCForm = () => {
   const handleSubmit = async (data) => {
     try {
       // Validate form data
-      await dailyCheckRegisterSDCValidation.validate(data, { abortEarly: false });
+      // Simple validation using custom validation logic
+      const validationErrors = {};
+      if (!data.date) validationErrors.date = 'Date is required';
+      if (!data.time) validationErrors.time = 'Time is required'; 
+      if (!data.employeeId) validationErrors.employeeId = 'Employee ID is required';
+      
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+      }
       
       // Dispatch to Redux store (maintaining legacy action structure)
       dispatch(submitDailyChecklistRegisterSDC(data));

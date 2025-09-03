@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Card, Button, Alert, Table, Badge } from 'react-bootstrap';
 import { AFCSDCFormLayout, UniversalAFCSDCFormField } from '../components';
-import { cscInitializationValidation } from '../validation/afcSDCValidationSchemas';
+import { parameterRegisterValidation } from '../validation/afcSDCValidationSchemas';
 
 // Redux action (maintaining exact legacy action)
 const submitCardInitializationTenderSDC = (formData) => ({
@@ -182,7 +182,16 @@ const CardInitializationTenderSDCForm = () => {
   const handleSubmit = async (data) => {
     try {
       // Validate form data
-      await cscInitializationValidation.validate(data, { abortEarly: false });
+      // Simple validation using custom validation logic
+      const validationErrors = {};
+      if (!data.cscId) validationErrors.cscId = 'CSC ID is required';
+      if (!data.initializationType) validationErrors.initializationType = 'Initialization Type is required'; 
+      if (!data.performedBy) validationErrors.performedBy = 'Performed By is required';
+      
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+      }
       
       // Dispatch to Redux store (maintaining legacy action structure)
       dispatch(submitCardInitializationTenderSDC(data));

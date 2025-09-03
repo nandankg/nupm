@@ -53,8 +53,6 @@ import {
   Security as SecurityIcon,
   Speed as SpeedIcon
 } from '@mui/icons-material';
-import { Formik, Form, FieldArray } from 'formik';
-import * as Yup from 'yup';
 import { AFCSDCFormLayout, UniversalAFCSDCFormField } from '../components';
 
 const PmLogBookQuarterlySDCForm = () => {

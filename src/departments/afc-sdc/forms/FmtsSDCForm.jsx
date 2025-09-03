@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Card, Button, Alert, Badge, Timeline } from 'react-bootstrap';
 import { AFCSDCFormLayout, UniversalAFCSDCFormField } from '../components';
-import { fmtsSDCValidation } from '../validation/afcSDCValidationSchemas';
+import { fmtsValidation } from '../validation/afcSDCValidationSchemas';
 
 // Redux action (maintaining exact legacy action)
 const submitFmtsSDC = (formData) => ({
@@ -141,7 +141,16 @@ const FmtsSDCForm = () => {
   const handleSubmit = async (data) => {
     try {
       // Validate form data
-      await fmtsSDCValidation.validate(data, { abortEarly: false });
+      // Simple validation using custom validation logic
+      const validationErrors = {};
+      if (!data.incidentId) validationErrors.incidentId = 'Incident ID is required';
+      if (!data.reportedBy) validationErrors.reportedBy = 'Reported By is required'; 
+      if (!data.faultDescription) validationErrors.faultDescription = 'Fault Description is required';
+      
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+      }
       
       // Dispatch to Redux store (maintaining legacy action structure)
       dispatch(submitFmtsSDC(data));

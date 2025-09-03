@@ -51,8 +51,6 @@ import {
   Settings as SettingsIcon,
   Timeline as TimelineIcon
 } from '@mui/icons-material';
-import { Formik, Form, FieldArray } from 'formik';
-import * as Yup from 'yup';
 import { AFCSDCFormLayout, UniversalAFCSDCFormField } from '../components';
 
 const EquipmentMaintenanceScheduleSDCForm = () => {
