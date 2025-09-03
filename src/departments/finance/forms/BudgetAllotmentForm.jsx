@@ -8,7 +8,7 @@ import {
   subheadList,
   newsubheadList,
   fetchData,
-} from "../../../reducer/store/BudgetAllotmentReducer";
+} from "../redux/budgetSlice";
 
 const user = JSON.parse(localStorage.getItem("userdata"));
 
@@ -37,7 +37,7 @@ const BudgetAllotmentForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [loa, setLoa] = useState({});
-  const eloa = useSelector((state) => state.budgetallotment);
+  const eloa = useSelector((state) => state.financeBudget);
   const dispatch = useDispatch();
 
   // PRESERVED EXACT VALIDATION LOGIC
@@ -152,10 +152,10 @@ const BudgetAllotmentForm = () => {
   }, [loa]);
 
   useEffect(() => {
-    setSlug(eloa?.slug);
-    setBudgetHead(eloa?.budgethead);
-    setSubHead(eloa?.subHead);
-    setBudgetData(eloa?.data);
+    setSlug(eloa?.slugs?.budget || 'expenditure-budget-register');
+    setBudgetHead(eloa?.budgetHeadList || []);
+    setSubHead(eloa?.subHeadList || []);
+    setBudgetData(eloa?.data || []);
   }, [eloa]);
 
   // PRESERVED EXACT FUNCTION - No changes

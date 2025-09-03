@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { UniversalFinanceFormField, FinanceFormLayout } from "../components";
-import { addData, budgetheadList } from "../../../reducer/isha/EstimateLOAReducer";
+import { addData, budgetheadList } from "../redux/transactionSlice";
 import { formatDate, formatTime } from "../../../data/formatDate";
 
 const BudgetPaymentsRegisterForm = () => {
   const navigate = useNavigate();
   const [date, setDate] = useState(new Date());
   const dispatch = useDispatch();
-  const eloa = useSelector((state) => state.estimateloa);
+  const eloa = useSelector((state) => state.financeTransaction);
   const [slug, setSlug] = useState("");
   const [bgtid, setBgtid] = useState("");
   const [blist, setBlist] = useState([]);
@@ -92,8 +92,8 @@ const BudgetPaymentsRegisterForm = () => {
 
   useEffect(() => {
     if (eloa) {
-      setSlug(eloa.slug);
-      setBlist(eloa.budgetlist.data);
+      setSlug(eloa.slugs?.estimateLoa || 'estimate-and-loa-budget-register');
+      setBlist(eloa.estimateLoaData || []);
     }
   }, [eloa]);
 

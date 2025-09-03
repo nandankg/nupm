@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { UniversalFinanceFormField, FinanceFormLayout } from "../components";
-import { addData, budgetheadList, subheadList } from "../../../reducer/isha/EstimateLOAReducer";
+import { estimateLoaAddData as addData, estimateLoaBudgetheadList as budgetheadList, estimateLoaSubheadList as subheadList } from "../redux/transactionSlice";
 import { formatDate, formatTime } from "../../../data/formatDate";
 
 const EstimateAndLOABudgetRegisterForm = () => {
@@ -11,7 +11,7 @@ const EstimateAndLOABudgetRegisterForm = () => {
   const [budgetHead, setBudgetHead] = useState([]);
   const [subHead, setSubHead] = useState([]);
   const dispatch = useDispatch();
-  const eloa = useSelector((state) => state.estimateloa);
+  const eloa = useSelector((state) => state.financeTransaction);
   const [slug, setSlug] = useState("");
   const [bdata, setBdata] = useState("");
   const [blist, setBlist] = useState([]);
@@ -118,9 +118,9 @@ const EstimateAndLOABudgetRegisterForm = () => {
 
   useEffect(() => {
     if (eloa) {
-      setSlug(eloa.slug);
-      setBudgetHead(eloa?.budgethead);
-      setSubHead(eloa?.subHead);
+      setSlug(eloa.slugs?.estimateLoa || 'estimate-and-loa-budget-register');
+      setBudgetHead(eloa?.budgetHeadList || []);
+      setSubHead(eloa?.subHeadList || []);
     }
   }, [eloa]);
 
