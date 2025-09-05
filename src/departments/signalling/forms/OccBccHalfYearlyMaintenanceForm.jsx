@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { UniversalSignallingFormField, SignallingFormLayout } from "../components";
 import {
   addData,
-  addPmsheet,
-} from "../../../reducer/manshi/Pmsheetoccbcchalfyearlyreducer";
+  addPmsheet
+      } from "../../../reducer/manshi/Pmsheetoccbcchalfyearlyreducer";
 
 /**
  * OCC/BCC Half Yearly Maintenance Form - Signalling Department
@@ -32,159 +32,131 @@ const OccBccHalfYearlyMaintenanceForm = () => {
   // PRESERVED EXACT SYSTEM STRUCTURE - No changes from original form
   const [systems, setSystems] = useState([
     {
-      id: 1,
       name: "PAS",
       activities: [
         {
-          id: 1,
           label: "External cleaning of speakers at all Zones and TER rack",
-          remark: "",
-        },
+          remark: ""
+      },
         {
-          id: 2,
           label: "Checking the amplifier switch over process",
           remark: "",
           BCC1: {
             label: "Values",
             zones: ["Zone 1", "Zone 2", "Zone 3"],
-            values: ["", "", ""],
-          },
-        },
-      ],
-    },
+            values: ["", "", ""]
+      }
+      },
+      ]
+      },
     {
-      id: 2,
       name: "FOTS",
       activities: [
         {
-          id: 1,
           label: "Checking the switching of Normal to standby path and vice-versa",
-          remark: "",
-        },
+          remark: ""
+      },
         {
-          id: 2,
           label: "Cleaning & Redundancy check of Core Switch Power supply",
-          remark: "",
-        },
+          remark: ""
+      },
         {
-          id: 3,
           label: " Checking of Dressing & Labeling of Fiber patch cords and LAN cables",
-          remark: "",
-        },
-      ],
-    },
+          remark: ""
+      },
+      ]
+      },
     {
-      id: 3,
       name: "CCTV",
       activities: [
         {
-          id: 1,
           label: "Physical inspection of all equipment in CER and BCC",
-          remark: "",
-        },
+          remark: ""
+      },
         {
-          id: 2,
           label: "Perform Defragmentation of Windows drives in CLSTR,ENTZ,BVMS-1,BVMS-2",
-          remark: "",
-        },
+          remark: ""
+      },
         {
-          id: 3,
           label: "Perform Defragmentation of Windows drives in NMS",
-          remark: "",
-        },
+          remark: ""
+      },
         {
-          id: 4,
           label: "Clean CPU chassis air filter of Video Wall Server",
-          remark: "",
-        },
-      ],
-    },
+          remark: ""
+      },
+      ]
+      },
     {
-      id: 4,
       name: "Radio",
       activities: [
         {
-          id: 1,
           label: "Ensure that all devices & Cables are labeled properly",
           remark: "",
           subInput: ["MSO", "CAD", "RCW"],
-          subInputValues: { MSO: "", CAD: "", RCW: "" },
-        },
+          subInputValues: { MSO: "", CAD: "", RCW: "" }
+      },
         {
-          id: 2,
           label: "Optimize NM Servers and check component status",
-          remark: "",
-        },
+          remark: ""
+      },
         {
-          id: 3,
           label: "Clean dust filter of NM Server",
-          remark: "",
-        },
+          remark: ""
+      },
         {
-          id: 4,
           label: "Backup of RCW, Vortex, CAD server and ATSS GW and restart them",
-          remark: "",
-        },
+          remark: ""
+      },
         {
-          id: 5,
           label: "Perform Tx/Rx check for MTS-4 (RF site) from NMS",
-          remark: "",
-        },
-      ],
-    },
+          remark: ""
+      },
+      ]
+      },
     {
-      id: 5,
       name: "MCS",
       activities: [
         {
-          id: 1,
           label: "Disk cleanup and defragmentation of NMS, restart system",
-          remark: "",
-        },
+          remark: ""
+      },
         {
-          id: 2,
           label: "Cleaning of racks and checking all connections (Do not remove connections)",
-          remark: "",
-        },
-      ],
-    },
+          remark: ""
+      },
+      ]
+      },
     {
-      id: 6,
       name: "OAIT",
       activities: [
         {
-          id: 1,
           label: "Checking the switching of Normal to standby path and vice-versa",
-          remark: "",
-        },
+          remark: ""
+      },
         {
-          id: 2,
           label: " Cleaning of Fan tray",
-          remark: "",
-        },
+          remark: ""
+      },
         {
-          id: 3,
           label: " Check redundancy at EPRS level",
-          remark: "",
-        },
-      ],
-    },
+          remark: ""
+      },
+      ]
+      },
     {
-      id: 7,
       name: "Mics",
       activities: [
         {
-          id: 1,
           label: "Check labelling of all cables inside each Rack",
-          remark: "",
-        },
+          remark: ""
+      },
         {
-          id: 2,
           label: "Check status of Locks of Telecom Racks & Equipments",
-          remark: "",
-        },
-      ],
-    },
+          remark: ""
+      },
+      ]
+      },
   ]);
 
   // PRESERVED EXACT FIELD NAMES - No changes from original form
@@ -211,12 +183,12 @@ const OccBccHalfYearlyMaintenanceForm = () => {
               ...activity[type],
               values: activity[type].values.map((v, i) =>
                 i === index ? value : v
-              ),
-            };
+              )
+      };
             return {
               ...activity,
-              [type]: updatedType,
-            };
+              [type]: updatedType
+      };
           }
           return activity;
         });
@@ -237,9 +209,9 @@ const OccBccHalfYearlyMaintenanceForm = () => {
               ...activity,
               subCheckboxes: {
                 ...activity.subCheckboxes,
-                [subLabel]: checked,
-              },
-            };
+                [subLabel]: checked
+      }
+      };
           }
           return activity;
         });
@@ -260,9 +232,9 @@ const OccBccHalfYearlyMaintenanceForm = () => {
               ...activity,
               subInputValues: {
                 ...activity.subInputValues,
-                [subLabel]: value,
-              },
-            };
+                [subLabel]: value
+      }
+      };
           }
           return activity;
         });
@@ -281,8 +253,8 @@ const OccBccHalfYearlyMaintenanceForm = () => {
           if (activity.id === activityId) {
             return {
               ...activity,
-              remark: value,
-            };
+              remark: value
+      };
           }
           return activity;
         });
@@ -336,6 +308,7 @@ const OccBccHalfYearlyMaintenanceForm = () => {
     try {
       // Preserve exact field structure for API compatibility
       const submissionData = {
+        // FIXED: Remove client-side IDs - form_id is auto-generated by database
         systems,
         station,
         date,
@@ -627,8 +600,8 @@ const SystemMaintenanceSection = ({
   handleRemarkChange,
   handleBCCChange,
   handleSubInputChange,
-  handleSubCheckboxChange,
-}) => {
+  handleSubCheckboxChange
+      }) => {
   return (
     <div className="card mb-4">
       <div className="card-header">

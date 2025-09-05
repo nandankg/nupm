@@ -91,7 +91,7 @@ export const addData = createAsyncThunk("data/addData", async (values) => {
         org: values.org,
         dept: values.dept,
         bookno: values.bookno,
-    page_no:values.pageno,
+        page_no: values.pageno,
 
         return_type: values.return_type,
         items: values.items,
@@ -124,6 +124,7 @@ export const editData = createAsyncThunk("data/editData", async (values) => {
         org: values.org,
         dept: values.dept,
         bookno: values.bookno,
+        page_no: values.pageno,
         items: values.items,
         issuerdetail: values.issuerdetail,
         return_type: values.return_type,
@@ -178,6 +179,9 @@ const gatePassReducerSlice = createSlice({
       state.data = [];
       state.isSuccess = action.payload;
       console.log(action.payload);
+      if (action.payload?.message) {
+        showToastOnce(action.payload.message, "success");
+      }
     });
 
     builder.addCase(addData.rejected, (state, action) => {
@@ -185,6 +189,7 @@ const gatePassReducerSlice = createSlice({
       state.data = [];
       state.error = action.error.message;
       console.log(action.error.message);
+      showToastOnce(action.error.message || "Failed to save gate pass", "error");
     });
 
     builder.addCase(editData.pending, (state) => {
@@ -220,7 +225,7 @@ const gatePassReducerSlice = createSlice({
       state.loading = false;
       state.data = [];
       state.error = action.error.message;
-      showToastOnce(action.payload.message);
+      showToastOnce(action.error.message || "Failed to save gate pass", "error");
     });
   },
 });

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { UniversalSignallingFormField, SignallingFormLayout } from "../components";
+import { UniversalSignallingFormField, SignallingFormLayout, FormActionButtons } from "../components";
 import { validateSignallingForm, stationDiarySignallingValidation } from "../validation/signallingValidationSchemas";
 import { formatDate, formatTime } from "../../../data/formatDate";
 
@@ -84,8 +84,43 @@ const StationDiarySignallingForm = () => {
     }
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  // Handle form submission (Save & Submit - Final submission)
+  const handleSubmit = async (e) => {
+    if (e) e.preventDefault();
+    await submitForm(true); // true = final submission
+  };
+
+  // Handle draft save
+  const handleSaveDraft = async () => {
+    await submitForm(false); // false = draft save
+  };
+
+  // Reset form
+  const resetForm = () => {
+    setFormValues({
+      date: formatDate(new Date()),
+      startTime: formatTime(new Date()),
+      endTime: "",
+      shift: "",
+      stationName: "",
+      signalmanName: "",
+      signalmanId: "",
+      trainOperations: "",
+      signallingIssues: "",
+      maintenanceWork: "",
+      passengerFlow: "",
+      incidentReported: false,
+      incidentDetails: "",
+      incidentTime: "",
+      incidentSeverity: "",
+      weatherConditions: "",
+      remarks: ""
+    });
+    setFormErrors({});
+  };
+
+  // Common submission logic
+  const submitForm = async (isFinalSubmit) => {
     setIsLoading(true);
 
     try {
@@ -98,12 +133,25 @@ const StationDiarySignallingForm = () => {
         return;
       }
 
+      // Prepare submission data
+      const submissionData = {
+        ...formValues,
+        status: isFinalSubmit ? "1" : "0", // 1 = submitted, 0 = draft
+      };
+
       // Here you would normally dispatch to a reducer
-      // For now, we'll use console.log to show the preserved data structure
-      console.log("Station Diary Signalling Form Submission:", formValues);
+      console.log("Station Diary Signalling Form Submission:", submissionData);
       
-      // Navigate on success
-      navigate("/list/station-diary-signalling");
+      // Success feedback based on action type
+      const message = isFinalSubmit 
+        ? "Station Diary submitted successfully!" 
+        : "Station Diary saved as draft!";
+      alert(message);
+      
+      if (isFinalSubmit) {
+        navigate("/list/station-diary-signalling");
+      }
+      // For draft save, stay on form for continued editing
       
     } catch (error) {
       console.error("Error submitting Station Diary Signalling form:", error);
@@ -120,14 +168,13 @@ const StationDiarySignallingForm = () => {
   return (
     <SignallingFormLayout
       title="Station Diary - Signalling"
-      onSubmit={handleSubmit}
-      onCancel={handleCancel}
-      isLoading={isLoading}
-      showSafetyAlert={formValues.incidentReported}
-      safetyMessage="Incident reported - ensure proper documentation and escalation"
-      equipmentContext={formValues.stationName}
-      complianceStatus="compliant"
+      breadcrumbs={[
+        { label: "Home", path: "/" },
+        { label: "Signalling", path: "/signalling" },
+        { label: "Station Diary", path: "/signalling/station-diary" }
+      ]}
     >
+      <form onSubmit={handleSubmit} className="space-y-6">
       {/* Basic Information Section */}
       <div className="row mb-4">
         <div className="col-12">
@@ -477,6 +524,16 @@ const StationDiarySignallingForm = () => {
           </div>
         </div>
       )}
+
+      {/* Form Actions */}
+      <FormActionButtons
+        loading={isLoading}
+        onReset={resetForm}
+        onSaveDraft={handleSaveDraft}
+        onSubmit={handleSubmit}
+        formName="Station Diary"
+      />
+      </form>
     </SignallingFormLayout>
   );
 };

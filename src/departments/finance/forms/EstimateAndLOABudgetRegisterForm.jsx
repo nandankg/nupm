@@ -16,7 +16,7 @@ const EstimateAndLOABudgetRegisterForm = () => {
   const [bdata, setBdata] = useState("");
   const [blist, setBlist] = useState([]);
   const [loa, setLoa] = useState({});
-
+console.log(eloa)
   // PRESERVED EXACT INITIAL VALUES - No changes to field names
   const basicInitialValues = {
     budgetHead_id: "",

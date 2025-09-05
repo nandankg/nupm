@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { UniversalSignallingFormField, SignallingFormLayout } from "../components";
+import { UniversalSignallingFormField, SignallingFormLayout, FormActionButtons } from "../components";
 import { addData } from "../../../reducer/redux/tableDataSlice";
 import stations from "../../../data/station.json";
 
@@ -166,10 +166,19 @@ const EquipmentFailureRegisterForm = () => {
     return errors;
   };
 
-  // Handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    
+  // Handle form submission (Save & Submit - Final submission)
+  const handleSubmit = async (e) => {
+    if (e) e.preventDefault();
+    await submitForm(true); // true = final submission
+  };
+
+  // Handle draft save
+  const handleSaveDraft = async () => {
+    await submitForm(false); // false = draft save
+  };
+
+  // Common submission logic
+  const submitForm = async (isFinalSubmit) => {
     const errors = validateForm();
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
@@ -180,16 +189,30 @@ const EquipmentFailureRegisterForm = () => {
     
     try {
       // Preserve exact field structure for API compatibility
+      // FIXED: Map station field to station_name for database compatibility
+      const { station, ...otherValues } = formValues;
       const submissionData = {
         formType: slug || "equipment-failure-register",
-        values: formValues
+        values: {
+          ...otherValues,
+          station_name: station, // Map station to station_name for database
+          // Add status based on action type
+          status: isFinalSubmit ? "1" : "0", // 1 = submitted, 0 = draft
+        }
       };
 
       dispatch(addData(submissionData));
       
-      // Success feedback
-      alert("Equipment Failure Register saved successfully!");
-      navigate(`/list/${slug}`);
+      // Success feedback based on action type
+      const message = isFinalSubmit 
+        ? "Equipment Failure Register submitted successfully!" 
+        : "Equipment Failure Register saved as draft!";
+      alert(message);
+      
+      if (isFinalSubmit) {
+        navigate(`/list/${slug}`);
+      }
+      // For draft save, stay on form for continued editing
       
     } catch (error) {
       console.error("Submission error:", error);
@@ -478,35 +501,13 @@ const EquipmentFailureRegisterForm = () => {
         </div>
 
         {/* Form Actions */}
-        <div className="row">
-          <div className="col-md-12">
-            <div className="d-flex gap-2 justify-content-end">
-              <button
-                type="button"
-                onClick={resetForm}
-                className="btn btn-secondary"
-                disabled={isSubmitting}
-              >
-                Reset Form
-              </button>
-              <button
-                type="submit"
-                className="btn btn-primary"
-                disabled={isSubmitting}
-                style={{ width: "100px", height: "50px" }}
-              >
-                {isSubmitting ? (
-                  <span>
-                    <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                    Saving...
-                  </span>
-                ) : (
-                  "Save"
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
+        <FormActionButtons
+          loading={isSubmitting}
+          onReset={resetForm}
+          onSaveDraft={handleSaveDraft}
+          onSubmit={handleSubmit}
+          formName="Equipment Failure Register"
+        />
       </form>
     </SignallingFormLayout>
   );

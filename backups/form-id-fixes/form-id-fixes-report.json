@@ -1,0 +1,269 @@
+{
+  "total": 45,
+  "processed": 19,
+  "skipped": 26,
+  "errors": 0,
+  "totalChanges": 18,
+  "fileResults": [
+    {
+      "file": "AfcGateMaintenanceForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID from initial values: id: \"21\","
+      ]
+    },
+    {
+      "file": "AssetRegisterForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "AssuranceSystemForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID field: id: user.employeeid || \"\","
+      ]
+    },
+    {
+      "file": "AtcExaminationRegisterForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "AtsCabinetMaintenanceForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "AxleCounterMaintenanceForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID field: id: \"\","
+      ]
+    },
+    {
+      "file": "BoxCleaningOutdoorForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "ColorLightMaintenanceForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "ContractualSpareTestingRegisterForm.jsx",
+      "processed": true,
+      "changes": []
+    },
+    {
+      "file": "ContractWorkDoneRegisterForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID field: id: '',"
+      ]
+    },
+    {
+      "file": "DailyTransactionRegisterIssueForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID field: id: '1',"
+      ]
+    },
+    {
+      "file": "DailyTransactionRegisterReceiptForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID field: id: '1',"
+      ]
+    },
+    {
+      "file": "DailyWorkDoneRegisterForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "EktMaintenanceForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "EquipmentFailureRegisterForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "GatePassForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "GrievanceRegisterForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "HalfYearlyMainlineMaintenanceForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "HandoverTakingOverNoteForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "HardwareFailureForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "HardwareFailureRegisterForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID field: id: \"\","
+      ]
+    },
+    {
+      "file": "IncidentRegisterSignallingForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID field: id: \"\",",
+        "Removed client-side state variable: const [sNo, setSNo] = useState(1);..."
+      ]
+    },
+    {
+      "file": "InspectionRegisterForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "JobCardForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "LabFaultyItemRegisterForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "LedgerSignallingForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID field: serialNumber: '',"
+      ]
+    },
+    {
+      "file": "LoanRegisterForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "ManualPointOperationDrillForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID field: id: \"\","
+      ]
+    },
+    {
+      "file": "MeasurementVoltageMCBinPDCForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID field: id: \"\","
+      ]
+    },
+    {
+      "file": "OccBccHalfYearlyMaintenanceForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID field: id: 1,"
+      ]
+    },
+    {
+      "file": "PermanentLoanRegisterForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID field: serialNumber: '',"
+      ]
+    },
+    {
+      "file": "PmFollowupSheetForm.jsx",
+      "processed": true,
+      "changes": []
+    },
+    {
+      "file": "PmLogbookHalfYearlyOtherMainlineForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "PMPointMachineMaintenanceRecordForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "PMPointMachineMaintenanceRecordTDPForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID field: serialNumber: '',"
+      ]
+    },
+    {
+      "file": "PreventiveMaintenanceWorksheetCentralComputerForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "QuarterlyTrainInspectionForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID from initial values: id: \"\","
+      ]
+    },
+    {
+      "file": "ReplacementRegisterForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID field: id: \"\","
+      ]
+    },
+    {
+      "file": "RequisitionForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "SEREntryForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "ShuntSignalMaintenanceRecordForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "SignalFailureRegisterForm.jsx",
+      "processed": true,
+      "changes": [
+        "Removed client-side ID field: id: \"\","
+      ]
+    },
+    {
+      "file": "StationDiarySignallingForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "TomHalfYearlyMaintenanceForm.jsx",
+      "processed": false,
+      "changes": []
+    },
+    {
+      "file": "UpsMaintenanceForm.jsx",
+      "processed": false,
+      "changes": []
+    }
+  ]
+}

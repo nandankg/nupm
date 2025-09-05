@@ -25,109 +25,109 @@ const MeasurementVoltageMCBinPDCForm = () => {
   const halfyearlyactivity = [
     {
       category: "Details of Maintenance Activity",
-      activity: " Check lamp indication on PDC",
-    },
+      activity: " Check lamp indication on PDC"
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " ELD Status",
-    },
+      activity: " ELD Status"
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " IMD status ",
-    },
+      activity: " IMD status "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " VMR Status ",
-    },
+      activity: " VMR Status "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: "Masurement of Incomer Voltage from UPS on MCB No.",
-    },
+      activity: "Masurement of Incomer Voltage from UPS on MCB No."
+      },
   ];
 
   const mcbactivity = [
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 2 ",
-    },
+      activity: " MCB 2 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 3 ",
-    },
+      activity: " MCB 3 "
+      },
   ];
 
   const mcb2activity = [
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 1 ",
-    },
+      activity: " MCB 1 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 4 ",
-    },
+      activity: " MCB 4 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 5 ",
-    },
+      activity: " MCB 5 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 6 ",
-    },
+      activity: " MCB 6 "
+      },
   ];
 
   const [mcb3activity, setMcb3activity] = useState([
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 7 ",
-    },
+      activity: " MCB 7 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 8 ",
-    },
+      activity: " MCB 8 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 9 ",
-    },
+      activity: " MCB 9 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 10 ",
-    },
+      activity: " MCB 10 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 11 ",
-    },
+      activity: " MCB 11 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 12 ",
-    },
+      activity: " MCB 12 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 13 ",
-    },
+      activity: " MCB 13 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 14 ",
-    },
+      activity: " MCB 14 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 15 ",
-    },
+      activity: " MCB 15 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 16 ",
-    },
+      activity: " MCB 16 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 17 ",
-    },
+      activity: " MCB 17 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 18 ",
-    },
+      activity: " MCB 18 "
+      },
     {
       category: "Details of Maintenance Activity",
-      activity: " MCB 19 ",
-    },
+      activity: " MCB 19 "
+      },
   ]);
 
   // PRESERVED EXACT FIELD NAMES - No changes from original form
@@ -135,25 +135,25 @@ const MeasurementVoltageMCBinPDCForm = () => {
     station: "",
     date: "",
     halfyearly: halfyearlyactivity.map(() => ({
-      checked: "",
-    })),
+      checked: ""
+      })),
     mcb: mcbactivity.map(() => ({
       r_y: "",
       y_b: "",
       r_b: "",
       r_n: "",
       y_n: "",
-      b_n: "",
-    })),
+      b_n: ""
+      })),
     mcb2: mcb2activity.map(() => ({
       r_y2: "",
       y_b2: "",
-      r_b2: "",
-    })),
+      r_b2: ""
+      })),
     mcb3: mcb3activity.map(() => ({
       volt: "",
-      val: "",
-    })),
+      val: ""
+      })),
     range: "January-June",
     remarks: "",
     signature: "",
@@ -161,10 +161,9 @@ const MeasurementVoltageMCBinPDCForm = () => {
     designation: "",
     empno: "",
     countersign: "",
-    employee_id: "",
-    department: "",
-    unit: "",
-  });
+    employee_department: "",
+    unit: ""
+      });
 
   const [halfyearlyRange, setHalfyearlyRange] = useState("January-June");
   const halfyearlyRanges = ["January-June", "July-December"];
@@ -206,14 +205,14 @@ const MeasurementVoltageMCBinPDCForm = () => {
     const newMCBId = ` MCB ${newMCBNumber < 10 ? '0' + newMCBNumber : newMCBNumber}`;
     const newMCB = {
       category: "Details of Maintenance Activity",
-      activity: newMCBId,
-    };
+      activity: newMCBId
+      };
 
     setMcb3activity((prev) => [...prev, newMCB]);
     setFormValues((prevValues) => ({
       ...prevValues,
-      mcb3: [...prevValues.mcb3, { volt: "", val: "" }],
-    }));
+      mcb3: [...prevValues.mcb3, { volt: "", val: "" }]
+      }));
   };
 
   // Handle range change
@@ -221,8 +220,8 @@ const MeasurementVoltageMCBinPDCForm = () => {
     setHalfyearlyRange(selectedRange);
     setFormValues((prevValues) => ({
       ...prevValues,
-      range: selectedRange,
-    }));
+      range: selectedRange
+      }));
   };
 
   // Handle field changes
@@ -232,12 +231,12 @@ const MeasurementVoltageMCBinPDCForm = () => {
         ...prevValues,
         [type]: prevValues[type].map((item, i) =>
           i === index ? { ...item, [field]: value } : item
-        ),
+        )
       }));
     } else {
       setFormValues((prevValues) => ({
         ...prevValues,
-        [field]: value,
+        [field]: value
       }));
     }
 
@@ -308,6 +307,7 @@ const MeasurementVoltageMCBinPDCForm = () => {
     try {
       // Preserve exact field structure for API compatibility
       const submissionData = {
+        // FIXED: Remove client-side IDs - form_id is auto-generated by database
         ...formValues,
         slug: slug || "measurement-voltage-mcb-pdc"
       };
@@ -332,7 +332,7 @@ const MeasurementVoltageMCBinPDCForm = () => {
       station: "",
       date: "",
       halfyearly: halfyearlyactivity.map(() => ({
-        checked: "",
+        checked: ""
       })),
       mcb: mcbactivity.map(() => ({
         r_y: "",
@@ -340,16 +340,16 @@ const MeasurementVoltageMCBinPDCForm = () => {
         r_b: "",
         r_n: "",
         y_n: "",
-        b_n: "",
+        b_n: ""
       })),
       mcb2: mcb2activity.map(() => ({
         r_y2: "",
         y_b2: "",
-        r_b2: "",
+        r_b2: ""
       })),
       mcb3: mcb3activity.map(() => ({
         volt: "",
-        val: "",
+        val: ""
       })),
       range: "January-June",
       remarks: "",
@@ -358,10 +358,9 @@ const MeasurementVoltageMCBinPDCForm = () => {
       designation: "",
       empno: "",
       countersign: "",
-      employee_id: "",
-      department: "",
-      unit: "",
-    });
+      employee_department: "",
+      unit: ""
+      });
     setHalfyearlyRange("January-June");
     setFormErrors({});
   };

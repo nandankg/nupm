@@ -17,7 +17,6 @@ const LedgerSignallingForm = () => {
 
   const [formData, setFormData] = useState([
     {
-      serialNumber: '',
       date: '',
       particulars: '',
       voucherNo: '',
@@ -99,7 +98,6 @@ const LedgerSignallingForm = () => {
 
   const handleAddRow = () => {
     const newRow = {
-      serialNumber: (formData.length + 1).toString(),
       date: '',
       particulars: '',
       voucherNo: '',
@@ -112,59 +110,23 @@ const LedgerSignallingForm = () => {
     setFormData([...formData, newRow]);
   };
 
-  const handleRemoveRow = (index) => {
-    if (formData.length > 1) {
-      const newFormData = formData.filter((_, i) => i !== index);
-      // Recalculate serial numbers
-      const updatedFormData = newFormData.map((row, i) => ({
-        ...row,
-        serialNumber: (i + 1).toString()
-      }));
-      setFormData(updatedFormData);
-    }
-  };
+  const updatedFormData = newFormData.map((row, i) => ({
+  ...row,
+  department: 'Signalling',
+  submittedBy: user?.name || 'Unknown User',
+  submittedAt: new Date().toISOString(),
+  entries: formData,
+  totalReceipts: formData.reduce((sum, row) => sum + parseFloat(row.receipts || 0), 0),
+  totalPayments: formData.reduce((sum, row) => sum + parseFloat(row.payments || 0), 0),
+  finalBalance: formData.length > 0 ? formData[formData.length - 1].balance : '0.00'
+}));
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+console.log('Ledger Signalling Data:', updatedFormData);
 
-    if (!validateForm()) {
-      toast.error('Please fix the errors before submitting');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const submissionData = {
-        formType: 'ledger-signalling',
-        department: 'Signalling',
-        submittedBy: user?.name || 'Unknown User',
-        submittedAt: new Date().toISOString(),
-        entries: formData,
-        totalReceipts: formData.reduce((sum, row) => sum + parseFloat(row.receipts || 0), 0),
-        totalPayments: formData.reduce((sum, row) => sum + parseFloat(row.payments || 0), 0),
-        finalBalance: formData.length > 0 ? formData[formData.length - 1].balance : '0.00'
-      };
-
-      console.log('Ledger Signalling Data:', submissionData);
-      
-      // Here you would dispatch to your Redux store or make API call
-      // dispatch(saveLedgerSignallingData(submissionData));
-      
-      toast.success('Ledger entries saved successfully!');
-      // navigate('/signalling/ledger-list');
-      
-    } catch (error) {
-      console.error('Error saving ledger entries:', error);
-      toast.error('Failed to save ledger entries. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleReset = () => {
     setFormData([
       {
-        serialNumber: '1',
         date: '',
         particulars: '',
         voucherNo: '',

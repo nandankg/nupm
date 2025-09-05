@@ -38,7 +38,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "fix-db-columns": "node scripts/fix-database-column-mapping.js",
+    "fix-db-signalling": "node scripts/fix-database-column-mapping.js signalling",
+    "fix-db-telecom": "node scripts/fix-database-column-mapping.js telecom",
+    "fix-db-all": "node scripts/fix-database-column-mapping.js all"
   },
   "eslintConfig": {
     "extends": [

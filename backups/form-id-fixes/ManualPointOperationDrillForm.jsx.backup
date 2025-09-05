@@ -1,0 +1,220 @@
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  addData,
+  updateData,
+  removeData,
+} from "../../redux/signalling/manualPointOperationDrillSlice";
+import { formatDate } from "../../utils/dateHelper";
+import { 
+  FormContainer, 
+  FormSection, 
+  FormRow, 
+  FormField, 
+  SelectField,
+  DateField,
+  TimeField,
+  TextInput,
+  NumberInput,
+  RemarkField
+} from "../../../components/signalling/UniversalSignallingComponents";
+
+const ManualPointOperationDrillForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+  const { currentEntry, entries, loading } = useSelector(
+    (state) => state.manualPointOperationDrill
+  );
+
+  const initialFormState = {
+    S_No: 1,
+    date: formatDate(new Date()),
+    station: "",
+    nameofsc: "",
+    empid: "",
+    pointno: "",
+    from: "",
+    to: "",
+    totaltimtaken: "",
+    nameoftc: "",
+    empidoftc: "",
+    remark: "",
+  };
+
+  const [formData, setFormData] = useState(initialFormState);
+
+  useEffect(() => {
+    if (currentEntry) {
+      setFormData(currentEntry);
+    }
+  }, [currentEntry]);
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const formDataWithValidation = {
+      ...formData,
+      pointno: parseInt(formData.pointno) || 0,
+    };
+
+    if (currentEntry) {
+      dispatch(updateData(formDataWithValidation));
+    } else {
+      dispatch(addData(formDataWithValidation));
+    }
+    navigate("/signalling/manual-point-operation-drill/list");
+  };
+
+  const handleReset = () => {
+    setFormData(initialFormState);
+  };
+
+  const handleDelete = () => {
+    if (currentEntry && window.confirm("Are you sure you want to delete this entry?")) {
+      dispatch(removeData(currentEntry.id));
+      navigate("/signalling/manual-point-operation-drill/list");
+    }
+  };
+
+  return (
+    <FormContainer
+      title="Manual Point Operation Drill"
+      onSubmit={handleSubmit}
+      loading={loading}
+    >
+      <FormSection>
+        <FormRow>
+          <FormField md={6}>
+            <SelectField
+              label="Station"
+              value={formData.station}
+              onChange={(value) => handleInputChange("station", value)}
+              required
+            />
+          </FormField>
+          
+          <FormField md={6}>
+            <NumberInput
+              label="Point No."
+              value={formData.pointno}
+              onChange={(value) => handleInputChange("pointno", value)}
+              min="1"
+              required
+            />
+          </FormField>
+        </FormRow>
+
+        <FormRow>
+          <FormField md={6}>
+            <TextInput
+              label="Name of SC"
+              value={formData.nameofsc}
+              onChange={(value) => handleInputChange("nameofsc", value)}
+              required
+            />
+          </FormField>
+          
+          <FormField md={6}>
+            <TextInput
+              label="Employee ID"
+              value={formData.empid}
+              onChange={(value) => handleInputChange("empid", value)}
+              required
+            />
+          </FormField>
+        </FormRow>
+
+        <FormRow>
+          <FormField md={6}>
+            <TextInput
+              label="Total Time Taken"
+              value={formData.totaltimtaken}
+              onChange={(value) => handleInputChange("totaltimtaken", value)}
+              placeholder="e.g., 5 minutes"
+            />
+          </FormField>
+          
+          <FormField md={6}>
+            <TextInput
+              label="Name of TC"
+              value={formData.nameoftc}
+              onChange={(value) => handleInputChange("nameoftc", value)}
+              required
+            />
+          </FormField>
+        </FormRow>
+      </FormSection>
+
+      <FormSection>
+        <div className="text-center mb-3">
+          <h5>Time Duration</h5>
+        </div>
+        
+        <FormRow>
+          <FormField md={6}>
+            <TimeField
+              label="From"
+              value={formData.from}
+              onChange={(value) => handleInputChange("from", value)}
+              required
+            />
+          </FormField>
+          
+          <FormField md={6}>
+            <TimeField
+              label="To"
+              value={formData.to}
+              onChange={(value) => handleInputChange("to", value)}
+              required
+            />
+          </FormField>
+        </FormRow>
+
+        <FormRow>
+          <FormField md={6}>
+            <TextInput
+              label="Employee ID of TC"
+              value={formData.empidoftc}
+              onChange={(value) => handleInputChange("empidoftc", value)}
+              required
+            />
+          </FormField>
+          
+          <FormField md={6}>
+            <RemarkField
+              label="Remark"
+              value={formData.remark}
+              onChange={(value) => handleInputChange("remark", value)}
+            />
+          </FormField>
+        </FormRow>
+      </FormSection>
+
+      <FormRow>
+        <div className="col-12 text-center">
+          <div className="btn-group" role="group">
+            <button type="submit" className="btn btn-primary">
+              {currentEntry ? "Update" : "Save"}
+            </button>
+            <button type="button" className="btn btn-secondary" onClick={handleReset}>
+              Reset
+            </button>
+            {currentEntry && (
+              <button type="button" className="btn btn-danger" onClick={handleDelete}>
+                Delete
+              </button>
+            )}
+          </div>
+        </div>
+      </FormRow>
+    </FormContainer>
+  );
+};
+
+export default ManualPointOperationDrillForm;

@@ -42,7 +42,8 @@ const BudgetAllotmentForm = () => {
   const eloa = useSelector((state) => state.financeBudget);
   const transactionData = useSelector((state) => state.financeTransaction);
   const dispatch = useDispatch();
-
+console.log(eloa);
+console.log(transactionData);
   // PRESERVED EXACT VALIDATION LOGIC
   const validateForm = () => {
     const errors = {};

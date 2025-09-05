@@ -1,0 +1,270 @@
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  addData,
+  updateData,
+  removeData,
+} from "../../redux/signalling/pmFollowupSheetSlice";
+import { formatDate } from "../../utils/dateHelper";
+import { 
+  FormContainer, 
+  FormSection, 
+  FormRow, 
+  FormField, 
+  SelectField,
+  DateField,
+  TextInput,
+  TextAreaField,
+  DynamicTable
+} from "../../../components/signalling/UniversalSignallingComponents";
+
+const PmFollowupSheetForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+  const { currentEntry, entries, loading } = useSelector(
+    (state) => state.pmFollowupSheet
+  );
+
+  const initialFormState = {
+    S_No: 1,
+    PmDate: "",
+    Station: "",
+    FailDate: "",
+    failures: Array(9).fill({
+      FailObsDurPm: "",
+      RectDate: "",
+      Remark: "",
+      AttendedBy: "",
+    })
+  };
+
+  const [formData, setFormData] = useState(initialFormState);
+
+  useEffect(() => {
+    if (currentEntry) {
+      setFormData(currentEntry);
+    }
+  }, [currentEntry]);
+
+  const handleInputChange = (field, value, index, subField) => {
+    if (index !== undefined && subField) {
+      setFormData(prev => ({
+        ...prev,
+        [field]: prev[field].map((item, idx) => 
+          idx === index ? { ...item, [subField]: value } : item
+        )
+      }));
+    } else {
+      setFormData(prev => ({ ...prev, [field]: value }));
+    }
+  };
+
+  const handleAddFailure = () => {
+    setFormData(prev => ({
+      ...prev,
+      failures: [
+        ...prev.failures,
+        {
+          FailObsDurPm: "",
+          RectDate: "",
+          Remark: "",
+          AttendedBy: "",
+        }
+      ]
+    }));
+  };
+
+  const handleRemoveFailure = (index) => {
+    if (formData.failures.length > 1) {
+      setFormData(prev => ({
+        ...prev,
+        failures: prev.failures.filter((_, idx) => idx !== index)
+      }));
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const validFailures = formData.failures.filter(failure => 
+      failure.FailObsDurPm.trim() !== ""
+    );
+
+    const submissionData = {
+      ...formData,
+      failures: validFailures
+    };
+
+    if (currentEntry) {
+      dispatch(updateData(submissionData));
+    } else {
+      dispatch(addData(submissionData));
+    }
+    navigate("/signalling/pm-followup-sheet/list");
+  };
+
+  const handleReset = () => {
+    setFormData(initialFormState);
+  };
+
+  const handleDelete = () => {
+    if (currentEntry && window.confirm("Are you sure you want to delete this entry?")) {
+      dispatch(removeData(currentEntry.id));
+      navigate("/signalling/pm-followup-sheet/list");
+    }
+  };
+
+  const failureTableColumns = [
+    {
+      key: "FailObsDurPm",
+      label: "Failure Observed During PM",
+      type: "textarea",
+      required: true
+    },
+    {
+      key: "RectDate",
+      label: "Rectification Date",
+      type: "date"
+    },
+    {
+      key: "AttendedBy",
+      label: "Attended By",
+      type: "text"
+    },
+    {
+      key: "Remark",
+      label: "Rectification/Remarks",
+      type: "textarea"
+    }
+  ];
+
+  return (
+    <FormContainer
+      title="PM Follow-up Sheet"
+      onSubmit={handleSubmit}
+      loading={loading}
+    >
+      <FormSection>
+        <FormRow>
+          <FormField md={6}>
+            <DateField
+              label="PM Date"
+              value={formData.PmDate}
+              onChange={(value) => handleInputChange("PmDate", value)}
+              required
+            />
+          </FormField>
+          
+          <FormField md={6}>
+            <SelectField
+              label="Station"
+              value={formData.Station}
+              onChange={(value) => handleInputChange("Station", value)}
+              required
+            />
+          </FormField>
+        </FormRow>
+      </FormSection>
+
+      <FormSection>
+        <div className="text-center mb-3">
+          <h5>Failure Details</h5>
+        </div>
+
+        {formData.failures.map((failure, index) => (
+          <div key={index} className="border rounded p-3 mb-3 position-relative">
+            {formData.failures.length > 1 && (
+              <button
+                type="button"
+                className="btn btn-sm btn-danger position-absolute top-0 end-0 m-2"
+                onClick={() => handleRemoveFailure(index)}
+                title="Remove this failure record"
+              >
+                ×
+              </button>
+            )}
+            
+            <FormRow>
+              <FormField md={12}>
+                <TextAreaField
+                  label="Failure Observed During PM"
+                  value={failure.FailObsDurPm}
+                  onChange={(value) => handleInputChange("failures", value, index, "FailObsDurPm")}
+                  rows={3}
+                  required
+                />
+              </FormField>
+            </FormRow>
+
+            <div className="text-center my-3">
+              <h6>Rectification Details</h6>
+            </div>
+
+            <FormRow>
+              <FormField md={6}>
+                <DateField
+                  label="Rectification Date"
+                  value={failure.RectDate}
+                  onChange={(value) => handleInputChange("failures", value, index, "RectDate")}
+                />
+              </FormField>
+              
+              <FormField md={6}>
+                <TextInput
+                  label="Attended By"
+                  value={failure.AttendedBy}
+                  onChange={(value) => handleInputChange("failures", value, index, "AttendedBy")}
+                />
+              </FormField>
+            </FormRow>
+
+            <FormRow>
+              <FormField md={12}>
+                <TextAreaField
+                  label="Rectification/Remarks"
+                  value={failure.Remark}
+                  onChange={(value) => handleInputChange("failures", value, index, "Remark")}
+                  rows={3}
+                />
+              </FormField>
+            </FormRow>
+          </div>
+        ))}
+
+        <FormRow>
+          <div className="col-12 text-center mb-3">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={handleAddFailure}
+            >
+              Add Failure Record
+            </button>
+          </div>
+        </FormRow>
+      </FormSection>
+
+      <FormRow>
+        <div className="col-12 text-center">
+          <div className="btn-group" role="group">
+            <button type="submit" className="btn btn-primary">
+              {currentEntry ? "Update" : "Save"}
+            </button>
+            <button type="button" className="btn btn-secondary" onClick={handleReset}>
+              Reset
+            </button>
+            {currentEntry && (
+              <button type="button" className="btn btn-danger" onClick={handleDelete}>
+                Delete
+              </button>
+            )}
+          </div>
+        </div>
+      </FormRow>
+    </FormContainer>
+  );
+};
+
+export default PmFollowupSheetForm;

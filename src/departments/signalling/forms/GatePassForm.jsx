@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { UniversalSignallingFormField, SignallingFormLayout } from "../components";
+import { UniversalSignallingFormField, SignallingFormLayout, FormActionButtons } from "../components";
 import { addData } from "../../../reducer/GatePassReducer";
 import { formatDate } from "../../../data/formatDate";
 
@@ -15,7 +15,7 @@ import { formatDate } from "../../../data/formatDate";
 const GatePassForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const gatepass = useSelector((state) => state.gatepassstore || []);
+  const gatepass = useSelector((state) => state.gatepassstore || state.data || []);
   
   const [slug, setSlug] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,7 +35,7 @@ const GatePassForm = () => {
     bookno: "",
     pageno: "",
     return_type: "",
-    items: Array(18).fill({
+    items: Array.from({ length: 18 }, () => ({
       itmdespt: "",
       partno: "",
       serialno: "",
@@ -43,7 +43,7 @@ const GatePassForm = () => {
       qty: "",
       dftsrv: "",
       remark: "",
-    }),
+    })),
     issuerdetail: {
       nameissuer: "",
       designationissuer: "",
@@ -211,10 +211,19 @@ const GatePassForm = () => {
     return errors;
   };
 
-  // Handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    
+  // Handle form submission (Save & Submit - Final submission)
+  const handleSubmit = async (e) => {
+    if (e) e.preventDefault();
+    await submitForm(true); // true = final submission
+  };
+
+  // Handle draft save
+  const handleSaveDraft = async () => {
+    await submitForm(false); // false = draft save
+  };
+
+  // Common submission logic
+  const submitForm = async (isFinalSubmit) => {
     const errors = validateForm();
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
@@ -227,14 +236,30 @@ const GatePassForm = () => {
       // Preserve exact field structure for API compatibility
       const submissionData = {
         ...formValues,
-        slug: slug || "gate-pass-register"
+        // Add status based on action type
+        status: isFinalSubmit ? "1" : "0", // 1 = submitted, 0 = draft
       };
 
-      dispatch(addData(submissionData));
+      console.log("Submitting Gate Pass data:", submissionData);
       
-      // Success feedback
-      alert("Gate Pass saved successfully!");
-      navigate(`/list/${slug}`);
+      const resultAction = await dispatch(addData(submissionData));
+      
+      if (addData.fulfilled.match(resultAction)) {
+        // Success feedback based on action type
+        const message = isFinalSubmit 
+          ? "Gate Pass submitted successfully!" 
+          : "Gate Pass saved as draft!";
+        alert(message);
+        
+        if (isFinalSubmit) {
+          navigate(`/list/${slug || 'gate-pass'}`);
+        }
+        // For draft save, stay on form for continued editing
+      } else {
+        // Handle API error response
+        console.error("API Error:", resultAction.error || resultAction.payload);
+        alert(`Error saving gate pass: ${resultAction.error?.message || 'Unknown error'}`);
+      }
       
     } catch (error) {
       console.error("Submission error:", error);
@@ -246,7 +271,18 @@ const GatePassForm = () => {
 
   // Reset form
   const resetForm = () => {
-    setFormValues(basicInitialValues);
+    setFormValues({
+      ...basicInitialValues,
+      items: Array.from({ length: 18 }, () => ({
+        itmdespt: "",
+        partno: "",
+        serialno: "",
+        location: "",
+        qty: "",
+        dftsrv: "",
+        remark: "",
+      }))
+    });
     setItem([{
       itmdespt: "",
       partno: "",
@@ -318,6 +354,28 @@ const GatePassForm = () => {
               onChange={(e) => handleChange("org", e.target.value)}
               placeholder="Organisation name"
               error={formErrors.org}
+            />
+          </div>
+          <div className="col-md-4">
+            <UniversalSignallingFormField
+              type="text"
+              name="bookno"
+              label="Book No."
+              value={formValues.bookno}
+              onChange={(e) => handleChange("bookno", e.target.value)}
+              placeholder="Book number"
+              error={formErrors.bookno}
+            />
+          </div>
+          <div className="col-md-4">
+            <UniversalSignallingFormField
+              type="text"
+              name="pageno"
+              label="Page No."
+              value={formValues.pageno}
+              onChange={(e) => handleChange("pageno", e.target.value)}
+              placeholder="Page number"
+              error={formErrors.pageno}
             />
           </div>
         </div>
@@ -567,34 +625,13 @@ const GatePassForm = () => {
         </div>
 
         {/* Form Actions */}
-        <div className="row">
-          <div className="col-md-12">
-            <div className="d-flex gap-2 justify-content-end">
-              <button
-                type="button"
-                onClick={resetForm}
-                className="btn btn-secondary"
-                disabled={isSubmitting}
-              >
-                Reset Form
-              </button>
-              <button
-                type="submit"
-                className="btn btn-primary"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <span>
-                    <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                    Saving...
-                  </span>
-                ) : (
-                  "Save Gate Pass"
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
+        <FormActionButtons
+          loading={isSubmitting}
+          onReset={resetForm}
+          onSaveDraft={handleSaveDraft}
+          onSubmit={handleSubmit}
+          formName="Gate Pass"
+        />
       </form>
     </SignallingFormLayout>
   );

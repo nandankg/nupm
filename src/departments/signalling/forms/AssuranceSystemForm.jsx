@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { UniversalSignallingFormField, SignallingFormLayout } from "../components";
 import {
   fetchAssuranceData,
-  addAssuranceData,
-} from "../../../reducer/chanchal/AssuRegReducer";
+  addAssuranceData
+      } from "../../../reducer/chanchal/AssuRegReducer";
 import { formatDate } from "../../../data/formatDate";
 
 /**
@@ -26,10 +26,9 @@ const AssuranceSystemForm = () => {
   const [instructionForm, setInstructionForm] = useState({
     instructions_details: "",
     date_of_instructions: "",
-    admin_id: user.employeeid || "",
-    admin_name: user.signature || "",
-    department: user.department || "",
-  });
+    admin_admin_name: user.signature || "",
+    department: user.department || ""
+      });
   
   const [ackForm, setAckForm] = useState({});
   const [expandedInstruction, setExpandedInstruction] = useState(null);
@@ -102,9 +101,8 @@ const AssuranceSystemForm = () => {
       setInstructionForm({
         instructions_details: "",
         date_of_instructions: "",
-        admin_id: user.employeeid || "",
-        admin_name: user.signature || "",
-        department: user.department || "",
+        admin_admin_name: user.signature || "",
+        department: user.department || ""
       });
       setFormErrors({});
       
@@ -126,16 +124,15 @@ const AssuranceSystemForm = () => {
       [instructionId]: {
         instructions_details: instruction.instructions_details,
         date_of_instructions: instruction.date_of_instructions,
-        admin_id: instruction.admin_id,
-        admin_name: instruction.admin_name,
+        admin_admin_name: instruction.admin_name,
         department: user.department || "",
         date_of_acknowledgement: formatDate(new Date(), "YYYY-MM-DD"),
         acknowledged_name: user.name || "",
         acknowledged_designation: user.designation || "",
         acknowledged_emp_no: user.emp_no || "",
-        acknowledged_remark: value,
-      },
-    }));
+        acknowledged_remark: value
+      }
+      }));
   };
 
   // Handle acknowledgment submission
@@ -167,10 +164,9 @@ const AssuranceSystemForm = () => {
     setInstructionForm({
       instructions_details: "",
       date_of_instructions: "",
-      admin_id: user.employeeid || "",
-      admin_name: user.signature || "",
-      department: user.department || "",
-    });
+      admin_admin_name: user.signature || "",
+      department: user.department || ""
+      });
     setFormErrors({});
   };
 

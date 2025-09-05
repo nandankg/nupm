@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { UniversalSignallingFormField, SignallingFormLayout } from "../components";
+import { UniversalSignallingFormField, SignallingFormLayout, FormActionButtons } from "../components";
 import { validateSignallingForm, pmPointMaintenanceValidation } from "../validation/signallingValidationSchemas";
 import { addData } from "../../../reducer/ColorLightSignalMainlineReducer";
 
@@ -236,10 +236,19 @@ const ColorLightMaintenanceForm = () => {
     return errors;
   };
 
-  // Handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    
+  // Handle form submission (Save & Submit - Final submission)
+  const handleSubmit = async (e) => {
+    if (e) e.preventDefault();
+    await submitForm(true); // true = final submission
+  };
+
+  // Handle draft save
+  const handleSaveDraft = async () => {
+    await submitForm(false); // false = draft save
+  };
+
+  // Common submission logic
+  const submitForm = async (isFinalSubmit) => {
     const errors = validateForm();
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
@@ -252,14 +261,23 @@ const ColorLightMaintenanceForm = () => {
       // Preserve exact field structure for API compatibility
       const submissionData = {
         ...formValues,
-        slug: slug || "color-light-signal-maintenance"
+        slug: slug || "color-light-signal-maintenance",
+        // Add status based on action type
+        status: isFinalSubmit ? "1" : "0", // 1 = submitted, 0 = draft
       };
 
       dispatch(addData(submissionData));
       
-      // Success feedback
-      alert("Color Light Signal Maintenance Record saved successfully!");
-      navigate("/admin/AllDeptFormList");
+      // Success feedback based on action type
+      const message = isFinalSubmit 
+        ? "Color Light Signal Maintenance submitted successfully!" 
+        : "Color Light Signal Maintenance saved as draft!";
+      alert(message);
+      
+      if (isFinalSubmit) {
+        navigate("/admin/AllDeptFormList");
+      }
+      // For draft save, stay on form for continued editing
       
     } catch (error) {
       console.error("Submission error:", error);
@@ -696,34 +714,13 @@ const ColorLightMaintenanceForm = () => {
         </div>
 
         {/* Form Actions */}
-        <div className="row">
-          <div className="col-md-12">
-            <div className="d-flex gap-2 justify-content-end">
-              <button
-                type="button"
-                onClick={resetForm}
-                className="btn btn-secondary"
-                disabled={isSubmitting}
-              >
-                Reset Form
-              </button>
-              <button
-                type="submit"
-                className="btn btn-primary"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <span>
-                    <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                    Saving...
-                  </span>
-                ) : (
-                  "Save Color Light Signal Maintenance"
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
+        <FormActionButtons
+          loading={isSubmitting}
+          onReset={resetForm}
+          onSaveDraft={handleSaveDraft}
+          onSubmit={handleSubmit}
+          formName="Color Light Signal Maintenance"
+        />
       </form>
     </SignallingFormLayout>
   );

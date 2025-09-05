@@ -204,6 +204,17 @@ import RedirectReducer from "../reducer/RedirectReducer";
 import StationEarningReducer from "../reducer/store/StationEarningReducer"
 import HalfYearlyMaintenanceFormReducer from "../reducer/store/HalfYearlyMaintenanceFormReducer"
 
+// Modern Signalling Department Redux Slices
+import signallingSystemReducer from "../departments/signalling/redux/systemSlice";
+import signallingMaintenanceReducer from "../departments/signalling/redux/maintenanceSlice";
+import signallingSafetyReducer from "../departments/signalling/redux/safetySlice";
+
+// Modern Operation Department Redux Slices
+import operationStationReducer from "../departments/operation/redux/stationSlice";
+import operationTrafficReducer from "../departments/operation/redux/trafficSlice";
+import operationSafetyReducer from "../departments/operation/redux/safetySlice";
+import operationPersonnelReducer from "../departments/operation/redux/personnelSlice";
+
 const store = configureStore({
   reducer: {
     activitylog: ActivityLogReducer,
@@ -410,6 +421,17 @@ const store = configureStore({
 
     trainid: TrainIdRecordRegReducer,
     assetregistern: AssetRegisterReducer,
+    
+    // Modern Signalling Department Slices
+    signallingSystem: signallingSystemReducer,
+    signallingMaintenance: signallingMaintenanceReducer,
+    signallingSafety: signallingSafetyReducer,
+    
+    // Modern Operation Department Slices
+    operationStation: operationStationReducer,
+    operationTraffic: operationTrafficReducer,
+    operationSafety: operationSafetyReducer,
+    operationPersonnel: operationPersonnelReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

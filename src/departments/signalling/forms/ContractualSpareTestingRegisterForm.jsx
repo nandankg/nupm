@@ -41,8 +41,8 @@ const ContractualSpareTestingRegisterForm = () => {
     dateFrom: "",
     dateTo: "",
     FinalStatus: "",
-    remark: "",
-  };
+    remark: ""
+      };
 
   const [formValues, setFormValues] = useState(basicInitialValues);
 

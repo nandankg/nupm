@@ -1,16 +1,1 @@
-# ERROR RESOLUTION COMPLETED ✅
-
-## Previous Errors (RESOLVED):
-- ✅ AgentCardRegistersSDCForm.jsx: Fixed import 'agentCardRegistersValidation' → 'agentCardValidation'
-- ✅ CardInitializationTenderSDCForm.jsx: Fixed import 'cscInitializationValidation' → 'parameterRegisterValidation' 
-- ✅ DailyChecklistRegisterSDCForm.jsx: Fixed import 'dailyCheckRegisterSDCValidation' → 'dailyChecklistValidation'
-- ✅ FmtsSDCForm.jsx: Fixed import 'fmtsSDCValidation' → 'fmtsValidation'
-
-## Resolution Summary:
-- All formik/yup imports removed from AFC-SDC forms
-- Validation schemas aligned with available exports
-- Custom validation logic implemented using simple JavaScript
-- All compilation errors resolved
-- Application starts successfully
-
-## Status: ✅ ALL CLEAR - No compilation errors
+SQLSTATE[42S22]: Column not found: 1054  'station' in 'INSERT INTO' (Connection: mysql, SQL: insert into `register_asset_signalling` (`station`, `system`, `gearID`, `Dateofinstallation`, `DescriptionOfMaterial`, `make`, `serialno`, `qty`, `location`, `remark`, `employeeName`, `employeeID`, `designation`, `status`, `employee_id`, `department`, `employee_name`, `updated_at`, `created_at`) values (ALMB, Indoor, PDU, 2025-09-04, Description of Material, Make/Brand, Serial Number, 47, Location, Remarks, Employee Name, Employee ID, Designation, 1, 123, Signalling, Amit Kumar, 2025-09-04 11:55:24, 2025-09-04 11:55:24))

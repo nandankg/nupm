@@ -1,0 +1,529 @@
+import React, { useState, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { UniversalSignallingFormField, SignallingFormLayout } from '../components';
+import { permanentLoanRegisterValidationSchema } from '../validation/signallingValidationSchemas';
+
+const PermanentLoanRegisterForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Memoize user data parsing to avoid re-parsing on every render
+  const user = useMemo(() => {
+    const userData = localStorage.getItem("userdata");
+    return userData ? JSON.parse(userData) : {};
+  }, []);
+
+  const [formData, setFormData] = useState({
+    entryDate: '',
+    itemDescription: '',
+    quantity: '',
+    denomination: '',
+    make: '',
+    model: '',
+    serialNumber: '',
+    loanType: 'Permanent',
+    loanFromDepartment: '',
+    loanToDepartment: '',
+    authorizedBy: '',
+    authorizationDate: '',
+    authorizationRef: '',
+    loanPurpose: '',
+    expectedReturnDate: '',
+    actualReturnDate: '',
+    returnCondition: '',
+    loanStatus: 'Active',
+    contactPersonFrom: '',
+    contactPersonTo: '',
+    phoneNumberFrom: '',
+    phoneNumberTo: '',
+    documentRef: '',
+    specialConditions: '',
+    remarks: ''
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Required field validation
+    if (!formData.entryDate) {
+      newErrors.entryDate = 'Entry date is required';
+    }
+    if (!formData.itemDescription) {
+      newErrors.itemDescription = 'Item description is required';
+    }
+    if (!formData.quantity) {
+      newErrors.quantity = 'Quantity is required';
+    } else if (parseFloat(formData.quantity) <= 0) {
+      newErrors.quantity = 'Quantity must be greater than 0';
+    }
+    if (!formData.loanFromDepartment) {
+      newErrors.loanFromDepartment = 'Loan from department is required';
+    }
+    if (!formData.loanToDepartment) {
+      newErrors.loanToDepartment = 'Loan to department is required';
+    }
+    if (!formData.authorizedBy) {
+      newErrors.authorizedBy = 'Authorization by is required';
+    }
+    if (!formData.authorizationDate) {
+      newErrors.authorizationDate = 'Authorization date is required';
+    }
+    if (!formData.loanPurpose) {
+      newErrors.loanPurpose = 'Loan purpose is required';
+    }
+
+    // Date validation
+    if (formData.entryDate && formData.authorizationDate) {
+      const entryDate = new Date(formData.entryDate);
+      const authDate = new Date(formData.authorizationDate);
+      if (entryDate < authDate) {
+        newErrors.entryDate = 'Entry date cannot be earlier than authorization date';
+      }
+    }
+
+    if (formData.expectedReturnDate && formData.actualReturnDate) {
+      const expectedDate = new Date(formData.expectedReturnDate);
+      const actualDate = new Date(formData.actualReturnDate);
+      if (actualDate < expectedDate) {
+        // This is just a warning, not an error
+        console.warn('Actual return date is earlier than expected return date');
+      }
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+
+    // Auto-update loan status based on return date
+    if (field === 'actualReturnDate') {
+      if (value) {
+        setFormData(prev => ({
+          ...prev,
+          loanStatus: 'Returned'
+        }));
+      } else {
+        setFormData(prev => ({
+          ...prev,
+          loanStatus: 'Active'
+        }));
+      }
+    }
+
+    // Clear field error when user starts typing
+    if (errors[field]) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      toast.error('Please fix the errors before submitting');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const submissionData = {
+        formType: 'permanent-loan-register',
+        department: 'Signalling',
+        submittedBy: user?.name || 'Unknown User',
+        submittedAt: new Date().toISOString(),
+        ...formData
+      };
+
+      console.log('Permanent Loan Register Data:', submissionData);
+      
+      // Here you would dispatch to your Redux store or make API call
+      // dispatch(savePermanentLoanRegisterData(submissionData));
+      
+      toast.success('Permanent loan record saved successfully!');
+      // navigate('/signalling/permanent-loan-register-list');
+      
+    } catch (error) {
+      console.error('Error saving permanent loan record:', error);
+      toast.error('Failed to save permanent loan record. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleReset = () => {
+    setFormData({
+      entryDate: '',
+      itemDescription: '',
+      quantity: '',
+      denomination: '',
+      make: '',
+      model: '',
+      serialNumber: '',
+      loanType: 'Permanent',
+      loanFromDepartment: '',
+      loanToDepartment: '',
+      authorizedBy: '',
+      authorizationDate: '',
+      authorizationRef: '',
+      loanPurpose: '',
+      expectedReturnDate: '',
+      actualReturnDate: '',
+      returnCondition: '',
+      loanStatus: 'Active',
+      contactPersonFrom: '',
+      contactPersonTo: '',
+      phoneNumberFrom: '',
+      phoneNumberTo: '',
+      documentRef: '',
+      specialConditions: '',
+      remarks: ''
+    });
+    setErrors({});
+    toast.info('Form reset successfully');
+  };
+
+  return (
+    <SignallingFormLayout
+      title="Permanent Loan Register"
+      description="Register for permanent loans of equipment and materials between departments"
+    >
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Basic Information */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <UniversalSignallingFormField
+            type="date"
+            label="Entry Date"
+            value={formData.entryDate}
+            onChange={(value) => handleInputChange('entryDate', value)}
+            required
+            error={errors.entryDate}
+          />
+          <UniversalSignallingFormField
+            type="select"
+            label="Loan Type"
+            value={formData.loanType}
+            onChange={(value) => handleInputChange('loanType', value)}
+            options={[
+              { value: 'Permanent', label: 'Permanent' },
+              { value: 'Long Term', label: 'Long Term' },
+              { value: 'Indefinite', label: 'Indefinite' }
+            ]}
+            required
+            error={errors.loanType}
+          />
+        </div>
+
+        {/* Item Information */}
+        <div className="bg-blue-50 p-4 rounded-lg">
+          <h4 className="text-lg font-semibold text-blue-800 mb-4">Item Information</h4>
+          <div className="space-y-4">
+            <UniversalSignallingFormField
+              type="textarea"
+              label="Item Description"
+              value={formData.itemDescription}
+              onChange={(value) => handleInputChange('itemDescription', value)}
+              placeholder="Detailed description of the item being loaned"
+              rows={3}
+              required
+              error={errors.itemDescription}
+            />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <UniversalSignallingFormField
+                type="text"
+                label="Quantity"
+                value={formData.quantity}
+                onChange={(value) => handleInputChange('quantity', value)}
+                placeholder="Enter quantity"
+                required
+                error={errors.quantity}
+              />
+              <UniversalSignallingFormField
+                type="text"
+                label="Denomination"
+                value={formData.denomination}
+                onChange={(value) => handleInputChange('denomination', value)}
+                placeholder="e.g., Nos, Meters, Kg"
+                error={errors.denomination}
+              />
+              <UniversalSignallingFormField
+                type="text"
+                label="Serial Number"
+                value={formData.serialNumber}
+                onChange={(value) => handleInputChange('serialNumber', value)}
+                placeholder="Serial number if applicable"
+                error={errors.serialNumber}
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <UniversalSignallingFormField
+                type="text"
+                label="Make"
+                value={formData.make}
+                onChange={(value) => handleInputChange('make', value)}
+                placeholder="Manufacturer"
+                error={errors.make}
+              />
+              <UniversalSignallingFormField
+                type="text"
+                label="Model"
+                value={formData.model}
+                onChange={(value) => handleInputChange('model', value)}
+                placeholder="Model number"
+                error={errors.model}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Loan Details */}
+        <div className="bg-green-50 p-4 rounded-lg">
+          <h4 className="text-lg font-semibold text-green-800 mb-4">Loan Details</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <UniversalSignallingFormField
+              type="text"
+              label="Loan From Department"
+              value={formData.loanFromDepartment}
+              onChange={(value) => handleInputChange('loanFromDepartment', value)}
+              placeholder="Department giving the loan"
+              required
+              error={errors.loanFromDepartment}
+            />
+            <UniversalSignallingFormField
+              type="text"
+              label="Loan To Department"
+              value={formData.loanToDepartment}
+              onChange={(value) => handleInputChange('loanToDepartment', value)}
+              placeholder="Department receiving the loan"
+              required
+              error={errors.loanToDepartment}
+            />
+          </div>
+          <div className="mt-4">
+            <UniversalSignallingFormField
+              type="textarea"
+              label="Loan Purpose"
+              value={formData.loanPurpose}
+              onChange={(value) => handleInputChange('loanPurpose', value)}
+              placeholder="Detailed purpose for which the loan is being taken"
+              rows={3}
+              required
+              error={errors.loanPurpose}
+            />
+          </div>
+        </div>
+
+        {/* Authorization Information */}
+        <div className="bg-orange-50 p-4 rounded-lg">
+          <h4 className="text-lg font-semibold text-orange-800 mb-4">Authorization Information</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <UniversalSignallingFormField
+              type="text"
+              label="Authorized By"
+              value={formData.authorizedBy}
+              onChange={(value) => handleInputChange('authorizedBy', value)}
+              placeholder="Name and designation of authorizing officer"
+              required
+              error={errors.authorizedBy}
+            />
+            <UniversalSignallingFormField
+              type="date"
+              label="Authorization Date"
+              value={formData.authorizationDate}
+              onChange={(value) => handleInputChange('authorizationDate', value)}
+              required
+              error={errors.authorizationDate}
+            />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+            <UniversalSignallingFormField
+              type="text"
+              label="Authorization Reference"
+              value={formData.authorizationRef}
+              onChange={(value) => handleInputChange('authorizationRef', value)}
+              placeholder="Letter/memo reference number"
+              error={errors.authorizationRef}
+            />
+            <UniversalSignallingFormField
+              type="text"
+              label="Document Reference"
+              value={formData.documentRef}
+              onChange={(value) => handleInputChange('documentRef', value)}
+              placeholder="Related document reference"
+              error={errors.documentRef}
+            />
+          </div>
+        </div>
+
+        {/* Contact Information */}
+        <div className="bg-purple-50 p-4 rounded-lg">
+          <h4 className="text-lg font-semibold text-purple-800 mb-4">Contact Information</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h5 className="font-semibold text-purple-700 mb-2">Lending Department Contact</h5>
+              <div className="space-y-3">
+                <UniversalSignallingFormField
+                  type="text"
+                  label="Contact Person"
+                  value={formData.contactPersonFrom}
+                  onChange={(value) => handleInputChange('contactPersonFrom', value)}
+                  placeholder="Name of contact person"
+                  error={errors.contactPersonFrom}
+                />
+                <UniversalSignallingFormField
+                  type="tel"
+                  label="Phone Number"
+                  value={formData.phoneNumberFrom}
+                  onChange={(value) => handleInputChange('phoneNumberFrom', value)}
+                  placeholder="Contact phone number"
+                  error={errors.phoneNumberFrom}
+                />
+              </div>
+            </div>
+            <div>
+              <h5 className="font-semibold text-purple-700 mb-2">Borrowing Department Contact</h5>
+              <div className="space-y-3">
+                <UniversalSignallingFormField
+                  type="text"
+                  label="Contact Person"
+                  value={formData.contactPersonTo}
+                  onChange={(value) => handleInputChange('contactPersonTo', value)}
+                  placeholder="Name of contact person"
+                  error={errors.contactPersonTo}
+                />
+                <UniversalSignallingFormField
+                  type="tel"
+                  label="Phone Number"
+                  value={formData.phoneNumberTo}
+                  onChange={(value) => handleInputChange('phoneNumberTo', value)}
+                  placeholder="Contact phone number"
+                  error={errors.phoneNumberTo}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Return Information */}
+        <div className="bg-yellow-50 p-4 rounded-lg">
+          <h4 className="text-lg font-semibold text-yellow-800 mb-4">Return Information</h4>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <UniversalSignallingFormField
+              type="date"
+              label="Expected Return Date"
+              value={formData.expectedReturnDate}
+              onChange={(value) => handleInputChange('expectedReturnDate', value)}
+              error={errors.expectedReturnDate}
+            />
+            <UniversalSignallingFormField
+              type="date"
+              label="Actual Return Date"
+              value={formData.actualReturnDate}
+              onChange={(value) => handleInputChange('actualReturnDate', value)}
+              error={errors.actualReturnDate}
+            />
+            <UniversalSignallingFormField
+              type="select"
+              label="Loan Status"
+              value={formData.loanStatus}
+              onChange={(value) => handleInputChange('loanStatus', value)}
+              options={[
+                { value: 'Active', label: 'Active' },
+                { value: 'Returned', label: 'Returned' },
+                { value: 'Overdue', label: 'Overdue' },
+                { value: 'Lost', label: 'Lost' },
+                { value: 'Damaged', label: 'Damaged' }
+              ]}
+              required
+              error={errors.loanStatus}
+            />
+          </div>
+          <div className="mt-4">
+            <UniversalSignallingFormField
+              type="textarea"
+              label="Return Condition"
+              value={formData.returnCondition}
+              onChange={(value) => handleInputChange('returnCondition', value)}
+              placeholder="Condition of item upon return (if returned)"
+              rows={2}
+              error={errors.returnCondition}
+            />
+          </div>
+        </div>
+
+        {/* Additional Information */}
+        <div className="bg-gray-50 p-4 rounded-lg">
+          <h4 className="text-lg font-semibold text-gray-800 mb-4">Additional Information</h4>
+          <div className="space-y-4">
+            <UniversalSignallingFormField
+              type="textarea"
+              label="Special Conditions"
+              value={formData.specialConditions}
+              onChange={(value) => handleInputChange('specialConditions', value)}
+              placeholder="Any special conditions or terms of the loan"
+              rows={3}
+              error={errors.specialConditions}
+            />
+            <UniversalSignallingFormField
+              type="textarea"
+              label="Remarks"
+              value={formData.remarks}
+              onChange={(value) => handleInputChange('remarks', value)}
+              placeholder="Additional remarks or notes"
+              rows={3}
+              error={errors.remarks}
+            />
+          </div>
+        </div>
+
+        {/* Form Actions */}
+        <div className="flex justify-end space-x-4 pt-6">
+          <button
+            type="button"
+            onClick={handleReset}
+            className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg"
+            disabled={loading}
+          >
+            Reset
+          </button>
+          <button
+            type="submit"
+            className={`font-bold py-2 px-6 rounded-lg ${
+              loading
+                ? 'bg-gray-400 cursor-not-allowed'
+                : 'bg-green-600 hover:bg-green-700 text-white'
+            }`}
+            disabled={loading}
+          >
+            {loading ? (
+              <span className="flex items-center">
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Saving...
+              </span>
+            ) : (
+              'Save Permanent Loan Record'
+            )}
+          </button>
+        </div>
+      </form>
+    </SignallingFormLayout>
+  );
+};
+
+export default PermanentLoanRegisterForm;
