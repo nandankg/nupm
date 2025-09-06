@@ -215,6 +215,11 @@ import operationTrafficReducer from "../departments/operation/redux/trafficSlice
 import operationSafetyReducer from "../departments/operation/redux/safetySlice";
 import operationPersonnelReducer from "../departments/operation/redux/personnelSlice";
 
+// Modern AFC-Mainline Department Redux Slices
+import afcGateReducer from "../departments/afc-mainline/redux/gateSlice";
+import afcTransactionReducer from "../departments/afc-mainline/redux/transactionSlice";
+import afcSystemReducer from "../departments/afc-mainline/redux/systemSlice";
+
 const store = configureStore({
   reducer: {
     activitylog: ActivityLogReducer,
@@ -432,6 +437,11 @@ const store = configureStore({
     operationTraffic: operationTrafficReducer,
     operationSafety: operationSafetyReducer,
     operationPersonnel: operationPersonnelReducer,
+    
+    // Modern AFC-Mainline Department Slices
+    afcGate: afcGateReducer,
+    afcTransaction: afcTransactionReducer,
+    afcSystem: afcSystemReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
