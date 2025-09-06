@@ -40,6 +40,13 @@ import {
 // Import date formatting utilities
 import { formatDate, formatTime } from '../../../data/formatDate';
 
+// Import AFC-Mainline system slice
+import { 
+  addSystemData,
+  selectSystemData,
+  selectSystemLoading
+} from '../redux/systemSlice';
+
 /**
  * PM Logbook Monthly Other Mainline Form - Monthly Preventive Maintenance for Other Equipment
  * 
@@ -395,7 +402,11 @@ const PmLogbookMonthlyOtherMainlineForm = () => {
         submittedAt: new Date().toISOString(),
       };
 
-      // Redux dispatch (will be added when reducer is available)
+      // Redux dispatch to save system maintenance data
+      await dispatch(addSystemData({ 
+        values: formValues,
+        formType: 'pm-logbook-monthly-other-mainline' 
+      }));
       console.log('PM Logbook Monthly Other submitted:', formData);
       
       setSuccess(true);

@@ -32,7 +32,11 @@ import {
   AFCMainlineFormLayout 
 } from "../components";
 import { validateForm } from "../validation/afcMainlineValidationSchemas";
-import { addData } from "../../../reducer/store/DtrIssueStoreReducer";
+import { 
+  addTransactionData,
+  selectTransactionData,
+  selectTransactionLoading
+} from "../redux/transactionSlice";
 
 const LedgerMainlineForm = () => {
   const navigate = useNavigate();
@@ -147,7 +151,10 @@ const LedgerMainlineForm = () => {
     setLoading(true);
     try {
       // Use same Redux action as legacy form
-      await dispatch(addData(formData));
+      await dispatch(addTransactionData({ 
+        values: formData,
+        formType: 'ledger-mainline' 
+      }));
       navigate("/list");
     } catch (error) {
       setErrors({ submit: 'Error saving ledger data.' });

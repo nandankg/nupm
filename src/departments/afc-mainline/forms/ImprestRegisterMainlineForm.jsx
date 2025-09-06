@@ -32,7 +32,11 @@ import {
   AFCMainlineFormLayout 
 } from "../components";
 import { validateForm } from "../validation/afcMainlineValidationSchemas";
-import { addData } from "../../../reducer/rajiv/ImprestRegReducer";
+import { 
+  addTransactionData,
+  selectTransactionData,
+  selectTransactionLoading
+} from "../redux/transactionSlice";
 
 const ImprestRegisterMainlineForm = () => {
   const navigate = useNavigate();
@@ -176,7 +180,10 @@ const ImprestRegisterMainlineForm = () => {
     setLoading(true);
     try {
       // Use exact same Redux action as legacy form
-      await dispatch(addData(formData));
+      await dispatch(addTransactionData({ 
+        values: formData,
+        formType: 'imprest-register-mainline' 
+      }));
       navigate("/list");
     } catch (error) {
       setErrors({ submit: 'Error saving imprest data.' });

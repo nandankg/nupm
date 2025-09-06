@@ -35,7 +35,11 @@ import {
   AFCMainlineFormLayout 
 } from "../components";
 import { validateForm } from "../validation/afcMainlineValidationSchemas";
-import { addData } from "../../../reducer/pinki/AfcPreventiveReducer";
+import { 
+  addAfcGateMaintenanceData,
+  selectAfcMaintenanceData,
+  selectAfcGateLoading
+} from "../redux/gateSlice";
 import { formatDate } from "../../../data/formatDate";
 import stations from "../../../station.json";
 
@@ -232,7 +236,7 @@ const PmLogbookHalfYearlyGateMainlineForm = () => {
     setLoading(true);
     try {
       // Use exact same Redux action as legacy form
-      await dispatch(addData(formValues));
+      await dispatch(addAfcGateMaintenanceData(formValues));
       navigate("/list");
     } catch (error) {
       setErrors({ submit: 'Error saving PM logbook data.' });

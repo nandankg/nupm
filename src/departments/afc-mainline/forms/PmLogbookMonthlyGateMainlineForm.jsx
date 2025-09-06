@@ -37,7 +37,11 @@ import {
   AFCMainlineFormLayout 
 } from "../components";
 import { validateForm } from "../validation/afcMainlineValidationSchemas";
-import { addData } from "../../../reducer/rajiv/PMLogBookMainLine3Reducer";
+import { 
+  addAfcMonthlyData,
+  selectAfcMonthlyData,
+  selectAfcGateLoading
+} from "../redux/gateSlice";
 
 const PmLogbookMonthlyGateMainlineForm = () => {
   const navigate = useNavigate();
@@ -267,7 +271,7 @@ const PmLogbookMonthlyGateMainlineForm = () => {
     setLoading(true);
     try {
       // Use exact same Redux action as legacy form
-      await dispatch(addData(formValues));
+      await dispatch(addAfcMonthlyData(formValues));
       navigate("/list");
     } catch (error) {
       setErrors({ submit: 'Error saving PM logbook data.' });

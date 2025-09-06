@@ -12,8 +12,12 @@ import {
   fmtsBookValidation 
 } from '../components';
 
-// Import Redux actions (preserve existing integration)
-import { addData, addFMTS } from '../../../reducer/pinki/FMTSReducer';
+// Import AFC-Mainline system slice
+import { 
+  addSystemData,
+  selectSystemData,
+  selectSystemLoading
+} from '../redux/systemSlice';
 
 /**
  * FMTS Book Mainline Form - Migrated to Universal Component Architecture
@@ -94,8 +98,10 @@ const FmtsBookMainlineForm = () => {
         submittedAt: new Date().toISOString(),
       };
 
-      dispatch(addData(formData));
-      dispatch(addFMTS(formData));
+      await dispatch(addSystemData({ 
+        values: formData,
+        formType: 'fmts-book-mainline' 
+      }));
       
       setSuccess(true);
       

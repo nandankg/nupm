@@ -37,6 +37,13 @@ import {
 // Import date formatting utilities
 import { formatDate, formatTime } from '../../../data/formatDate';
 
+// Import AFC-Mainline transaction slice
+import { 
+  addTransactionData,
+  selectTransactionData,
+  selectTransactionLoading
+} from '../redux/transactionSlice';
+
 /**
  * Daily Transaction Register Mainline Form - High Complexity AFC Transaction Processing
  * 
@@ -238,7 +245,11 @@ const DailyTransactionRegisterMainlineForm = () => {
         submittedAt: new Date().toISOString(),
       };
 
-      // Redux dispatch (will be added when reducer is available)
+      // Redux dispatch to save transaction data
+      await dispatch(addTransactionData({ 
+        values: formValues,
+        formType: 'daily-transaction-register-mainline' 
+      }));
       console.log('Daily Transaction Register submitted:', formData);
       
       setSuccess(true);

@@ -37,7 +37,11 @@ import {
   AFCMainlineFormLayout 
 } from "../components";
 import { validateForm } from "../validation/afcMainlineValidationSchemas";
-import { addData } from "../../../reducer/store/RequisitionReducer";
+import { 
+  addSystemData,
+  selectSystemData,
+  selectSystemLoading
+} from "../redux/systemSlice";
 import stationData from "../../../station.json";
 
 const RequisitionMainlineForm = () => {
@@ -205,7 +209,10 @@ const RequisitionMainlineForm = () => {
     setLoading(true);
     try {
       // Use exact same Redux action as legacy form
-      await dispatch(addData(formData));
+      await dispatch(addSystemData({ 
+        values: formData,
+        formType: 'requisition-mainline' 
+      }));
       navigate("/list");
     } catch (error) {
       setErrors({ submit: 'Error saving requisition data.' });
